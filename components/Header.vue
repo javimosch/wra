@@ -36,6 +36,9 @@ export default {
 		}
 	},
 	async mounted(){
+		if(process.server) {
+			return
+		}
 		await this.$store.dispatch('auth/update');
 	},
 	computed:{

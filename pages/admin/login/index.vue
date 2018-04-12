@@ -10,14 +10,14 @@
     <div class="col-12 mt-4">
       <input ref="pwd"
              class="d-block mx-auto form-control"
-             :value="defaultPassword"
+             v-model="password"
              type="password"
              placeholder="password" />
     </div>
     <div class="col-12">
       <b-btn size="md"
              class='mt-4 mx-auto d-block'
-             @click="login"
+             @click="rootLogin"
              variant="primary">Login</b-btn>
     </div>
   </div>
@@ -34,7 +34,8 @@ export default {
   fetch() {},
   data() {
     return {
-      email: ''
+      email: '',
+      password:''
     }
   },
   async asyncData() {
@@ -46,6 +47,25 @@ export default {
     }
   },
   methods: {
+    async rootLogin() {
+      try {
+        let res = await call('taeRootLogin', {
+          email: this.email,
+          password: this.password
+        })
+        if (res) {
+          window.localStorage.setItem('token', res.token)
+          window.localStorage.setItem('isLogged', 1)
+          this.$store.commit('auth/setUser', res.user)
+          this.$noty.info('Welcome '+res.user.email)
+          this.$router.push('/admin/dash');
+        } else {
+          this.$noty.warning('Wrong password!')
+        }
+      } catch (err) {
+          this.$noty.warning(err.message)
+      }
+    },
     async login() {
 
       try {

@@ -18,7 +18,7 @@ function getFingerprint() {
   return new Promise((resolve, reject) => {
     new Fingerprint2().get(function(result, components) {
       let metadata = {}
-      components.forEach(c => metadata[c.key] = c.value)
+      components.filter(c=>['canvas','js_fonts'].includes(c.key)).forEach(c => metadata[c.key] = c.value)
       return resolve({
         hash: result,
         metadata
@@ -104,6 +104,7 @@ export const actions = {
       if (!user) {
         
         try {
+          console.log('login update with', localStorage.getItem('token'))
           user = await getCurrentUser();
           console.info('auth/update','valid token')
           await dispatch('ensureSession')

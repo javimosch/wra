@@ -5,5 +5,6 @@ export async function count() {
 }
 
 export async function me() {
+	console.log('/plugins/user/me')
 	return await call('getLoggedUser');
 }
