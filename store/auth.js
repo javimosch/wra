@@ -9,10 +9,29 @@ import {
   me as getCurrentUser
 }
 from '@/plugins/user';
+import {
+  call
+} from '@/plugins/rpcApi';
+
+function getFingerprint() {
+  const Fingerprint2 = require("fingerprintjs2")
+  return new Promise((resolve, reject) => {
+    new Fingerprint2().get(function(result, components) {
+      let metadata = {}
+      components.forEach(c => metadata[c.key] = c.value)
+      return resolve({
+        hash: result,
+        metadata
+      })
+    })
+  })
+}
 
 export const state = () => ({
   isLogged: null,
-  user: null
+  user: null,
+  hasSession:false,
+  session:null
 });
 
 export const mutations = {
@@ -20,11 +39,26 @@ export const mutations = {
     state.isLogged = user !== null
     setIsLoggedInCache(user !== null);
     state.user = user;
+  },
+  setSession(state, session) {
+    state.session = session;
+    state.hasSession = !!session
   }
 };
 
 export const actions = {
+  async ensureSession({
+    commit
+  }) {
+    if (process.server) return;
 
+    const {session,token} = await call('sessionUpdate', Object.assign({
+      at: new Date()
+    }, await getFingerprint()))
+    window.localStorage.setItem('token', token);
+    commit('setSession', session);
+
+  },
 
   async login({
     commit
@@ -43,23 +77,28 @@ export const actions = {
     state
   }) {
 
-    let isLogged =  getIsLoggedFromCache();
+    let isLogged = getIsLoggedFromCache();
 
     if (!!isLogged) {
       let user = state.user;
       if (!user) {
         console.log('Fetching user')
-        user = await getCurrentUser();
-        console.log(JSON.stringify(user));
+        try {
+          user = await getCurrentUser();
+        } catch (err) {
+          if (err.message === 'LOGIN_REQUIRED') {
+            return commit('setUser', null);
+          } else {
+            throw err;
+          }
+
+        }
       }
-      commit('setUser', user);
-      return;
+      console.log(JSON.stringify(user));
+      return commit('setUser', user);
     } else {
-      commit('setUser', null);
+      return commit('setUser', null);
     }
-
-
-
   },
 
   async logout({

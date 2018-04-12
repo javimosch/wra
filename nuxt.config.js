@@ -5,34 +5,12 @@ require('dotenv').config({
 });
 
 
-function getStaticRoutes() {
-  let p = path.join(process.cwd(), 'assets', 'routes.json');
-  if (!sander.existsSync(p)) {
-    throw new Error('Not found: ' + p);
-  }
-  //let res = sander.readFileSync(p).toString('utf-8');
-  //res = JSON.parse(res);
-  //res = res.nodes.filter(i => (!i.ssr || i.ssr !== false) && i.path != undefined).map(i => i.path)
-  let res = [];
-  res = res.concat([
-    '/mockup/1',
-    '/mockup/2',
-    'admin/login',
-    'admin/dash',
-    'admin/fields',
-    'admin/benefits'
-  ]);
-  return res;
-}
-
-//getStaticRoutes();
-
 module.exports = {
   /*
    ** Headers of the page
    */
   head: {
-    title: 'Tous Mes Droits',
+    title: 'Track All Errors - Browser',
     meta: [{
       charset: 'utf-8'
     }, {
@@ -59,6 +37,9 @@ module.exports = {
       }, {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Montserrat|Nunito'
+      },{
+        rel:'stylesheet',
+        href:'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'
       }
     ],
     script: [{

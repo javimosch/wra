@@ -6,52 +6,55 @@ const instance = axios.create({
 
 var actionsCallers = {};
 
-export async function sync(){
+export async function sync() {
 	let actions = await call('getRpcActionsSelect');
-	actions.forEach(a=>{
-		actionsCallers[a.text] = (data)=>call(a.text,data);
+	actions.forEach(a => {
+		actionsCallers[a.text] = (data) => call(a.text, data);
 	});
 	return {
 		actions,
-		namesList: actions.map(a=>a.text)
+		namesList: actions.map(a => a.text)
 	};
 }
 
-export async function call(name, data){
+export async function call(name, data) {
 	data = data || {};
-	try{
-	let res = await instance.post('rpc/'+name,{
-		n:name,
-		d:data
-	},{
-		headers: {
-    		'Authorization': 'Bearer '+localStorage.getItem('token')
-  		}
-	});
-	if(res.data){
-		let resData = res.data;
-		if(resData.err){
-			throw new Error(resData.err);
-		}else{
-			return resData.data;
+	try {
+		var headers = {}
+		if (typeof window !== 'undefined') {
+			headers = {
+				'Authorization': 'Bearer ' + localStorage.getItem('token')
+			}
 		}
-	}
-}
-	catch(err){
-		if(err.response && err.response.data&& err.response.data.err){
-			
+		let res = await instance.post('rpc/' + name, {
+			n: name,
+			d: data
+		}, {
+			headers: headers
+		});
+		if (res.data) {
+			let resData = res.data;
+			if (resData.err) {
+				throw new Error(resData.err);
+			} else {
+				return resData.data;
+			}
+		}
+	} catch (err) {
+		if (err.response && err.response.data && err.response.data.err) {
+
 			err = err.response.data.err;
 			let msg = err;
-			try{
+			try {
 				let json = JSON.parse(msg);
 				console.warn(json);
-				if(json.message){
+				if (json.message) {
 					msg = json.message;
 				}
-			}catch(err){}
+			} catch (err) {}
 			throw new Error(msg);
-			
-		}else{
+
+		} else {
 			throw err;
 		}
 	}

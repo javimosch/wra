@@ -1,8 +1,8 @@
 <template>
-<div class="PublicLayout">
+<div class="ProtectedLayout">
   <MyHeader></MyHeader>
 	<nuxt/>
-  <MyFooter></MyFooter>
+  <MyFooter :contact="false"></MyFooter>
   <div id="fb-root"></div>
   <div class="fb-customerchat"
        page_id="1611136268975764">
@@ -12,8 +12,10 @@
 <script>
 import MyHeader from '@/components/Header'
 import MyFooter from '@/components/Footer'
+import {trackae} from '@/plugins/injection';
+import { call } from '@/plugins/rpcApi';
 export default {
-  name: 'PublicLayout',
+  name: 'ProtectedLayout',
   props: [],
   fetch() {},
   data() {
@@ -34,7 +36,8 @@ export default {
   },
   created() {},
   async mounted() {
-
+    trackae('5acf19b62e76546bdabd4e44')
+    
     //Login using token
     await this.$store.dispatch('auth/update')
     //Ensure session
@@ -61,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" >
-.PublicLayout {}
+.ProtectedLayout {}
   body{
   background-color:$color3;
 }

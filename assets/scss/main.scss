@@ -1,14 +1,8 @@
-@import './tmd-main';
+@import './colors';
 @import './scrollbar';
 @import './table';
 @import './fonts';
 
-.title_block{
-	height: 50px;
-    line-height: 50px;
-    margin: 0px;
-    background: #0B1F47;
-    color: white;
-    text-align: left!important;
-    padding-left: 20px;
+html, body{
+	background-color:$color3;
 }
