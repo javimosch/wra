@@ -24,7 +24,11 @@ module.exports = {
       hid: 'og:description',
       name: 'og:description',
       content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
-    }],
+    },{
+          hid: `og:image`,
+          property: 'og:image',
+          content: `@/assets/logo_1200x630.jpg`
+        }],
     link: [
       /*{
             rel: 'icon',
@@ -69,10 +73,16 @@ module.exports = {
       },
       debug: {
         sendHitTask: process.env.NODE_ENV === 'production'
+      },
+      commands: {
+        trackButtonClick:(name)=>{
+          this.$ga.event('button', 'click', 'landing', name);
+        }
       }
     }]
   ],
   env: {
+    FIREBASE_KEY: process.env.FIREBASE_KEY || '',
     basicAuthPassword: process.env.basicAuthPassword || 'secret',
     RPC_ENDPOINT: process.env.RPC_ENDPOINT || 'http://localhost:3002/',
     nuxtHome: process.env.NUXTHOME,

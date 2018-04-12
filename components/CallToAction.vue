@@ -3,7 +3,9 @@
 		<div class="row mt-5">
     <div class="col-12">
       <h2 class="text-center">1 minute integration</h2>
-      <b-btn class="mx-auto d-block" to="/dashboard" variant="warning" size="lg">Give a try</b-btn>
+      <b-btn 
+		v-ga="track" 
+      class="mx-auto d-block" to="/dashboard" variant="warning" size="lg">Give a try</b-btn>
     </div>
   </div>
 	</div>
@@ -25,8 +27,11 @@
 
 		},
 		methods:{
-
-		},
+			track(){
+				if(process.server) return
+				return this.$ga.commands.trackButtonClick.bind(this, 'give-a-try')
+			}
+		},	
 		components:{
 
 		},
