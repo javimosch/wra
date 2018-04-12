@@ -50,7 +50,7 @@
 		},
 		computed:{
 			projectName(){
-				return this.item.original||this.item.name||'(Choice or create a project)'
+				return this.item.original||this.item.name||'Click me'
 			},
 			saveLabel(){
 				return this.item._id?'Update':'Create'

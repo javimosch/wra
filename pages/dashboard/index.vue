@@ -21,7 +21,7 @@
     <div class="col-12" v-show="!isLogged">
       <TaeCreateAccountForm></TaeCreateAccountForm>
     </div>
-    <div class="col-12 mt-5">
+    <div class="col-12 mt-5" v-if="false">
       <p class="text-center">Paid plan with new features will be available in May 2018</p>
     </div>
   </div>

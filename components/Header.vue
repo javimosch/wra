@@ -1,8 +1,8 @@
 <template>
 	<div class="Header mb-4">
 		<div>
-			<img class="mx-auto d-block mt-0" :src="logo" />
-			<h5 class="text-center">ErrorTracky</h5>
+			<img class="mx-auto d-block mt-0" :src="logo" v-if="false"/>
+			<router-link to="/"><h2 class="text-center">Error{t}racky</h2></router-link>
 		</div>
 		<div v-if="true" class="nav mx-auto d-block mt-2 pb-4">
 		  <b-nav class="" justified tabs>
@@ -51,6 +51,16 @@ export default {
 <style lang="scss" scoped>
 .Header{
 	background-color:$color6;
+}
+h2{
+	font-family: love_ya_like_a_sisterregular;
+	color:$color5;
+	padding-top:30px;
+}
+a:hover{
+	border-color:$color4;
+	outline-color:$color4;
+	text-decoration-color: $color4;
 }
 a,a:hover{
 	border:0!important;

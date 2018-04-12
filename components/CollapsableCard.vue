@@ -64,7 +64,8 @@ export default {
 .CollapsableCard {}
 	h5,.Title{
 		color:$color1;
-		text-decoration:underline;
+		
+    padding:20px;
 	}
 	h5:hover,.Title:hover{
 		cursor:pointer;
