@@ -133,7 +133,7 @@ export default {
     await this.$store.dispatch('auth/ensureSession')
     
     this.projects = await call('taeGetPersonalProjects')
-    this.project = this.projects[0]
+    Object.assign(this.project,this.projects[0])
   }
 }
 

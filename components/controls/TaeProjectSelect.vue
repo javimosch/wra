@@ -64,6 +64,16 @@ export default {
           'name',
           //'code'
         ],
+        query:{
+          $or:[
+            {
+              user:this.$store.state.auth.user&&this.$store.state.auth.user._id
+            },
+            {
+              session:this.$store.state.auth.session&&this.$store.state.auth.session._id
+            }
+          ] 
+        },
         //extractFromJsonField:['code',['group']],
         transform: [
           '_id:_id',
