@@ -20,7 +20,7 @@ module.exports = {
       hid: 'description',
       name: 'description',
       content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
-    },{
+    }, {
       hid: 'og:description',
       name: 'og:description',
       content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
@@ -37,17 +37,17 @@ module.exports = {
       }, {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Montserrat|Nunito'
-      },{
-        rel:'stylesheet',
-        href:'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'
+      }, {
+        rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'
       }
     ],
     script: [{
       src: 'https://cdnjs.cloudflare.com/ajax/libs/rellax/1.6.2/rellax.min.js'
-    },{
-      src:'https://js.stripe.com/v3/'
-    },{
-      src:'https://www.gstatic.com/firebasejs/4.12.1/firebase.js'
+    }, {
+      src: 'https://js.stripe.com/v3/'
+    }, {
+      src: 'https://www.gstatic.com/firebasejs/4.12.1/firebase.js'
     }]
   },
   /*
@@ -62,9 +62,18 @@ module.exports = {
     '@nuxtjs/font-awesome', ['nuxt-sass-resources-loader', {
       resources: path.join(process.cwd(), 'assets/scss/main.scss')
     }],
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-60303213-8',
+      autoTracking: {
+        exception: true
+      },
+      debug: {
+        sendHitTask: process.env.NODE_ENV === 'production'
+      }
+    }]
   ],
   env: {
-    basicAuthPassword: process.env.basicAuthPassword||'secret',
+    basicAuthPassword: process.env.basicAuthPassword || 'secret',
     RPC_ENDPOINT: process.env.RPC_ENDPOINT || 'http://localhost:3002/',
     nuxtHome: process.env.NUXTHOME,
     loginSalt: '$2a$10$67Bn8fXfK0peYFBhAKCctequ/QSkwtX4DWE5UmG0DQOieGdGysR8S',
@@ -87,16 +96,15 @@ module.exports = {
   }, {
     src: '@/plugins/codemirror',
     ssr: false
-  },{
+  }, {
     src: '@/plugins/vue-good-table',
     ssr: false
-  },
-  {
+  }, {
     src: '@/plugins/vue-toggle-button',
     ssr: false
-  },{
+  }, {
     src: '@/plugins/errortracky',
-    ssr:false
+    ssr: false
   }],
   css: [
     'vuejs-noty/dist/vuejs-noty.css',
@@ -126,12 +134,12 @@ module.exports = {
     ssr: true
   },
   //generate: {
-    /*
-    routes: function() {
-      return new Promise((resolve, reject) => {
-        resolve(getStaticRoutes());
-      })
-    }*/
+  /*
+  routes: function() {
+    return new Promise((resolve, reject) => {
+      resolve(getStaticRoutes());
+    })
+  }*/
   //},
   /*
    ** Build configuration
