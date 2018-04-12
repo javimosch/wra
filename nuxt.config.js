@@ -46,6 +46,8 @@ module.exports = {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/rellax/1.6.2/rellax.min.js'
     },{
       src:'https://js.stripe.com/v3/'
+    },{
+      src:'https://www.gstatic.com/firebasejs/4.12.1/firebase.js'
     }]
   },
   /*
@@ -92,6 +94,9 @@ module.exports = {
   {
     src: '@/plugins/vue-toggle-button',
     ssr: false
+  },{
+    src: '@/plugins/errortracky',
+    ssr:false
   }],
   css: [
     'vuejs-noty/dist/vuejs-noty.css',
@@ -114,8 +119,8 @@ module.exports = {
   },
   manifest: {
     display: 'standalone',
-    name: 'tous mes droits',
-    lang: 'fr'
+    name: 'errortracky',
+    lang: 'en'
   },
   render: {
     ssr: true

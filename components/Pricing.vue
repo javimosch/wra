@@ -34,6 +34,18 @@
                     </div>
                   </div>
                 </li>
+                <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-times"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">5 projects limit</p>
+                    </div>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="card-footer">
@@ -67,6 +79,18 @@
                     </div>
                     <div class="col-8">
                       <p class="m-0">Unlimited errors per month</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-check"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">Unlimited projects</p>
                     </div>
                   </div>
                 </li>

@@ -71,6 +71,7 @@
     "typed.js": "^2.0.6",
     "universal-cookie": "^2.1.2",
     "vis": "^4.21.0",
+    "vue-analytics": "^5.10.2",
     "vue-codemirror": "^4.0.3",
     "vue-cookie": "^1.1.4",
     "vue-good-table": "^2.0.5",
