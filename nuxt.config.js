@@ -27,7 +27,7 @@ module.exports = {
     },{
           hid: `og:image`,
           property: 'og:image',
-          content: `@/assets/logo_1200x630.jpg`
+          content: `/img/logo_1200x630.jpg`
         }],
     link: [
       /*{
