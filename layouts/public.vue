@@ -2,7 +2,7 @@
 <div class="PublicLayout">
   <MyHeader></MyHeader>
 	<nuxt/>
-  <MyFooter></MyFooter>
+  <MyFooter :contact="true"></MyFooter>
   <div id="fb-root"></div>
   <div class="fb-customerchat"
        page_id="1611136268975764">

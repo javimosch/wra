@@ -2,6 +2,7 @@
 	<div class="Header mb-4">
 		<div>
 			<img class="mx-auto d-block mt-0" :src="logo" />
+			<h5 class="text-center">ErrorTracky</h5>
 		</div>
 		<div v-if="true" class="nav mx-auto d-block mt-2 pb-4">
 		  <b-nav class="" justified tabs>

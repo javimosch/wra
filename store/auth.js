@@ -31,7 +31,8 @@ export const state = () => ({
   isLogged: null,
   user: null,
   hasSession:false,
-  session:null
+  session:null,
+  loginAt: null
 });
 
 export const mutations = {
@@ -39,24 +40,42 @@ export const mutations = {
     state.isLogged = user !== null
     setIsLoggedInCache(user !== null);
     state.user = user;
+    state.loginAt = user? Date.now() : state.loginAt
+    if(state.user){
+      console.log('user commited')
+    }
   },
   setSession(state, session) {
     state.session = session;
     state.hasSession = !!session
+    console.log('session commited')
   }
 };
 
 export const actions = {
   async ensureSession({
-    commit
+    commit, state
   }) {
     if (process.server) return;
+
+    if(!state.isLogged&&!window.localStorage.getItem('token')&&state.hasSession){
+      window.localStorage.setItem('token', state.session.token);
+    }
 
     const {session,token} = await call('sessionUpdate', Object.assign({
       at: new Date()
     }, await getFingerprint()))
-    window.localStorage.setItem('token', token);
+    if(!state.isLogged||!window.localStorage.getItem('token')){
+      window.localStorage.setItem('token', token);
+    }
+    session.token = token;
     commit('setSession', session);
+
+    if(!window.localStorage.getItem('token')){
+      throw new Error('ENSURE_SESSION_LOST_TOKEN')
+    }else{
+      console.info('auth/ensureSession','success')
+    }
 
   },
 
@@ -74,24 +93,30 @@ export const actions = {
 
   async update({
     commit,
-    state
+    state,
+    dispatch
   }) {
-
+    if(process.server) return;
     let isLogged = getIsLoggedFromCache();
 
     if (!!isLogged) {
       let user = state.user;
       if (!user) {
-        console.log('Fetching user')
+        
         try {
           user = await getCurrentUser();
+          console.info('auth/update','valid token')
+          await dispatch('ensureSession')
+          console.info('auth/update','valid session')
         } catch (err) {
+          window.localStorage.setItem('token', '');
+          console.warn('auth/update',err.message)
           if (err.message === 'LOGIN_REQUIRED') {
             return commit('setUser', null);
           } else {
             throw err;
           }
-
+          await dispatch('ensureSession')
         }
       }
       console.log(JSON.stringify(user));

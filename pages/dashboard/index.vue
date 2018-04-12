@@ -2,8 +2,14 @@
 <div class="Dashboard pt-5 pb-5 container">
   <div class="row no-gutters">
     <div class="col-12">
-      <TaeProjectCardSelect v-model="project._id"></TaeProjectCardSelect>
-      <CollapsableCard text="Integration"
+      <h4 class="text-center mb-4">Select a project, copy paste the script "et voilà"</h4>
+    </div>
+    <div class="col-12">
+      
+      <TaeProjectCardSelect class="mb-2 mt-2" v-model="project._id"></TaeProjectCardSelect>
+      
+
+      <CollapsableCard class="mb-2" text="Integration"
                        v-show="project._id">
         <CopyPasteScript :project="project._id"></CopyPasteScript>
       </CollapsableCard>
@@ -14,6 +20,9 @@
     </div>
     <div class="col-12" v-show="!isLogged">
       <TaeCreateAccountForm></TaeCreateAccountForm>
+    </div>
+    <div class="col-12 mt-5">
+      <p class="text-center">Paid plan with new features will be available in May 2018</p>
     </div>
   </div>
 </div>
@@ -120,7 +129,9 @@ export default {
       })
     })
 
-    // If no project, create a project and link to session
+    await this.$store.dispatch('auth/update')
+    await this.$store.dispatch('auth/ensureSession')
+    
     this.projects = await call('taeGetPersonalProjects')
     this.project = this.projects[0]
   }
@@ -131,5 +142,8 @@ export default {
 <style lang="scss" scoped="">
 .Dashboard {
   background-color: $color3;
+}
+h4{
+  color:$color1;
 }
 </style>

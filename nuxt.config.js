@@ -10,7 +10,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: 'Track All Errors - Browser',
+    title: 'JavaScript Error Tracking',
     meta: [{
       charset: 'utf-8'
     }, {
@@ -19,11 +19,11 @@ module.exports = {
     }, {
       hid: 'description',
       name: 'description',
-      content: ''
+      content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
     },{
       hid: 'og:description',
       name: 'og:description',
-      content: ''
+      content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
     }],
     link: [
       /*{

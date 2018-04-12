@@ -58,14 +58,22 @@ export default {
       if (typeof window === 'undefined') {
         return
       }
-      let res = await call('taeQuickLogin', {
-        email: this.email,
-        password: this.password
-      })
-      window.localStorage.setItem('token', res.token)
-      window.localStorage.setItem('isLogged', 1)
-      this.$store.commit('auth/setUser', res.user)
-      this.$noty.info('You are in')
+      try {
+        let res = await call('taeQuickLogin', {
+          email: this.email,
+          password: this.password
+        })
+        window.localStorage.setItem('token', res.token)
+        window.localStorage.setItem('isLogged', 1)
+        this.$store.commit('auth/setUser', res.user)
+        this.$noty.info('You are in')
+      } catch (err) {
+        if(err.message==='PASSWORD_MISMATCH'){
+          this.$noty.warning('Wrong password!')
+        }else{
+          this.$noty.warning(err.message)
+        }
+      }
     }
   },
   components: {

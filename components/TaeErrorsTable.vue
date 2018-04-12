@@ -23,7 +23,7 @@ export default {
       //items: [],
       columns: [
         {
-          label: 'Description',
+          label: 'Message',
           field: 'message',
           filterOptions: {
             enabled: true
