@@ -11,7 +11,7 @@
               </div>
             </div>
             <div class="col-8">
-              <p class="m-0">Allow you to track browser errors</p>
+              <p class="m-0">Track errors in real-time</p>
             </div>
           </div>
         </li>
@@ -23,7 +23,7 @@
               </div>
             </div>
             <div class="col-8">
-              <p class="m-0">You can check them in your dashboard</p>
+              <p class="m-0">Multi-project support</p>
             </div>
           </div>
         </li>
@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="col-8">
-              <p class="m-0">Supports multiple projects</p>
+              <p class="m-0">Multi-user support</p>
             </div>
           </div>
         </li>
@@ -47,7 +47,7 @@
               </div>
             </div>
             <div class="col-8">
-              <p class="m-0">Integration takes 1 minute</p>
+              <p class="m-0">Simplicity</p>
             </div>
           </div>
         </li>

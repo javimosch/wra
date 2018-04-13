@@ -1,10 +1,11 @@
 <template>
-	<div class="Pricing">
+	<div class="Pricing ">
 		<div class="row mt-5">
     <div class="col-12">
       <h2 class="text-center">Pricing (Monthly)</h2>
+      <p class="text-center">Pricing is currently disabled and free accounts had no limitations until we raise 7/500 users.</p>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mt-3">
           <div class="card">
             <div class="card-header">
               <h3 class="text-center">FREE</h3></div>
@@ -52,7 +53,7 @@
               <h4 class="text-center">0€</h4></div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mt-3">
           <div class="card">
             <div class="card-header">
               <h3 class="text-center">PAID</h3></div>
@@ -106,6 +107,7 @@
 	</div>
 </template>
 <script>
+import {startParallax} from '@/plugins/parallax';
 	export default {
 		name: 'Pricing',
 		props:[],
@@ -131,7 +133,7 @@
 
 		},
 		mounted(){
-
+      
 		}
 	}
 </script>
@@ -139,8 +141,12 @@
 .Pricing{
 	
 }
+h2{
+  font-family: $font1;
+  color:$color5;
+}
 .card-header,.card-footer{
-   background-color:$color1;  
-   border-color:$color1;
+   background-color:$color4;  
+   border-color:$color4;
   }
 </style>
