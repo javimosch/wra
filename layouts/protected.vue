@@ -3,10 +3,7 @@
   <MyHeader></MyHeader>
 	<nuxt/>
   <MyFooter :contact="false"></MyFooter>
-  <div id="fb-root"></div>
-  <div class="fb-customerchat"
-       page_id="1611136268975764">
-  </div>
+  
 </div>
 </template>
 <script>
@@ -14,6 +11,7 @@ import MyHeader from '@/components/Header'
 import MyFooter from '@/components/Footer'
 import {trackae} from '@/plugins/injection';
 import { call } from '@/plugins/rpcApi';
+import {integrateFacebook} from '@/plugins/facebook'
 export default {
   name: 'ProtectedLayout',
   props: [],
@@ -37,6 +35,9 @@ export default {
   created() {},
   async mounted() {
     trackae('5acf19b62e76546bdabd4e44')
+
+
+    integrateFacebook();
     
     //Login using token
     await this.$store.dispatch('auth/update')
