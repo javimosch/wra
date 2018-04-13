@@ -100,7 +100,10 @@ module.exports = {
 
         }
       },
-      mixin: function() {}
+      mixin: (m)=> {
+        console.log('multianalytics mixin init',m)
+        return require('@/plugins/multianalytics')(m)
+      }
     }],
   ],
   env: {

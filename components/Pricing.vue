@@ -143,7 +143,7 @@ import {startParallax} from '@/plugins/parallax';
 }
 h2{
   font-family: $font1;
-  color:$color5;
+  color:black;
 }
 .card-header,.card-footer{
    background-color:$color4;  

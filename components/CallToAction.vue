@@ -4,8 +4,7 @@
     <div class="col-12">
       <h2 class="text-center">1 minute integration (or less)</h2>
       <b-btn 
-		v-ga="track" 
-      class="mx-auto d-block" to="/dashboard" variant="warning" size="lg">Give a try</b-btn>
+      class="mx-auto d-block" @click.stop="track" to="/dashboard" variant="warning" size="lg">Give a try</b-btn>
     </div>
   </div>
 	</div>
@@ -28,8 +27,7 @@
 		},
 		methods:{
 			track(){
-				if(process.server) return
-				return this.$ga.commands.trackButtonClick.bind(this, 'give-a-try')
+				return this.$mam.trackCallToActionButtonClick('try_app')
 			}
 		},	
 		components:{
