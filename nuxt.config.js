@@ -68,45 +68,15 @@ module.exports = {
     'bootstrap-vue/nuxt',
     '@nuxtjs/font-awesome', ['nuxt-sass-resources-loader', {
       resources: path.join(process.cwd(), 'assets/scss/main.scss')
-    }],
-    /*
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-60303213-8',
-      autoTracking: {
-        exception: true
-      },
-      debug: {
-        sendHitTask: process.env.NODE_ENV === 'production'
-      },
-      commands: {
-        trackButtonClick:(name)=>{
-          this.$ga.event('button', 'click', 'landing', name);
-        }
-      }
-    }]*/
-    ['nuxt-multianalytics', {
-      options: {
-        modules: {
-          ga: {
-            appName: package.name, // Mandatory
-            appVersion: package.version, // Mandatory
-            trackingId: 'UA-60303213-8', // Mandatory
-            debug: true, // Whether or not display console logs debugs (optional)
-          },
-          facebook:{
-            token: '1958620154410063',
-            debug: true 
-          }
-
-        }
-      },
-      mixin: (m)=> {
-        console.log('multianalytics mixin init',m)
-        return require('@/plugins/multianalytics')(m)
-      }
-    }],
+    }]
   ],
   env: {
+    ANALYTICS_GA_UA_ID: process.env.ANALYTICS_GA_UA_ID|| 'UA-60303213-8',
+    ANALYTICS_FB_PAGE_ID: process.env.ANALYTICS_FB_PAGE_ID || '172735413543583',
+    ANALYTICS_FB_APP_ID: process.env.ANALYTICS_FB_APP_ID || '1958620154410063',
+    ANALYTICS_APP_VERSION:package.name,
+    appName: package.name,
+    appVersion: package.version,
     FIREBASE_KEY: process.env.FIREBASE_KEY || '',
     basicAuthPassword: process.env.basicAuthPassword || 'secret',
     RPC_ENDPOINT: process.env.RPC_ENDPOINT || 'http://localhost:3002/',
@@ -139,6 +109,9 @@ module.exports = {
     ssr: false
   }, {
     src: '@/plugins/errortracky',
+    ssr: false
+  }, {
+    src: '@/plugins/analytics',
     ssr: false
   }],
   css: [
@@ -180,9 +153,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    /*
-     ** Run ESLint on save
-     */
+    vendor:['lodash'],
     extend(config, {
       isDev,
       isClient

@@ -27,7 +27,7 @@
 		},
 		methods:{
 			track(){
-				return this.$mam.trackCallToActionButtonClick('try_app')
+				return this.$analytics.trackEvent('landing_button','click','call_to_action')
 			}
 		},	
 		components:{

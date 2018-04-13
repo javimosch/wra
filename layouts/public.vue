@@ -10,7 +10,7 @@
 <script>
 import MyHeader from '@/components/Header';
 import MyFooter from '@/components/Footer';
-import { integrateFacebook } from '@/plugins/facebook';
+
 export default {
   name: 'PublicLayout',
   props: [],
@@ -40,8 +40,6 @@ export default {
     if (!this.$store.state.auth.hasSession) {
       await this.$store.dispatch('auth/ensureSession')
     }
-
-    integrateFacebook()
 
   }
 }
