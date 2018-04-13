@@ -6063,6 +6063,12 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
+nuxt-multianalytics@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/nuxt-multianalytics/-/nuxt-multianalytics-0.0.6.tgz#bc71cfe80237bef9aa0f170191cd0cc543a3185d"
+  dependencies:
+    vue-multianalytics "^1.8.1"
+
 nuxt-sass-resources-loader@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/nuxt-sass-resources-loader/-/nuxt-sass-resources-loader-1.1.1.tgz#ab18d40d163d0be0e6cccc241b9d4c6f209fa616"
@@ -9525,6 +9531,10 @@ vue-mixin-tween@^0.1.3:
   resolved "https://registry.yarnpkg.com/vue-mixin-tween/-/vue-mixin-tween-0.1.3.tgz#73e958f6048ff3354a71a052870ec5f94da2b2de"
   dependencies:
     "@tweenjs/tween.js" "^17.1.1"
+
+vue-multianalytics@^1.8.1, vue-multianalytics@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/vue-multianalytics/-/vue-multianalytics-1.9.4.tgz#1f235947b9f9a3acc1a0ce4f38f0541d1b596522"
 
 vue-no-ssr@^0.2.2:
   version "0.2.2"

@@ -4,6 +4,9 @@ require('dotenv').config({
   silent: true
 });
 
+let package = JSON.parse(sander.readFileSync('./package.json'));
+
+
 
 module.exports = {
   /*
@@ -24,11 +27,11 @@ module.exports = {
       hid: 'og:description',
       name: 'og:description',
       content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
-    },{
-          hid: `og:image`,
-          property: 'og:image',
-          content: `/img/logo_1200x630.jpg`
-        }],
+    }, {
+      hid: `og:image`,
+      property: 'og:image',
+      content: `/img/logo_1200x630.jpg`
+    }],
     link: [
       /*{
             rel: 'icon',
@@ -66,6 +69,7 @@ module.exports = {
     '@nuxtjs/font-awesome', ['nuxt-sass-resources-loader', {
       resources: path.join(process.cwd(), 'assets/scss/main.scss')
     }],
+    /*
     ['@nuxtjs/google-analytics', {
       id: 'UA-60303213-8',
       autoTracking: {
@@ -79,7 +83,25 @@ module.exports = {
           this.$ga.event('button', 'click', 'landing', name);
         }
       }
-    }]
+    }]*/
+    ['nuxt-multianalytics', {
+      options: {
+        modules: {
+          ga: {
+            appName: package.name, // Mandatory
+            appVersion: package.version, // Mandatory
+            trackingId: 'UA-60303213-8', // Mandatory
+            debug: true, // Whether or not display console logs debugs (optional)
+          },
+          facebook:{
+            token: '1958620154410063'
+            debug: true 
+          }
+
+        }
+      },
+      mixin: function() {}
+    }],
   ],
   env: {
     FIREBASE_KEY: process.env.FIREBASE_KEY || '',
