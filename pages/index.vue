@@ -2,7 +2,7 @@
 <div class="Home pt-5 pb-5 container">
   <div class="row no-gutters">
     <div class="col-12">
-      <h2 class="text-center">JAVASCRIPT ERROR TRACKING SIMPLE AS FU*CK</h2>
+      <h2 class="text-center">JAVASCRIPT ERROR TRACKING MADE SIMPLE</h2>
     </div>
   </div>
   <CallToAction></CallToAction>
