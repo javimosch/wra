@@ -94,7 +94,7 @@ module.exports = {
             debug: true, // Whether or not display console logs debugs (optional)
           },
           facebook:{
-            token: '1958620154410063'
+            token: '1958620154410063',
             debug: true 
           }
 
