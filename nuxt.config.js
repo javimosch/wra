@@ -68,13 +68,19 @@ module.exports = {
     'bootstrap-vue/nuxt',
     '@nuxtjs/font-awesome', ['nuxt-sass-resources-loader', {
       resources: path.join(process.cwd(), 'assets/scss/main.scss')
-    }]
+    }],
+    ['~/modules/analytics', {}]
   ],
+  analytics:{
+      fb: false,
+      ga: false,
+      mixins: {}
+    },
   env: {
-    ANALYTICS_GA_UA_ID: process.env.ANALYTICS_GA_UA_ID|| 'UA-60303213-8',
+    ANALYTICS_GA_UA_ID: process.env.ANALYTICS_GA_UA_ID || 'UA-60303213-8',
     ANALYTICS_FB_PAGE_ID: process.env.ANALYTICS_FB_PAGE_ID || '172735413543583',
     ANALYTICS_FB_APP_ID: process.env.ANALYTICS_FB_APP_ID || '1958620154410063',
-    ANALYTICS_APP_VERSION:package.name,
+    ANALYTICS_APP_VERSION: package.name,
     appName: package.name,
     appVersion: package.version,
     FIREBASE_KEY: process.env.FIREBASE_KEY || '',
@@ -88,32 +94,33 @@ module.exports = {
     isProduction: process.env.NODE_ENV === 'production'
   },
   plugins: [{
-    src: '@/plugins/vue-disable-autocomplete'
-  }, {
-    src: '@/plugins/vuejs-noty',
-    ssr: false
-  }, {
-    src: '@/plugins/vuex-router-sync.js',
-    ssr: false
-  }, {
-    src: '@/plugins/vue-cookie',
-    ssr: false
-  }, {
-    src: '@/plugins/codemirror',
-    ssr: false
-  }, {
-    src: '@/plugins/vue-good-table',
-    ssr: false
-  }, {
-    src: '@/plugins/vue-toggle-button',
-    ssr: false
-  }, {
-    src: '@/plugins/errortracky',
-    ssr: false
-  }, {
-    src: '@/plugins/analytics',
-    ssr: false
-  }],
+      src: '@/plugins/vue-disable-autocomplete'
+    }, {
+      src: '@/plugins/vuejs-noty',
+      ssr: false
+    }, {
+      src: '@/plugins/vuex-router-sync.js',
+      ssr: false
+    }, {
+      src: '@/plugins/vue-cookie',
+      ssr: false
+    }, {
+      src: '@/plugins/codemirror',
+      ssr: false
+    }, {
+      src: '@/plugins/vue-good-table',
+      ssr: false
+    }, {
+      src: '@/plugins/vue-toggle-button',
+      ssr: false
+    }, {
+      src: '@/plugins/errortracky',
+      ssr: false
+    }, {
+        src: '@/plugins/analytics',
+        ssr: false
+      }
+  ],
   css: [
     'vuejs-noty/dist/vuejs-noty.css',
     // lib css
@@ -153,7 +160,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor:['lodash'],
+    vendor: ['lodash'],
     extend(config, {
       isDev,
       isClient

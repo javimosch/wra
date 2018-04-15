@@ -1,148 +1,78 @@
 import Vue from 'vue';
-
-/* MOVE TO MODULE */
-import facebook from '@/plugins/analytics.fb'
-import google from '@/plugins/analytics.ga'
-
-
-var state = {
-	userId: '',options:{}
-}
-
-function log(){
-	if(!state.options.debug)return;
-	var args = Array.prototype.slice.call(arguments);
-	args.unshift('Analytics:');
-	console.log.apply(this,args);
-}
-
-var AnalyticsPlugin = {}
-AnalyticsPlugin.install = function(Vue, options = {}) {
-	state.options = options;
-	if (options.fb !== false) {
-		log('initializing fb')
-		facebook()
-	} else {
-		if (process.env.ANALYTICS_APP_VERSION) {
-			FB.AppEvents.setAppVersion(process.env.ANALYTICS_APP_VERSION);
-		}
-
-	}
-	log('ga options',!!options.ga && options.ga.debug === true);
-	if (options.ga !== false) {
-		google(!!options.ga && options.ga.debug === true)
-	} else {
-		if (options.ga && options.ga.disableLocalhost && location.hostname == 'localhost') {
-			log('ga disable sendHit')
-			ga('set', 'sendHitTask', null);
-		}
-	}
-
-	Vue.prototype.$analytics = {
-		trackEvent: (params,a,l,v) => {
-			if(!params){
-				throw new Error('trackEvent: string of object required')
-			}
-			if (typeof params === 'string') {
-				let action = typeof a=='string'?a:params;
-				let label = typeof l=='string'?l:'';
-				let value = typeof v=='number'?v:0;
-				let category = (action&&label)?params:'default' 
-				params = {
-					category: category,
-					action: action,
-					label: label,
-					value: value
-				};
-			}
-
-			log('trackEvent',params)
-
-			if (options.ga !== false) {
-				let payload = {
-					hitType: 'event',
-					eventCategory: params.category,
-					eventAction: params.action||'',
-					eventLabel: params.label||'',
-					eventValue: params.value||0,
-					fieldsObject: params.fieldsObject||{}
-				};
-				log('trackEvent goggle ',payload);
-				ga('send', payload);
-			}
-			if (options.fa !== false) {
-				var fbParams = {};
-				let paramsAsString = params.category + (params.action ? '_'+params.action  : '') + (params.label ? '_'+params.label : '');
-				fbParams[FB.AppEvents.ParameterNames.LEVEL] = paramsAsString;
-				if (params.description) {
-					fbParams[FB.AppEvents.ParameterNames.DESCRIPTION] = params.description;
-				}
-				log('trackEvent facebook ACHIEVED_LEVEL LEVEL',paramsAsString);
-				FB.AppEvents.logEvent(
-					FB.AppEvents.EventNames.ACHIEVED_LEVEL,
-					null, // numeric value for this event - in this case, none
-					fbParams
-				);
-			}
-
-		},
-		setUserId: (id) => {
-			if (id) {
-				if (options.ga !== false) {
-					ga('set', 'userId', USER_ID);
-				}
-				if (options.fb !== false) {
-					state.userId(id);
-					FB.AppEvents.setUserID(state.userId);
-				}
-			} else {
-				if (options.fb !== false) {
-					FB.AppEvents.clearUserID()
-				}
-			}
-		},
-		setUserProps: (props) => {
-			if (options.fb !== false) {
-				FB.AppEvents.updateUserProperties(normalizeFacebookUserProperties(props), (err) => {
-					console.log('Analytics: Facebook set user props ', res);
-				});
-			}
-		}
-	};
-}
-
-Vue.use(AnalyticsPlugin,{
-	debug: process.env.NODE_ENV!=='production'
-})
-
-export default ({
+import mixpanelMixins from '@/plugins/analytics-mixpanel';
+export default async function({
 	app,
 	route
-}, inject) => {
-	app.router.afterEach((to, from) => {
-		if (state.options.ga !== false && window.ga) {
-			ga('set', 'page', to.fullPath)
-			ga('send', 'pageview')
-		}
-		if (state.fb !== false && window.FB) {
-			FB.AppEvents.setUserID(state.userId);
-			FB.AppEvents.logPageView();
-		}
-	});
+}, inject) {
+	console.log('integrateKeen');
+	integrateKeen((client) => {
+		integrateAnalyticsProvider({
+			mixpanel:mixpanelMixins(),
+			keen: {
+				trackView: (url, route) => {
+					client.recordEvent('track_view', {
+						url: url
+					});
+				},
+				trackEvent: (name,params) => {
+					client.recordEvent(name, params);
+				}
+			}
+		},{
+
+		});
+	})
+	
 }
 
+function integrateAnalyticsProvider(mixins, methods = {}) {
+	Vue.prototype.$analytics = Object.assign(Vue.prototype.$analytics || {}, {
+		mixins: mixins
+	}, methods);
+}
 
-function normalizeFacebookUserProperties(props) {
-	let res = Object.assign({}, props);
-	for (var key in res) {
-		if (['city', 'country', 'zipCode', 'user_type'].includes(key)) {
-			delete res[key];
-			res['$' + key] = props[key];
+function integrateKeen(next) {
+	let scope = {};
+	! function(name, path, ctx) {
+		var latest, prev = name !== 'Keen' && window.Keen ? window.Keen : false;
+		ctx[name] = ctx[name] || {
+			ready: function(fn) {
+				var h = document.getElementsByTagName('head')[0],
+					s = document.createElement('script'),
+					w = window,
+					loaded;
+				s.onload = s.onerror = s.onreadystatechange = function() {
+					if ((s.readyState && !(/^c|loade/.test(s.readyState))) || loaded) {
+						return
+					}
+					s.onload = s.onreadystatechange = null;
+					loaded = 1;
+					latest = w.Keen;
+					if (prev) {
+						w.Keen = prev
+					} else {
+						try {
+							delete w.Keen
+						} catch (e) {
+							w.Keen = void 0
+						}
+					}
+					ctx[name] = latest;
+					ctx[name].ready(fn)
+				};
+				s.async = 1;
+				s.src = path;
+				h.parentNode.insertBefore(s, h)
+			}
 		}
-	}
-	if (props.role) {
-		props.$user_type = props.role;
-		delete props.role;
-	}
-	return res;
+	}('KeenAsync', 'https://d26b395fwzu5fz.cloudfront.net/keen-tracking-1.1.3.min.js', scope);
+
+	scope.KeenAsync.ready(function() {
+		// Configure a client instance
+		var client = new scope.KeenAsync({
+			projectId: '5acfb0cfc9e77c0001a033c8',
+			writeKey: '4867B74602ACC0560E8CA812456EB1EB57955CFBE41751DA58C3135152249BE21E4714F522048B3ED1153DE5063CB51B1410357E4433C02A6B78EEDCE5731034D838DB5EDADF05CF7CA51E4832720355219006AA86AB00BEA818F1392B273791'
+		});
+		next(client);
+	});
 }

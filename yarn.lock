@@ -6063,6 +6063,12 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
+nuxt-lytics@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/nuxt-lytics/-/nuxt-lytics-0.0.19.tgz#cea4e69026d94e85fe6ade750075881567ab1a29"
+  dependencies:
+    lodash "^4.17.5"
+
 nuxt-multianalytics@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/nuxt-multianalytics/-/nuxt-multianalytics-0.0.6.tgz#bc71cfe80237bef9aa0f170191cd0cc543a3185d"
