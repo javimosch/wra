@@ -80,7 +80,7 @@ module.exports = {
     ANALYTICS_GA_UA_ID: process.env.ANALYTICS_GA_UA_ID || 'UA-60303213-8',
     ANALYTICS_FB_PAGE_ID: process.env.ANALYTICS_FB_PAGE_ID || '172735413543583',
     ANALYTICS_FB_APP_ID: process.env.ANALYTICS_FB_APP_ID || '1958620154410063',
-    ANALYTICS_APP_VERSION: package.name,
+    ANALYTICS_APP_VERSION: package.version,
     appName: package.name,
     appVersion: package.version,
     FIREBASE_KEY: process.env.FIREBASE_KEY || '',

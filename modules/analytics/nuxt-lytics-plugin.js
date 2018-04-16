@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import _ from 'lodash';
 
+const safeCallTimeout = 5000;
+
 export default async function({
 	app,
 	route
@@ -41,6 +43,48 @@ function log() {
 	console.log.apply(this, args);
 }
 
+function callMethodSafely(scopeFn, key, params, condition) {
+	var scope = scopeFn()
+	log('safe-call', key ? key : scope.name, params, condition)
+	if (typeof condition === 'undefined') condition = true;
+
+
+	let self = this || {};
+	if (typeof scope === 'undefined') {
+		return setTimeout(() => {
+			console.info('START', self.start)
+			if (self.start && Date.now() - self.start > safeCallTimeout) return console.warn('Analytics: safe-call timeout', key)
+			let s = self.start ? self : {
+				start: Date.now()
+			}
+			callMethodSafely.apply(s, [scopeFn, key, params, condition]);
+		}, 100);
+	} else {
+		if (typeof condition === 'function' ? condition() : condition) {
+			log('safe-call exec', key ? key : scope.name, params, condition)
+
+			let splits = key.split('.');
+			if (splits.length > 1) {
+				scope = scope[splits[0]]
+				key = splits[1];
+			}
+			try {
+				if (key === '' && typeof scope === 'function') {
+					scope.apply(scope, params);
+				} else {
+					scope[key].apply(scope, params);
+				}
+
+			} catch (err) {
+				console.warn(key, scope)
+				console.error(err);
+			}
+		} else {
+			log('safe-call skip', key ? key : scope.name, params);
+		}
+	}
+}
+
 var AnalyticsPlugin = {}
 AnalyticsPlugin.install = function(Vue, options = {
 	debug: process.env.NODE_ENV !== 'production'
@@ -49,22 +93,19 @@ AnalyticsPlugin.install = function(Vue, options = {
 	if (options.fb !== false) {
 		log('initializing fb')
 		facebook(state.options.debug)
-		if (process.env.ANALYTICS_APP_VERSION) {
-			FB.AppEvents.setAppVersion(process.env.ANALYTICS_APP_VERSION);
-		}
-	} 
+
+		callMethodSafely(() => window.FB, 'AppEvents.setAppVersion', [process.env.ANALYTICS_APP_VERSION], options.fb !== false && process.env.ANALYTICS_APP_VERSION);
+
+	}
 	log('ga options', !!options.ga && options.ga.debug === true);
 	if (options.ga !== false) {
 		google(!!options.ga && options.ga.debug === true)
-	} else {
-		if (options.ga && options.ga.disableLocalhost && location.hostname == 'localhost') {
-			log('ga disable sendHit')
-			ga('set', 'sendHitTask', null);
-		}
+
+		callMethodSafely(() => window.ga, '', ['set', 'sendHitTask', null], (options.ga && options.ga.disableLocalhost && location.hostname == 'localhost') ? true : false)
 	}
 
 	console.log('lytics scope created')
-	var scope = window.lytics= state.scope = Vue.prototype.$analytics = _.assign(Vue.prototype.$analytics||{},{
+	var scope = window.lytics = state.scope = Vue.prototype.$analytics = _.assign(Vue.prototype.$analytics || {}, {
 		trackEvent: (params, a, l, v) => {
 			if (!params) {
 				throw new Error('trackEvent: string of object required')
@@ -84,20 +125,22 @@ AnalyticsPlugin.install = function(Vue, options = {
 
 			log('trackEvent', params)
 
-			if (options.ga !== false) {
-				let payload = {
-					hitType: 'event',
-					eventCategory: params.category,
-					eventAction: params.action || '',
-					eventLabel: params.label || '',
-					eventValue: params.value || 0,
-					fieldsObject: params.fieldsObject || {}
-				};
-				log('trackEvent goggle ', payload);
-				ga('send', payload);
-			}
+
+			let payload = {
+				hitType: 'event',
+				eventCategory: params.category,
+				eventAction: params.action || '',
+				eventLabel: params.label || '',
+				eventValue: params.value || 0,
+				fieldsObject: params.fieldsObject || {}
+			};
+			log('trackEvent goggle ', payload);
+			callMethodSafely(() => window.ga, '', ['send', payload], options.ga !== false)
+			ga('send', payload);
+
 			let paramsAsString = params.category + (params.action ? '_' + params.action : '') + (params.label ? '_' + params.label : '');
-			if (options.fb !== false) {
+			
+			if (options.fb !== false && window.FB!=='undefined') {
 				var fbParams = {};
 				fbParams[FB.AppEvents.ParameterNames.LEVEL] = paramsAsString;
 				if (params.description) {
@@ -110,7 +153,7 @@ AnalyticsPlugin.install = function(Vue, options = {
 					fbParams
 				);
 			}
-			callMixinMethod(scope, options.mixins, 'trackEvent', [paramsAsString,params]);
+			callMixinMethod(scope, options.mixins, 'trackEvent', [paramsAsString, params]);
 		},
 		setUserId: (id) => {
 			log('setUserId', id)
@@ -120,14 +163,14 @@ AnalyticsPlugin.install = function(Vue, options = {
 					ga('set', 'userId', id);
 					log('setUserID:ga', id)
 				}
-				if (options.fb !== false) {
+				if (options.fb !== false&&window.FB!=='undefined') {
 
 					FB.AppEvents.setUserID(state.userId);
 					log('setUserID:fb', id)
 				}
 
 			} else {
-				if (options.fb !== false) {
+				if (options.fb !== false&&window.FB!=='undefined') {
 					FB.AppEvents.clearUserID()
 					log('setUserId:fb:clear (id was null/undefined/empty)')
 				}
@@ -143,7 +186,7 @@ AnalyticsPlugin.install = function(Vue, options = {
 			if (pick) {
 				props = _.pick(props, pick);
 			}
-			if (options.fb !== false) {
+			if (options.fb !== false && window.FB!=='undefined') {
 				FB.AppEvents.updateUserProperties(normalizeFacebookUserProperties(props), (res) => {
 					console.log('Analytics: Facebook set user props ', res);
 				});
@@ -154,11 +197,11 @@ AnalyticsPlugin.install = function(Vue, options = {
 }
 
 function callMixinMethod(scope, mixins, method, params) {
-	
 
-	mixins = Object.assign({},mixins,scope.mixins||{})
 
-	log('Calling mixin method',method,'mixins',mixins)
+	mixins = Object.assign({}, mixins, scope.mixins || {})
+
+	log('Calling mixin method', method, 'mixins', mixins)
 
 	if (!mixins) return;
 	if (mixins) {
