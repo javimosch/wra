@@ -4,7 +4,6 @@ export default async function({
 	app,
 	route
 }, inject) {
-	console.log('integrateKeen');
 	integrateKeen((client) => {
 		integrateAnalyticsProvider({
 			mixpanel:mixpanelMixins(),
@@ -22,11 +21,10 @@ export default async function({
 
 		});
 	})
-	
 }
 
 function integrateAnalyticsProvider(mixins, methods = {}) {
-	Vue.prototype.$analytics = Object.assign(Vue.prototype.$analytics || {}, {
+	Vue.prototype.$ma = Object.assign(Vue.prototype.$ma || {}, {
 		mixins: mixins
 	}, methods);
 }

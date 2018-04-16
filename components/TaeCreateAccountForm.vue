@@ -67,8 +67,8 @@ export default {
         window.localStorage.setItem('isLogged', 1)
         this.$store.commit('auth/setUser', res.user)
         this.$noty.info('You are in')
-        this.$analytics.trackEvent('login_form','success','dashboard');
-        this.$analytics.setUserProps(res.user,['_id','email','createdAt']);
+        this.$ma.trackEvent('login_form','success','dashboard');
+        this.$ma.setUserProps(res.user,['_id','email','createdAt']);
       } catch (err) {
         console.error(err)
         if(err.message==='PASSWORD_MISMATCH'){

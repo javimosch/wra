@@ -3,6 +3,18 @@ import _ from 'lodash';
 
 const safeCallTimeout = 5000;
 
+var state = {
+	userId: '',
+	options: {}
+}
+
+function log() {
+	if (!state.options.debug) return;
+	var args = Array.prototype.slice.call(arguments);
+	args.unshift('$ma');
+	console.log.apply(this, args);
+}
+
 export default async function({
 	app,
 	route
@@ -31,28 +43,18 @@ export default async function({
 
 
 
-var state = {
-	userId: '',
-	options: {}
-}
 
-function log() {
-	if (!state.options.debug) return;
-	var args = Array.prototype.slice.call(arguments);
-	args.unshift('Analytics:');
-	console.log.apply(this, args);
-}
 
 function callMethodSafely(scopeFn, key, params, condition) {
 	var scope = scopeFn()
-	log('safe-call', key ? key : scope.name, params, condition)
+	//log('safe-call', key ? key : scope.name, params, condition)
 	if (typeof condition === 'undefined') condition = true;
 
 
 	let self = this || {};
 	if (typeof scope === 'undefined') {
 		return setTimeout(() => {
-			console.info('START', self.start)
+			
 			if (self.start && Date.now() - self.start > safeCallTimeout) return console.warn('Analytics: safe-call timeout', key)
 			let s = self.start ? self : {
 				start: Date.now()
@@ -104,8 +106,8 @@ AnalyticsPlugin.install = function(Vue, options = {
 		callMethodSafely(() => window.ga, '', ['set', 'sendHitTask', null], (options.ga && options.ga.disableLocalhost && location.hostname == 'localhost') ? true : false)
 	}
 
-	console.log('lytics scope created')
-	var scope = window.lytics = state.scope = Vue.prototype.$analytics = _.assign(Vue.prototype.$analytics || {}, {
+	
+	var scope = window.$ma = state.scope = Vue.prototype.$ma = _.assign(Vue.prototype.$ma || {}, {
 		trackEvent: (params, a, l, v) => {
 			if (!params) {
 				throw new Error('trackEvent: string of object required')
@@ -233,13 +235,7 @@ function normalizeFacebookUserProperties(props) {
 
 
 function facebook(debug) {
-	function log() {
-		if (!debug) return;
-		var args = Array.prototype.slice.call(arguments);
-		args.unshift('Analytics:fb:');
-		console.log.apply(this, args);
-	}
-
+	
 	const pageId = process.env.ANALYTICS_FB_PAGE_ID;
 	const appId = process.env.ANALYTICS_FB_APP_ID;
 	if (!pageId || !appId) {
@@ -247,20 +243,24 @@ function facebook(debug) {
 	}
 
 	log('Using pageId', pageId, 'appId', appId)
+
+
+	/*Facebook platform*/
 	var div;
 	if (!document.querySelector('.fb-customerchat')) {
 		div = document.createElement('div');
+		div.className="fb-customerchat";
 		div.setAttribute('attribution', 'setup_tool');
 		div.setAttribute('page_id', pageId);
 		div.setAttribute('theme_color', '#fa3c4c');
-		let div = document.createElement('div');
+		document.body.appendChild(div);
+		log("Adding chat",div)
 	}
 	if (!document.querySelector('#fb-root')) {
 		div = document.createElement('div');
 		div.id = 'fb-root';
 		document.body.appendChild(div);
 	}
-
 
 	(function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -271,6 +271,8 @@ function facebook(debug) {
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 
+
+/*
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId: appId,
@@ -278,7 +280,7 @@ function facebook(debug) {
 			xfbml: true,
 			version: 'v2.12'
 		});
-	};
+	};*/
 
 	div = document.createElement('img');
 	div.height = '1';
@@ -317,7 +319,8 @@ function google(debug) {
 		throw new Error('ANALYTICS_GA_UA_ID required');
 	}
 	if (debug) {
-		console.log('Analytics:', 'DEBUG MODE')
+		log('GA DEBUG MODE');
+
 			(function(i, s, o, g, r, a, m) {
 				i['GoogleAnalyticsObject'] = r;
 				i[r] = i[r] || function() {
@@ -328,12 +331,15 @@ function google(debug) {
 				a.async = 1;
 				a.src = g;
 				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script', 'https://www.google-analytics.com/analytics_debug.js', 'ga');
+			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 		window.ga_debug = {
 			trace: true
 		};
 	} else {
-
+		log('GA PROD MODE');
+		window.ga_debug = {
+			trace: false
+		};
 		(function(i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;
 			i[r] = i[r] || function() {

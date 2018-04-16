@@ -2,7 +2,6 @@ import Vue from 'vue';
 
 export default function mixpanelMixins() {
 	addScript();
-	console.log('integrateMixpanel');
 	return{
 		trackView(url, route) {
 			mixpanel.track('track_view', {

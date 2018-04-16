@@ -27,7 +27,7 @@
 		},
 		methods:{
 			track(){
-				return this.$analytics.trackEvent('landing_button','click','call_to_action')
+				return this.$ma.trackEvent('landing_button','click','call_to_action')
 			}
 		},	
 		components:{
