@@ -72,8 +72,8 @@ module.exports = {
     ['~/modules/analytics', {}]
   ],
   analytics:{
-      fb: false,
-      ga: false,
+      fb: true,
+      ga: true,
       mixins: {}
     },
   env: {

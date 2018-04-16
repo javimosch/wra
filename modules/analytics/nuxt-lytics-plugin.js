@@ -208,7 +208,7 @@ function facebook(debug) {
 	if (!document.querySelector('.fb-customerchat')) {
 		div = document.createElement('div');
 		div.setAttribute('attribution', 'setup_tool');
-		div.setAttribute('page_id', 172735413543583);
+		div.setAttribute('page_id', pageId);
 		div.setAttribute('theme_color', '#fa3c4c');
 		let div = document.createElement('div');
 	}
