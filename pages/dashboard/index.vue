@@ -1,8 +1,11 @@
 <template>
 <div class="Dashboard pt-5 pb-5 container">
   <div class="row no-gutters">
+    <div class="col-12 mb-5" v-show="!isLogged">
+      <TaeCreateAccountForm></TaeCreateAccountForm>
+    </div>
     <div class="col-12">
-      <h4 class="text-center mb-4">Select a project, copy paste the script "et voilà"</h4>
+      <h4 class="text-center mb-4">How it works: Select a project, copy paste the script "et voilà"</h4>
     </div>
     <div class="col-12">
       
@@ -15,12 +18,10 @@
       <TaeErrorsTable @select="viewError"
                       :items="items"></TaeErrorsTable>
     </div>
-    <div class="col-12" v-show="!isLogged">
+    <div class="col-12 mb-5" v-show="!isLogged">
       <TaeCreateAccountForm></TaeCreateAccountForm>
     </div>
-    <div class="col-12 mt-5" v-if="false">
-      <p class="text-center">Paid plan with new features will be available in May 2018</p>
-    </div>
+    
   </div>
   <ErrorModalDetails :item.sync="item"></ErrorModalDetails>
 </div>

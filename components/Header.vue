@@ -2,15 +2,15 @@
 	<div class="Header mb-4">
 		<div>
 			<img class="mx-auto d-block mt-0" :src="logo" v-if="false"/>
-			<router-link to="/"><h2 class="text-center">Error{t}racky</h2></router-link>
+			<router-link to="/"><h2 class="text-center">errortracky</h2></router-link>
 		</div>
-		<div class="nav mx-auto d-block mt-2 pb-4">
+		<div class="nav mx-auto d-block ">
 		  <b-nav class="" justified tabs>
 
-		  	<b-nav-item v-show="isDash" :active="isActive('test')" to="/test">Integration page test</b-nav-item>
+		  	<b-nav-item class="mt-2 pb-4" v-show="isDash && isLogged" :active="isActive('test')" to="/test">Integration page test</b-nav-item>
 
-		  	<b-nav-item v-show="isLogged" :active="isActive('dashboard')" to="/dashboard">Dashboard</b-nav-item>
-		    <b-nav-item v-show="isLogged" @click="logout()">Logout</b-nav-item>
+		  	<b-nav-item class="mt-2 pb-4" v-show="isLogged" :active="isActive('dashboard')" to="/dashboard">Dashboard</b-nav-item>
+		    <b-nav-item class="mt-2 pb-4" v-show="isLogged" @click="logout()">Logout</b-nav-item>
 		  </b-nav>
 		</div>
 	</div>

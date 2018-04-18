@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import $ from 'jquery';
 import TaeButton from '@/components/TaeButton';
 import { call } from '@/plugins/rpcApi';
 export default {
@@ -54,6 +55,12 @@ export default {
     }
   },
   methods: {
+    scrollUp(){
+          var body = $('html, body')
+          body.stop().animate({
+            scrollTop: 0
+          }, 500, 'swing', function() {})
+        },
     async save() {
       if (typeof window === 'undefined') {
         return
@@ -66,7 +73,8 @@ export default {
         window.localStorage.setItem('token', res.token)
         window.localStorage.setItem('isLogged', 1)
         this.$store.commit('auth/setUser', res.user)
-        this.$noty.info('You are in')
+        //this.$noty.info('You are in')
+        this.scrollUp();
         this.$ma.trackEvent('login_form','success','dashboard');
         this.$ma.setUserProps(res.user,['_id','email','createdAt']);
       } catch (err) {
