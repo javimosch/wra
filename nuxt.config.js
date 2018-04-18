@@ -1,3 +1,4 @@
+const errortracky = require('errortracky')('123');
 const path = require('path');
 const sander = require('sander');
 require('dotenv').config({
@@ -6,9 +7,10 @@ require('dotenv').config({
 
 let package = JSON.parse(sander.readFileSync('./package.json'));
 
-
-
 module.exports = {
+  serverMiddleware:[
+    { path: '/webhooks/errortracky', handler: errortracky.nuxtWebhookMiddleware() },
+  ],
   /*
    ** Headers of the page
    */
@@ -55,6 +57,12 @@ module.exports = {
       src: 'https://js.stripe.com/v3/'
     }, {
       src: 'https://www.gstatic.com/firebasejs/4.12.1/firebase.js'
+    },{
+      src:'https://js.stripe.com/v3/'
+    },{
+      src:"https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    },{
+      src:"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     }]
   },
   /*

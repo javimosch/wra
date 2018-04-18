@@ -1,24 +1,11 @@
 <template>
 	<div class="Footer">
 		<div class="row no-gutters">
-		<footer class="w-100">
-			<div class="">
-				<div class="row no-gutters">
-					<div class="col-lg-12" v-show="true">
-						<h1 class="footer_center_text w-100 text-center parallax" data-rellax-speed="0.5">
-							<span v-show="contact">Support at<br>+33782809054</span>
-							<span v-show="!contact">&nbsp;<br>&nbsp;</span>
-						</h1>
-						
-					</div>
-				</div>	
-			</div>
-
-		</footer>  
+		<footer></footer>  
 		</div>
 		<div class='row no-gutters'>
 			<div class="credits w-100">
-					© MisitioBA - <a href="#">Privacy Policy</a>
+					© by <a href="https://misitioba.com" target="_blank">MisitioBA</a> - <a href="#">Privacy Policy</a>
 			</div>
 		</div>
 	</div>
@@ -41,7 +28,7 @@
 </script>
 <style lang="scss" scoped>
 .Footer{
-	margin-top:200px;
+	margin-top:300px;
 }
 a{
 	color:$color1;
@@ -51,14 +38,15 @@ a:hover{
 }
 footer{
 	position:relative;
-	margin-top:100px;
+	height: 50px;
+  width: 100%;
 }
 footer:before{
 	content: '';
     display: block;
     position: absolute;
     width: 100%;
-    height: 390px;
+    height: 145px;
     background: $color3;
     -webkit-transform: skewY(-6deg);
     transform: skewY(-2deg);
@@ -68,14 +56,6 @@ footer:before{
 }
 span{
 		font-family: $font1;
-}
-.footer_center_text{
-
-	color:$color5;
-    margin:0px;	
-    padding: 100px 0px;
-    line-height: 55px;
-    background-color:$color6;
 }
 .credits{
     color: $color5;

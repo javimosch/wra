@@ -1,12 +1,20 @@
+@font-face {
+    font-family: 'love_ya_like_a_sisterregular';
+    src: url('~assets/fonts/loveyalikeasister-webfont.woff2') format('woff2'),
+         url('~assets/fonts/loveyalikeasister-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $font1: Gaegu,cursive;
 $font2: 'Montserrat', sans-serif;
 $font3: love_ya_like_a_sisterregular;
 
 body{
-	font-family: 'Montserrat', sans-serif;
+	font-family: $font2;
 }
 p, span{
-	font-family: 'Montserrat', sans-serif;
+	font-family: $font2;
 }
 
 .tdm_subtitle{
@@ -14,10 +22,11 @@ p, span{
 	color: #8994c6;
 	font-weight: 300;
     line-height: 40px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font2;
 }
 
-h2{
+h1,h2,h3,h4,h5,h5{
+	font-family: $font2;
 	min-height: auto;
 	padding-bottom:20px;
 }

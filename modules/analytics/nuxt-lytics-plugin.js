@@ -272,7 +272,6 @@ function facebook(debug) {
 	}(document, 'script', 'facebook-jssdk'));
 
 
-/*
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId: appId,
@@ -280,7 +279,7 @@ function facebook(debug) {
 			xfbml: true,
 			version: 'v2.12'
 		});
-	};*/
+	};
 
 	div = document.createElement('img');
 	div.height = '1';

@@ -4,12 +4,12 @@
 			<img class="mx-auto d-block mt-0" :src="logo" v-if="false"/>
 			<router-link to="/"><h2 class="text-center">Error{t}racky</h2></router-link>
 		</div>
-		<div v-if="true" class="nav mx-auto d-block mt-2 pb-4">
+		<div class="nav mx-auto d-block mt-2 pb-4">
 		  <b-nav class="" justified tabs>
 
-		  	<b-nav-item v-show="isActive('dashboard')" :active="isActive('dashboard')" to="/test">Integration page test</b-nav-item>
+		  	<b-nav-item v-show="isDash" :active="isActive('test')" to="/test">Integration page test</b-nav-item>
 
-		  	<b-nav-item v-show="isLogged" :active="isActive('admin-chat')" to="/dashboard">Dashboard</b-nav-item>
+		  	<b-nav-item v-show="isLogged" :active="isActive('dashboard')" to="/dashboard">Dashboard</b-nav-item>
 		    <b-nav-item v-show="isLogged" @click="logout()">Logout</b-nav-item>
 		  </b-nav>
 		</div>
@@ -32,7 +32,7 @@ export default {
 			this.$router.push('/');
 		},
 		isActive(n){
-			return this.$store.state.route && this.$store.state.route.name == n;
+			return this.routeName == n
 		}
 	},
 	async mounted(){
@@ -42,6 +42,15 @@ export default {
 		await this.$store.dispatch('auth/update');
 	},
 	computed:{
+		isDash(){
+			return this.routeName==='index'
+		},
+		isIndex(){
+			return this.routeName==='index'
+		},
+		routeName(){
+			return this.$store.state.route && this.$store.state.route.name;
+		},
 		isLogged(){
 			return this.$store.state.auth.isLogged
 		}
@@ -54,13 +63,13 @@ export default {
 }
 h2{
 	font-family: love_ya_like_a_sisterregular;
-	color:$color5;
+	color:$color1;
 	padding-top:30px;
 }
 a:hover{
-	border-color:$color4;
-	outline-color:$color4;
-	text-decoration-color: $color4;
+	border-color:$color2;
+	outline-color:$color2;
+	text-decoration-color: $color2;
 }
 a,a:hover{
 	border:0!important;
@@ -72,5 +81,8 @@ a,a:hover{
 	}
 	img{
 		max-width:100px;
+	}
+	ul{
+		border-bottom:0px;
 	}
 </style>

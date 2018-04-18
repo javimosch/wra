@@ -1,14 +1,14 @@
 <template>
-<div class="CollapsableCard card p-2">
-  <div class="row">
+<div class="CollapsableCard card">
+  <div class="row no-gutters">
     <div class="col-12" @click="toggle">
       <slot name="title" >
-        <h5 class="text-center m-0"
+        <h5 class="text-center mx-auto m-2 p-0"
           v-html="text"></h5>
       </slot>
     </div>
-    <div class="col-12 mt-2">
-    	<div :class="cardClass" v-show="shouldCollapse">
+    <div class="col-12 p-2" v-show="shouldCollapse">
+    	<div :class="cardClass" >
     		<slot></slot>
     	</div>
     </div>
@@ -64,8 +64,6 @@ export default {
 .CollapsableCard {}
 	h5,.Title{
 		color:$color1;
-		
-    padding:20px;
 	}
 	h5:hover,.Title:hover{
 		cursor:pointer;

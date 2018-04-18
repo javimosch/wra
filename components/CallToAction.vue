@@ -2,7 +2,7 @@
 	<div class="CallToAction">
 		<div class="row mt-5">
     <div class="col-12">
-      <h2 class="text-center">1 minute integration (or less)</h2>
+      <h2 class="text-center">5 minutes integration</h2>
       <b-btn 
       class="mx-auto d-block" @click.stop="track" to="/dashboard" variant="warning" size="lg">Give a try</b-btn>
     </div>
@@ -46,15 +46,18 @@
 	
 }
 h2{
-	font-family: $font1;
+	font-family: $font3;
+	font-size: 20px;
 }
 a{
 	max-width: 200px;
-    background-color:$color4;
+    background-color:$color1;
+    border-color:$color1;
+    color:$color6;
   }
   a:hover{
-   background-color:$color1; 
-   border-color:$color1;
+   background-color:$color2; 
+   border-color:$color2;
    color:$color6;
   }
 </style>

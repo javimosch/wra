@@ -1,16 +1,16 @@
 <template>
-	<div class="Pricing ">
-		<div class="row mt-5">
+	<div class="Pricing">
+		<div class="row">
     <div class="col-12">
-      <h2 class="text-center">Pricing (Monthly)</h2>
-      <p class="text-center">Pricing is currently disabled and free accounts had no limitations until we raise 7/500 users.</p>
       <div class="row">
-        <div class="col-md-6 mt-3">
+        <div class="col-md-12">
           <div class="card">
             <div class="card-header">
               <h3 class="text-center">FREE</h3></div>
             <div class="card-body">
               <ul class="list-group mt-4">
+                
+
                 <li class="list-group-item border-0">
                   <div class="row">
                     <div class="col-4">
@@ -19,42 +19,71 @@
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">All the features</p>
+                      <p class="m-0">Track errors in real-time</p>
                     </div>
                   </div>
                 </li>
+
                 <li class="list-group-item border-0">
                   <div class="row">
                     <div class="col-4">
                       <div class="float-right d-block">
-                        <i class="fas fa-times"></i>
+                        <i class="fas fa-check"></i>
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">1000 errors per month limit</p>
+                      <p class="m-0">Multi-project support</p>
                     </div>
                   </div>
                 </li>
+
                 <li class="list-group-item border-0">
                   <div class="row">
                     <div class="col-4">
                       <div class="float-right d-block">
-                        <i class="fas fa-times"></i>
+                        <i class="fas fa-check"></i>
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">5 projects limit</p>
+                      <p class="m-0">Multi-user support</p>
                     </div>
                   </div>
                 </li>
+
+                <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-check"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">Smart error-stack explorer</p>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-check"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">NodeJS integration</p>
+                    </div>
+                  </div>
+                </li>
+                
               </ul>
             </div>
             <div class="card-footer">
-              <h4 class="text-center">0€</h4></div>
+              <h4 class="text-center">0€ / Month</h4></div>
           </div>
         </div>
-        <div class="col-md-6 mt-3">
-          <div class="card">
+        <div class="col-md-6 mt-3" v-if="false">
+          <div class="card" >
             <div class="card-header">
               <h3 class="text-center">PAID</h3></div>
             <div class="card-body">
@@ -141,12 +170,25 @@ import {startParallax} from '@/plugins/parallax';
 .Pricing{
 	
 }
-h2{
-  font-family: $font1;
-  color:black;
+h3,h4{
+  margin:0px;
+  padding:0px;
+  line-height: 50px;
+}
+.card{
+  max-width:450px;
+  margin:0 auto;
+  display:block;
 }
 .card-header,.card-footer{
-   background-color:$color4;  
-   border-color:$color4;
+   background-color:$color1;  
+   border-color:$color1;
+   color:$color6;
+  }
+  p{
+    color:$color3;
+  }
+  .card-body{
+    padding-bottom:50px;
   }
 </style>

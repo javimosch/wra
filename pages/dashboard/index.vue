@@ -9,13 +9,10 @@
       <TaeProjectCardSelect class="mb-2 mt-2" v-model="project._id"></TaeProjectCardSelect>
       
 
-      <CollapsableCard class="mb-2" text="Integration"
-                       v-show="project._id">
-        <CopyPasteScript :project="project._id"></CopyPasteScript>
-      </CollapsableCard>
+      
     </div>
     <div class="col-12">
-      <TaeErrorsTable @change="viewError"
+      <TaeErrorsTable @select="viewError"
                       :items="items"></TaeErrorsTable>
     </div>
     <div class="col-12" v-show="!isLogged">
@@ -25,11 +22,15 @@
       <p class="text-center">Paid plan with new features will be available in May 2018</p>
     </div>
   </div>
+  <ErrorModalDetails :item.sync="item"></ErrorModalDetails>
 </div>
+
+
 
 </template>
 
 <script>
+import ErrorModalDetails from '@/components/ErrorModalDetails';
 import TaeCreateAccountForm from '@/components/TaeCreateAccountForm';
 import TaeProjectCardSelect from '@/components/controls/TaeProjectCardSelect';
 import CollapsableCard from '@/components/CollapsableCard';
@@ -67,6 +68,7 @@ export default {
   methods: {
     viewError(err) {
       this.item = err
+      console.warn(err);
     }
   },
   components: {
@@ -74,7 +76,8 @@ export default {
     CopyPasteScript,
     CollapsableCard,
     TaeProjectCardSelect,
-    TaeCreateAccountForm
+    TaeCreateAccountForm,
+    ErrorModalDetails
   },
   created() {},
   destroyed() {
@@ -144,6 +147,6 @@ export default {
   background-color: $color3;
 }
 h4{
-  color:$color1;
+  color:$color2;
 }
 </style>

@@ -39,7 +39,9 @@
 }
 a,button{
 	max-width: 200px;
-    background-color:$color4;
+    background-color:$color2;
+    border-color:$color2;
+    color:$color6;
   }
   a:hover,button:hover{
    background-color:$color1; 
