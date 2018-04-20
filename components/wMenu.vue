@@ -13,31 +13,31 @@
   </div>
   <ul class="list-group">
     <li class="list-group-item">
-      <router-link to="/app/dashboard/my-account">My account</router-link>
+      <b-link to="/app/dashboard/my-account">My account</b-link>
     </li>
     <li class="list-group-item">
-      <router-link to="/app/dashboard" disabled>Dashboard</router-link>
+      <b-link to="/app/dashboard" :disabled="true">Dashboard</b-link>
     </li>
     <li class="list-group-item">
-      <router-link to="/app/dashboard/users" disabled>Users</router-link>
+      <b-link to="/app/my-users" :disabled="true">Users</b-link>
     </li>
     <li class="list-group-item">
-    	<router-link to="/app/dashboard/collections" disabled>Collections</router-link>
+    	<b-link to="/app/dashboard/collections" :disabled="true">Collections</b-link>
     </li>
     <li class="list-group-item">
-    	<router-link to="/app/dashboard/api-actions" disabled>Api actions</router-link>
+    	<b-link to="/app/dashboard/api-actions" :disabled="true">Api actions</b-link>
     </li>
     <li class="list-group-item">
-    	<router-link to="/app/dashboard/middlewares" disabled>Middlewares</router-link>
+    	<b-link to="/app/dashboard/middlewares" :disabled="true">Middlewares</b-link>
     </li>
     <li class="list-group-item">
-    	<router-link to="/app/dashboard/analytics" disabled>Analytics</router-link>
+    	<b-link to="/app/dashboard/analytics" :disabled="true">Analytics</b-link>
     </li>
     <li class="list-group-item">
-    	<router-link to="/app/dashboard/schedules" disabled>Schedules</router-link>
+    	<b-link to="/app/dashboard/schedules" :disabled="true">Schedules</b-link>
     </li>
     <li class="list-group-item">
-    	<router-link to="/app/my-projects" >Projects</router-link>
+    	<b-link to="/app/my-projects" >Projects</b-link>
     </li>
   </ul>
 </div>
@@ -83,10 +83,13 @@ a:hover {
 }
 
 a {
-  color: lightgrey;
+  color: grey;
   border: 0!important;
   border-top: 0;
   border-bottom: 0;
   font-size: 12px;
+}
+a[disabled],a.disabled{
+  color: lightgrey;
 }
 </style>

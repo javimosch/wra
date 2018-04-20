@@ -98,7 +98,8 @@ module.exports = {
     loginEmail: process.env.NODE_ENV === 'production' ? '' : 'arancibiajav@gmail.com',
     loginPwd: process.env.NODE_ENV === 'production' ? '' : '',
     isProduction: process.env.NODE_ENV === 'production',
-    implementation: process.env.IMPLEMENTATION || 'tae'
+    implementation: process.env.IMPLEMENTATION || 'tae',
+    NODE_ENV: process.env.NODE_ENV || 'development'
   },
   plugins: [{
       src: '@/plugins/vue-disable-autocomplete'
@@ -125,6 +126,9 @@ module.exports = {
       ssr: false
     }, {
         src: '@/plugins/analytics',
+        ssr: false
+      }, {
+        src: '@/plugins/logging',
         ssr: false
       }
   ],

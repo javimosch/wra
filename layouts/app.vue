@@ -67,7 +67,7 @@ export default {
     },
     resize() {
       if (window.innerWidth < 992) {
-        this.sidebar = true
+        //this.sidebar = true
       }
     }
   },

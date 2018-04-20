@@ -1,25 +1,24 @@
 <template>
-	<div class="Dashboard container">
-		
-		
-		<div class="row">
+	<div class="MyUsers container">
+		<div class="row no-gutters">
 			<div class="col-12">
-				<h3>Admin dash</h3>
+				<WraMyUsers></WraMyUsers>
 			</div>
-			
 		</div>
 	</div>
 </template>
 <script>
-
-import {call} from '@/plugins/rpcApi';
+	import WraMyUsers from '@/components/wra/WraMyUsers'
 	export default {
-		middleware:['rootAuth'],
-		layout: 'app',
-		name: 'Dashboard',
+		layout:'app',
+		middleware:['appAuth'],
+		name: 'MyUsers',
 		props:[],
 		fetch(){
 
+		},
+		data(){
+			return{}
 		},
 		async asyncData(){
 			return {}
@@ -28,10 +27,10 @@ import {call} from '@/plugins/rpcApi';
 
 		},
 		methods:{
-			
-		},	
+
+		},
 		components:{
-			
+			WraMyUsers
 		},
 		created(){
 
@@ -42,7 +41,7 @@ import {call} from '@/plugins/rpcApi';
 	}
 </script>
 <style lang="scss" scoped>
-.Dashboard{
+.MyUsers{
 	
 }
 </style>

@@ -19,30 +19,25 @@
         <b-form-input v-model="item.name"
                       class="mt-2"
                       placeholder="name"></b-form-input>
-        
-
-        <b-btn class="mx-auto d-block mt-2"
-               size="lg"
-               variant="warning"
-               v-html="saveLabel"
-               @click="save"
-               :disabled="!item.name"></b-btn>
-
-        <b-btn class="mx-auto d-block mt-2"
-               size="md"
-               variant="warning"
-               v-html="'Sync'"
-               @click="sync"
-               :disabled="!item._id"></b-btn>
-
+        <div v-show="isSaveVisible">
+          <b-btn class="mx-auto d-block mt-2"
+                 size="lg"
+                 variant="warning"
+                 v-html="saveLabel"
+                 @click="save"></b-btn>
+        </div>
+        <div class="alert alert-danger mt-2" v-show="isItemProtected"
+             role="alert">
+          <p><strong>Important</strong>Protected items like this can only be edited manually.</p>
+        </div>
       </div>
       <div class="col-12 mt-3">
         <label>Code</label>
         <JsEditor v-show="true"
-                   :height="600"
-                   class="text-left"
-                   cmMode="text/javascript"
-                   v-model="item.code"></JsEditor>
+                  :height="600"
+                  class="text-left"
+                  cmMode="text/javascript"
+                  v-model="item.code"></JsEditor>
       </div>
     </div>
   </CollapsableCard>
@@ -54,7 +49,7 @@
 import CollapsableCard from '@/components/CollapsableCard';
 import JsEditor from '@/components/JsEditor';
 import ApiActionSelect from '@/components/controls/ApiActionSelect';
-import {getRoomSocket} from '@/plugins/taeSockets';
+import { getRoomSocket } from '@/plugins/taeSockets';
 import { call } from '@/plugins/rpcApi';
 import _ from 'lodash';
 export default {
@@ -68,7 +63,7 @@ export default {
         name: '',
         code: ''
       },
-      socket:null,
+      socket: null,
       original: {},
       collapsed: false
     }
@@ -77,6 +72,18 @@ export default {
     return {}
   },
   computed: {
+    isItemProtected(){
+      return this.item._id && this.item.protected
+    },
+    isSaveVisible() {
+      if (!this.item.name) {
+        return false
+      }
+      if (this.item.protected) {
+        return false
+      }
+      return true
+    },
     itemName() {
       return this.item.original || this.item.name || '(Choice or create a record)'
     },
@@ -84,8 +91,8 @@ export default {
       return this.item._id ? 'Update' : 'Create'
     }
   },
-  destroyed(){
-    if(this.socket) {
+  destroyed() {
+    if (this.socket) {
       this.socket.close()
     }
   },
@@ -103,7 +110,7 @@ export default {
       Object.assign(this.item, {
         _id: '',
         name: '',
-        code:''
+        code: ''
       })
     },
     async save() {
@@ -112,16 +119,16 @@ export default {
         '_id',
         'name',
         'code'
-      ]),{
-        model:'api_action'
+      ]), {
+        model: 'api_action'
       }))
       this.onSelect(item)
       this.collapsed = false
-      await self.sync();
+      await self.sync()
     },
-    sync(){
-      call('syncAction',{
-        _id:this.item._id
+    sync() {
+      call('syncAction', {
+        _id: this.item._id
       })
       this.$noty.info('Sync OK')
     }
@@ -133,11 +140,11 @@ export default {
   },
   created() {},
   async mounted() {
-    if(process.server) {
-      return;
+    if (process.server) {
+      return
     }
-    
-    this.socket = this.socket || await getRoomSocket('api_actions','coreEnsureActionsSocketRoom')
+
+    this.socket = this.socket || await getRoomSocket('api_actions', 'coreEnsureActionsSocketRoom')
   }
 }
 
