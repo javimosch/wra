@@ -1,16 +1,8 @@
 <template>
-	<div class="Dashboard container">
-		
-		
-		<div class="row">
+	<div class="ApiActions container">
+		<div class="row no-gutters">
 			<div class="col-12">
 				<ApiActionCrudView></ApiActionCrudView>
-			</div>
-			<div class="col-12">
-				
-			</div>
-			<div class="col-12">
-				
 			</div>
 		</div>
 	</div>
@@ -21,7 +13,7 @@ import {call} from '@/plugins/rpcApi';
 	export default {
 		middleware:['rootAuth'],
 		layout: 'app',
-		name: 'Dashboard',
+		name: 'ApiActions',
 		props:[],
 		fetch(){
 
@@ -47,7 +39,7 @@ import {call} from '@/plugins/rpcApi';
 	}
 </script>
 <style lang="scss" scoped>
-.Dashboard{
+.ApiActions{
 	
 }
 </style>

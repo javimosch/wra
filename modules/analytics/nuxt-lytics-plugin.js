@@ -5,7 +5,8 @@ const safeCallTimeout = 5000;
 
 var state = {
 	userId: '',
-	options: {}
+	options: {},
+	routerTrackViews:true
 }
 
 function log() {
@@ -28,6 +29,7 @@ export default async function({
 
 
 	app.router.afterEach((to, from) => {
+		if(!state.routerTrackViews) return;
 		if (state.options.ga !== false && window.ga) {
 			ga('set', 'page', to.fullPath)
 			ga('send', 'pageview')
@@ -108,6 +110,10 @@ AnalyticsPlugin.install = function(Vue, options = {
 
 	
 	var scope = window.$ma = state.scope = Vue.prototype.$ma = _.assign(Vue.prototype.$ma || {}, {
+		setRouterTracking: (v)=> {
+			state.routerTrackViews = v
+			log('router toggle',v)
+		},
 		trackEvent: (params, a, l, v) => {
 			if (!params) {
 				throw new Error('trackEvent: string of object required')

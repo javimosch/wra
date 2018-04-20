@@ -58,8 +58,6 @@ module.exports = {
     }, {
       src: 'https://www.gstatic.com/firebasejs/4.12.1/firebase.js'
     },{
-      src:'https://js.stripe.com/v3/'
-    },{
       src:"https://code.jquery.com/jquery-3.2.1.slim.min.js"
     },{
       src:"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
@@ -99,7 +97,8 @@ module.exports = {
     apiUrl: process.env.API_URL || 'http://localhost:3000',
     loginEmail: process.env.NODE_ENV === 'production' ? '' : 'arancibiajav@gmail.com',
     loginPwd: process.env.NODE_ENV === 'production' ? '' : '',
-    isProduction: process.env.NODE_ENV === 'production'
+    isProduction: process.env.NODE_ENV === 'production',
+    implementation: process.env.IMPLEMENTATION || 'tae'
   },
   plugins: [{
       src: '@/plugins/vue-disable-autocomplete'

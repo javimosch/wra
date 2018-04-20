@@ -1,6 +1,6 @@
 <template>
 <div class="AdminLogin container">
-  <h3 class="text-center">Are you a master Jedi?</h3>
+  <h3 class="text-center">Backoffice</h3>
   <div class="row justify-content-center">
     <div class="col-12 col-lg-12 mt-4">
       <input class="form-control "
@@ -28,7 +28,9 @@
 <script>
 import { call } from '@/plugins/rpcApi';
 export default {
-  middleware:['loggedCheck'],
+  middleware: [
+    'loggedCheck'
+  ],
   layout: 'app-guess',
   name: 'AdminLogin',
   props: [],
@@ -36,8 +38,7 @@ export default {
   data() {
     return {
       email: '',
-      password:'',
-      auto:false
+      password: ''
     }
   },
   async asyncData() {
@@ -53,10 +54,6 @@ export default {
   },
   methods: {
     afterLogin(user) {
-      if(user && this.auto){
-        return;
-      }
-      this.auto = true;
       this.$store.commit('auth/setUser', user)
       this.$noty.info('Welcome ' + user.email)
       if (user.role === 'root') {
@@ -67,7 +64,7 @@ export default {
     },
     async login() {
       try {
-        let res = await call('taeRootLogin', {
+        let res = await call('taeAppLogin', {
           email: this.email,
           password: this.password
         })
@@ -88,7 +85,9 @@ export default {
   },
   created() {},
   mounted() {
-    
+    if (!process.server && this.$store.state.auth.isLogged) {
+      this.afterLogin(this.$store.state.auth.user)
+    }
   },
   watch:{
     isLogged(v){

@@ -19,12 +19,22 @@
         <b-form-input v-model="item.name"
                       class="mt-2"
                       placeholder="name"></b-form-input>
+        
+
         <b-btn class="mx-auto d-block mt-2"
                size="lg"
                variant="warning"
                v-html="saveLabel"
                @click="save"
                :disabled="!item.name"></b-btn>
+
+        <b-btn class="mx-auto d-block mt-2"
+               size="md"
+               variant="warning"
+               v-html="'Sync'"
+               @click="sync"
+               :disabled="!item._id"></b-btn>
+
       </div>
       <div class="col-12 mt-3">
         <label>Code</label>
@@ -105,12 +115,15 @@ export default {
       ]),{
         model:'api_action'
       }))
-      this.$noty.info('Saved')
-      this.socket.emit('syncAction',{
-        _id:item._id
-      });
       this.onSelect(item)
       this.collapsed = false
+      await self.sync();
+    },
+    sync(){
+      call('syncAction',{
+        _id:this.item._id
+      })
+      this.$noty.info('Sync OK')
     }
   },
   components: {

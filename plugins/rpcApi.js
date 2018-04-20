@@ -18,6 +18,7 @@ export async function sync() {
 }
 
 export async function call(name, data) {
+
 	data = data || {};
 	try {
 		var headers = {}
@@ -37,6 +38,9 @@ export async function call(name, data) {
 			if (resData.err) {
 				throw new Error(resData.err);
 			} else {
+				if(!process.env.isProduction){
+					console.info('WRAKEND CALL',name, JSON.stringify(data),'THEN',resData.data)
+				}
 				return resData.data;
 			}
 		}
@@ -52,6 +56,11 @@ export async function call(name, data) {
 					msg = json.message;
 				}
 			} catch (err) {}
+
+			if(!process.env.isProduction){
+				console.info('WRAKEND CALL',name, JSON.stringify(data),'CATCH',msg)
+			}
+
 			throw new Error(msg);
 
 		} else {

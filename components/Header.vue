@@ -1,10 +1,9 @@
 <template>
 	<div class="Header mb-4">
 		<div>
-			<img class="mx-auto d-block mt-0" :src="logo" v-if="false"/>
 			<router-link to="/"><h2 class="text-center">errortracky</h2></router-link>
 		</div>
-		<div class="nav mx-auto d-block ">
+		<div class="nav mx-auto d-block " v-show="nav">
 		  <b-nav class="" justified tabs>
 
 		  	<b-nav-item class="mt-2 pb-4" v-show="isDash && isLogged" :active="isActive('test')" to="/test">Integration page test</b-nav-item>

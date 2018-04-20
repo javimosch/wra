@@ -18,7 +18,9 @@ function getFingerprint() {
   return new Promise((resolve, reject) => {
     new Fingerprint2().get(function(result, components) {
       let metadata = {}
-      components.filter(c=>['canvas','js_fonts'].includes(c.key)).forEach(c => metadata[c.key] = c.value)
+      components
+        .filter(c => !['canvas', 'js_fonts'].includes(c.key))
+        .forEach(c => metadata[c.key] = c.value)
       return resolve({
         hash: result,
         metadata
@@ -30,8 +32,8 @@ function getFingerprint() {
 export const state = () => ({
   isLogged: null,
   user: null,
-  hasSession:false,
-  session:null,
+  hasSession: false,
+  session: null,
   loginAt: null
 });
 
@@ -40,9 +42,11 @@ export const mutations = {
     state.isLogged = user !== null
     setIsLoggedInCache(user !== null);
     state.user = user;
-    state.loginAt = user? Date.now() : state.loginAt
-    if(state.user){
+    state.loginAt = user ? Date.now() : state.loginAt
+    if (state.user) {
       console.log('user commited')
+    }else{
+      window.localStorage.setItem('token', '');
     }
   },
   setSession(state, session) {
@@ -54,27 +58,31 @@ export const mutations = {
 
 export const actions = {
   async ensureSession({
-    commit, state
+    commit,
+    state
   }) {
     if (process.server) return;
 
-    if(!state.isLogged&&!window.localStorage.getItem('token')&&state.hasSession){
+    if (!state.isLogged && !window.localStorage.getItem('token') && state.hasSession) {
       window.localStorage.setItem('token', state.session.token);
     }
 
-    const {session,token} = await call('sessionUpdate', Object.assign({
+    const {
+      session,
+      token
+    } = await call('sessionUpdate', Object.assign({
       at: new Date()
     }, await getFingerprint()))
-    if(!state.isLogged||!window.localStorage.getItem('token')){
+    if (!state.isLogged || !window.localStorage.getItem('token')) {
       window.localStorage.setItem('token', token);
     }
     session.token = token;
     commit('setSession', session);
 
-    if(!window.localStorage.getItem('token')){
+    if (!window.localStorage.getItem('token')) {
       throw new Error('ENSURE_SESSION_LOST_TOKEN')
-    }else{
-      console.info('auth/ensureSession','success')
+    } else {
+      console.info('auth/ensureSession', 'success')
     }
 
   },
@@ -96,35 +104,29 @@ export const actions = {
     state,
     dispatch
   }) {
-    if(process.server) return;
-    let isLogged = getIsLoggedFromCache();
+    if (process.server) return;
 
-    if (!!isLogged) {
-      let user = state.user;
-      if (!user) {
-        
-        try {
-          console.log('login update with', localStorage.getItem('token'))
-          user = await getCurrentUser();
-          console.info('auth/update','valid token')
+
+    let user = state.user;
+    if (user) {
+      //do nothing
+    } else {
+      try {
+        user = await getCurrentUser();
+        return commit('setUser', user);
+      } catch (err) {
+        window.localStorage.setItem('token', '');
+        console.warn('auth/update', err.message)
+        if (err.message === 'LOGIN_REQUIRED') {
           await dispatch('ensureSession')
-          console.info('auth/update','valid session')
-        } catch (err) {
-          window.localStorage.setItem('token', '');
-          console.warn('auth/update',err.message)
-          if (err.message === 'LOGIN_REQUIRED') {
-            return commit('setUser', null);
-          } else {
-            throw err;
-          }
-          await dispatch('ensureSession')
+          return commit('setUser', null);
+        } else {
+          throw err;
         }
       }
-      console.log(JSON.stringify(user));
-      return commit('setUser', user);
-    } else {
-      return commit('setUser', null);
     }
+
+
   },
 
   async logout({

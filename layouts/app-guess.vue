@@ -13,10 +13,13 @@
   </div>
 </template>
 <script>
-import Header from '@/components/Header';
+import AppHeader from '@/components/AppHeader';
 export default {
   components:{
-    AppHeader:Header
+    AppHeader
+  },
+   mounted(){
+    this.$ma.setRouterTracking(false)
   }
 }
 </script>
