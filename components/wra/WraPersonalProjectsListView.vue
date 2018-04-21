@@ -2,7 +2,7 @@
 <div class="WrapPersonalProjectsListView">
   <h3>My projects</h3>
   <ListView :columns="columns"
-            :items="items"
+            :items="formatedItems"
             @select="select"></ListView>
 </div>
 
@@ -11,6 +11,7 @@
 <script>
 import { call } from '@/plugins/rpcApi';
 import ListView from '@/components/controls/ListView';
+import moment from 'moment'
 export default {
   name: 'WrapPersonalProjectsListView',
   props: [
@@ -26,6 +27,13 @@ export default {
           filterOptions: {
             enabled: true
           }
+        },
+        {
+          label: 'Last update',
+          field: 'updatedAt',
+          filterOptions: {
+            enabled: true
+          }
         }
       ]
     }
@@ -34,7 +42,12 @@ export default {
     return {}
   },
   computed: {
-    
+    formatedItems(){
+      return this.items.map(i=>{
+        i.updatedAt = moment(i.updatedAt).format('DD/MM/YYYY HH:mm')
+        return i
+      })
+    }
   },
   methods: {
     select(doc) {

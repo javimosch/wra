@@ -8,3 +8,13 @@ html, body{
 	color:$color5;
 }
 
+
+.SelectKeyDescription:hover,.SelectKeyDescription:active,.SelectKeyDescription:focus{
+	text-decoration: none!important;
+	box-shadow: none!important;
+	outline:1px solid grey!important;
+	border-radius: 0px;
+}
+.SelectKeyDescription[disabled]:hover,.SelectKeyDescription[disabled]:active,.SelectKeyDescription[disabled]:focus{
+	outline:0px!important;
+}

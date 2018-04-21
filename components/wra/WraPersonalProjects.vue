@@ -20,19 +20,27 @@
 			</div>
 		</div>
 		<div class="col-12" v-show="isList">
-			<WrapPersonalProjectsListView 
+			<WraPersonalProjectsListView 
 			:items="items"
-			@select="select" :item.sync="item"></WrapPersonalProjectsListView>
+			@select="select" :item.sync="item"></WraPersonalProjectsListView>
 		</div>
 		<div class="col-12" v-show="isDetails">
 			<TextInput ref="name" class="w-50" label="Name" v-model="item.name"></TextInput>
+			<TextInput ref="dbURI" class="w-50" label="dbURI (Mongoose connection string)" v-model="item.dbURI"></TextInput>
+			<StringList v-model="item.dependencies" ref="dependencies" label="Dependencies (npm modules)"></StringList>
+
+			<CollapsableCard text="Monitor" class="mt-4">
+				<LightButton @click="checkDatabase">Check database</LightButton>		
+			</CollapsableCard>
 		</div>
 	</div>
 </template>
 <script>
 	import LightButton from '@/components/LightButton'
-	import WrapPersonalProjectsListView from '@/components/wra/WrapPersonalProjectsListView'
+	import WraPersonalProjectsListView from '@/components/wra/WraPersonalProjectsListView'
 	import TextInput from '@/components/TextInput'
+	import StringList from '@/components/controls/StringList'
+	import CollapsableCard from '@/components/CollapsableCard'
 	import { call } from '@/plugins/rpcApi';
 	export default {
 		name: 'WraPersonalProjects',
@@ -45,7 +53,9 @@
 				mode:'list',
 				items:[],
 				item:{
-					_id:''
+					_id:'',
+					dbURI:'',
+					dependencies:[]
 				}
 			}
 		},
@@ -67,10 +77,21 @@
 			}
 		},
 		methods:{
+			async checkDatabase(){
+				let r = await call('wraProjectCheckDatabase',{
+					project: this.item._id
+				})
+				if(r.connected){
+					this.$noty.info('Connection success')
+				}else{
+					this.$noty.info('Something went wrong')
+				}
+			},
 			async refresh(){
 				this.items = await call('wraGetPersonalProjects');
 			},
 			select(item){
+				this.create();
 				this.mode="details";
 				this.item = {...this.item,...item}
 			},
@@ -83,6 +104,15 @@
 					this.$refs.name.focus();
 					return 'Name'
 				}
+				if(!this.item.dbURI) {
+					this.$refs.dbURI.focus();
+					return 'dbURI'
+				}
+				if(this.item.dependencies.length===0) {
+					this.$refs.dependencies.focus();
+					return 'dependencies (at least one)'
+				}
+				
 				return true;
 			},
 			async save(back){
@@ -97,14 +127,22 @@
 			},
 			create(){
 				var self = this;
-				Object.keys(this.item).forEach(k=>self.item[k]='')
+				Object.keys(this.item).forEach(k=>{
+					if(typeof self.item[k]==='object' && self.item[k].length!==undefined){
+						return self.item[k]=[]
+					}
+					self.item[k]=''
+				})
+				this.$refs.dependencies.clear();
 				this.mode = 'details';
 			}
 		},
 		components:{
 			TextInput,
 			LightButton,
-			WrapPersonalProjectsListView
+			WraPersonalProjectsListView,
+			StringList,
+			CollapsableCard
 		},
 		created(){
 

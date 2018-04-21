@@ -38,7 +38,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      done:false
     }
   },
   async asyncData() {
@@ -54,6 +55,8 @@ export default {
   },
   methods: {
     afterLogin(user) {
+      if(this.done) return;
+      this.done = true;
       this.$store.commit('auth/setUser', user)
       this.$noty.info('Welcome ' + user.email)
       if (user.role === 'root') {

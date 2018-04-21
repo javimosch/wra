@@ -22,7 +22,7 @@
       <b-link to="/app/my-users" :disabled="true">Users</b-link>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/dashboard/collections" :disabled="true">Collections</b-link>
+    	<b-link to="/app/my-collections" :disabled="false">Collections</b-link>
     </li>
     <li class="list-group-item">
     	<b-link to="/app/dashboard/api-actions" :disabled="true">Api actions</b-link>

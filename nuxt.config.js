@@ -130,6 +130,9 @@ module.exports = {
       }, {
         src: '@/plugins/logging',
         ssr: false
+      }, {
+        src: '@/plugins/vue-select',
+        ssr: false
       }
   ],
   css: [

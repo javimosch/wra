@@ -2,16 +2,16 @@
 <div class="SelectKey"
      @keyup.esc="toggleModal(false)">
   <input v-if="false"
-         class="form-control code"
+         class="form-control code SelectKeyCode"
          v-model="item._id"
          @keyup.enter="searchByCode" />
   <input :class="inputStyle"
          v-model="item[descriptionField]"
          :placeholder="placeholder||''"
-         @keyup.enter="searchByDescription" />
-  <button v-show="item._id" class="btn btn-primary ClearButton"
+         @keyup.enter="searchByDescription" ref="input" />
+  <button v-show="item._id" class="btn btn-primary ClearButton SelectKeyClearButton"
           @click="unselect"><i class="fas fa-close"></i></button>
-  <button class="btn btn-primary SearchButton"
+  <button class="btn btn-primary SearchButton SelectKeySearchButton"
           @click="searchAll"><i class="fas fa-search"></i></button>
   <simple-modal-backdrop v-show="backdrop"></simple-modal-backdrop>
   <simple-modal v-show="modal"
@@ -96,10 +96,13 @@ export default {
   },
   computed: {
     inputStyle() {
-      return 'form-control description ' + (this.hasSelection ? 'selected' : '')
+      return 'form-control description SelectKeyDescription' + (this.hasSelection ? 'selected' : '')
     }
   },
   methods: {
+    focus(){
+      this.$refs.input.focus();
+    },
     toggleModal(v) {
       this.modal = v
       this.backdrop = v

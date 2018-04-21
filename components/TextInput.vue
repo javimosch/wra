@@ -1,7 +1,7 @@
 <template>
 	<div class="TextInput">
 		<label v-show="label" v-html="label"></label>
-		<input ref="input" class="w-100" type="text" :value="value" @keyup="keyup" :disabled="isDisabled" />
+		<input ref="input" @change="change" class="w-100" type="text" :value="value" @keyup="keyup" :disabled="isDisabled" />
 	</div>
 </template>
 <script>
@@ -23,6 +23,9 @@
 			}
 		},
 		methods:{
+			change(e){
+				this.$emit('change',e.target.value)
+			},
 			focus(){
 				this.$refs.input.focus();
 			},

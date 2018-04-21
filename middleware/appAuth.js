@@ -13,7 +13,7 @@ export default async function({
 	if(isLogged){
 		await store.dispatch('auth/update')
 	}
-	console.log('taeIsLogged',isLogged);
+	//console.log('taeIsLogged',isLogged);
 	if(!isLogged){
 		console.log('Redirect to login',route)
 		redirect('/app/login')
