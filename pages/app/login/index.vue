@@ -1,24 +1,55 @@
 <template>
 <div class="AdminLogin container">
-  <h3 class="text-center">Backoffice</h3>
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-12 mt-4">
-      <input class="form-control "
-             v-model="email"
-             placeholder="your email" />
+  <div class="row">
+    <div class="col-12 col-md-6 mt-5">
+      <div class="row">
+        <div class="col-12">
+          <h3>Welcome to Wrapkend 0.1.0 Alpha (Pre-Release)</h3>
+        </div>
+        <div class="col-12">
+          <p>We are working hard to release the beta version. Stay tuned.</p>
+        </div>
+        <div class="col-12">
+          <ul>
+            <li>NodeJS Enviroment</li>
+            <li>MongoDB/Mongoose built-in</li>
+            <li>Multi project</li>
+            <li>Multi user</li>
+            <li>RPC Promised Actions</li>
+            <li>Middlewares support</li>
+            <li>Analytics reports</li>
+            <li>Schedules tasks</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="col-12 mt-4">
-      <input ref="pwd"
-             class="d-block mx-auto form-control"
-             v-model="password"
-             type="password"
-             placeholder="password" />
-    </div>
-    <div class="col-12">
-      <b-btn size="md"
-             class='mt-4 mx-auto d-block'
-             @click="login"
-             variant="primary">Login</b-btn>
+    <div class="col-12 col-md-6 mt-5">
+      <h3 class="text-center">Try it here</h3>
+      <div class="row justify-content-center">
+        <div class="col-12 mt-2 d-flex justify-content-center">
+          <TextInput class=""
+                     label="Email"
+                     v-model="email"
+                     placeholder="your email"></TextInput>
+        </div>
+        <div class="col-12 mt-2 d-flex justify-content-center">
+          <TextInput ref="pwd"
+                     class=""
+                     label="Password"
+                     v-model="password"
+                     type="password"
+                     placeholder="password"></TextInput>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-4">
+          <div>
+            <LightButton size="md"
+                         class='mt-2 mx-auto d-block'
+                         @click="login"
+                         variant="primary">SignIn/SignUp</LightButton>
+            <p class="BottomText m-0 mt-3">No email verification required</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -26,6 +57,8 @@
 </template>
 
 <script>
+import LightButton from '@/components/LightButton';
+import TextInput from '@/components/TextInput';
 import { call } from '@/plugins/rpcApi';
 export default {
   middleware: [
@@ -39,7 +72,7 @@ export default {
     return {
       email: '',
       password: '',
-      done:false
+      done: false
     }
   },
   async asyncData() {
@@ -49,18 +82,20 @@ export default {
     defaultPassword() {
       return process.env.loginPwd || ''
     },
-    isLogged(){
+    isLogged() {
       return this.$store.state.auth.isLogged
     }
   },
   methods: {
     afterLogin(user) {
-      if(this.done) return;
-      this.done = true;
+      if (this.done) {
+        return
+      }
+      this.done = true
       this.$store.commit('auth/setUser', user)
       this.$noty.info('Welcome ' + user.email)
       if (user.role === 'root') {
-        this.$router.push('/admin/dash')
+        this.$router.push('/app/dashboard')
       } else {
         this.$router.push('/app/dashboard')
       }
@@ -84,7 +119,8 @@ export default {
     }
   },
   components: {
-
+    LightButton,
+    TextInput
   },
   created() {},
   mounted() {
@@ -92,9 +128,9 @@ export default {
       this.afterLogin(this.$store.state.auth.user)
     }
   },
-  watch:{
-    isLogged(v){
-      if(v){
+  watch: {
+    isLogged(v) {
+      if (v) {
         this.afterLogin(this.$store.state.auth.user)
       }
     }
@@ -115,5 +151,9 @@ input {
 button,
 a {
   max-width: 200px;
+}
+
+.BottomText {
+  font-size: 10px;
 }
 </style>

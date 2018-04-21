@@ -2,7 +2,7 @@
 	<div class="MyCollections container">
 		<div class="row no-gutters">
 			<div class="col-12">
-				<b-btn variant="primary" size="sm" to="/app/my-collections/fields">Collection fields</b-btn>
+				<LightButton to="/app/my-collections/fields">Collection fields</LightButton>
 				<hr>
 			</div>
 			<div class="col-12">
@@ -12,6 +12,7 @@
 	</div>
 </template>
 <script>
+	import LightButton from '@/components/LightButton'
 	import WraMyCollections from '@/components/wra/WraMyCollections'
 	export default {
 		layout:'app',
@@ -34,7 +35,8 @@
 
 		},
 		components:{
-			WraMyCollections
+			WraMyCollections,
+			LightButton
 		},
 		created(){
 

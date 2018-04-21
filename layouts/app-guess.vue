@@ -1,28 +1,38 @@
 <template>
+<div class="Layout">
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12">
-        <app-header :nav="false"></app-header>
+        <AppHeader :nav="false"></AppHeader>
       </div>
     </div>
     <div class="row  no-gutters">
       <div class="col-sm-12">
-      <nuxt/>
+        <nuxt/>
       </div>
     </div>
   </div>
+  <div class="container-fluid">
+    <AppFooter></AppFooter>
+  </div>
+</div>
+
 </template>
+
 <script>
-import AppHeader from '@/components/AppHeader';
+import AppHeader from '@/components/wra/WraHeader';
+import AppFooter from '@/components/wra/WraFooter';
 export default {
-  components:{
-    AppHeader
+  components: {
+    AppHeader,
+    AppFooter
   },
-   mounted(){
+  mounted() {
     this.$ma.setRouterTracking(false)
   }
 }
-</script>
-<style>
 
+</script>
+
+<style>
 </style>

@@ -1,16 +1,20 @@
 <template>
-	<div class="MyAccount">
-		<h1>MyAccount</h1>
-		<div class="row">
-			<div class="col-12">
+	<div class="MyAccount container">
+		<div class="row no-gutters  pt-5">
+			
+			<div class="col-12 col-md-12">
+				<h3>MyAccount</h3>
+			</div>
+			<div class="col-12 col-md-12">
+				
 				<TextInput class="w-25" label="ID" v-model="item._id" :disabled="true"></TextInput>
 			</div>
-			<div class="col-12">
+			<div class="col-12 col-md-12">
 				<TextInput class="w-50" label="Email" v-model="item.email"></TextInput>
 			</div>
-			<div class="col-12">
-				<LightButton @click="save">Save</LightButton>
-				<LightButton @click="remove" :disabled="true">Delete</LightButton>
+			<div class="col-12 col-sm-6 col-md-4 d-flex justify-content-start">
+				<LightButton @click="save" class="m-0 mr-3" className="d-block">Save</LightButton>
+				<LightButton @click="remove" :disabled="true" class="m-0 mr-3" className="d-block">Delete</LightButton>
 			</div>
 		</div>
 	</div>

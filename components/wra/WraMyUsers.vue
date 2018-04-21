@@ -22,13 +22,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12" v-show="isList">
+		<div class="col-12 mt-3" v-show="isList">
 			<WraMyUsersList 
 			:items="items"
 			@select="select" :item.sync="item"></WraMyUsersList>
 		</div>
 		<div class="col-12" v-show="isDetails">
 			<TextInput ref="email" class="w-50" label="Email" v-model="item.email"></TextInput>
+			<TextInput ref="password" class="w-50" label="Password" v-model="item.password" type="password"></TextInput>
 			<TextInput ref="firstName" class="w-50" label="Firstname" v-model="item.firstName"></TextInput>
 			<TextInput ref="lastName" class="w-50" label="Lastname" v-model="item.lastName"></TextInput>
 		</div>

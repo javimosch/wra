@@ -4,40 +4,46 @@
     <label>Root Menu</label>
     <ul class="list-group">
     	<li class="list-group-item">
-        <router-link to="/admin/users">All Users</router-link>
+        <b-link to="/admin/users" @click="click">System users</b-link>
       </li>
       <li class="list-group-item">
-        <router-link to="/admin/api-actions">All Api actions</router-link>
+        <b-link to="/admin/api-actions" @click="click">System actions</b-link>
+      </li>
+      <li class="list-group-item">
+        <b-link to="/admin/middlewares" @click="click" :disabled="true">System middlewares</b-link>
       </li>
     </ul>
   </div>
   <ul class="list-group">
     <li class="list-group-item">
-      <b-link to="/app/dashboard/my-account">My account</b-link>
+      <b-link to="/app/dashboard/my-account" @click="click">My account</b-link>
     </li>
     <li class="list-group-item">
-      <b-link to="/app/dashboard" :disabled="true">Dashboard</b-link>
+      <b-link to="/app/dashboard" @click="click">Dashboard</b-link>
     </li>
     <li class="list-group-item">
-      <b-link to="/app/my-users" :disabled="true">Users</b-link>
+      <b-link to="/app/my-users" @click="click">Users</b-link>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/my-collections" :disabled="false">Collections</b-link>
+    	<b-link to="/app/my-collections" @click="click" :disabled="false">Collections</b-link>
+      <div>
+        <b-link to="/app/my-collections/fields" @click="click" :disabled="false">Collections Fields</b-link>
+      </div>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/dashboard/api-actions" :disabled="true">Api actions</b-link>
+    	<b-link to="/app/dashboard/api-actions" @click="click" :disabled="true">Api actions</b-link>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/dashboard/middlewares" :disabled="true">Middlewares</b-link>
+    	<b-link to="/app/dashboard/middlewares" @click="click" :disabled="true">Middlewares</b-link>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/dashboard/analytics" :disabled="true">Analytics</b-link>
+    	<b-link to="/app/dashboard/analytics" @click="click"  :disabled="true">Analytics</b-link>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/dashboard/schedules" :disabled="true">Schedules</b-link>
+    	<b-link to="/app/dashboard/schedules" @click="click" :disabled="true">Schedules</b-link>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/my-projects" >Projects</b-link>
+    	<b-link to="/app/my-projects" @click="click" >Projects</b-link>
     </li>
   </ul>
 </div>
@@ -61,7 +67,9 @@ export default {
   	}
   },
   methods: {
-
+    click(){
+      this.$emit('select')
+    }
   },
   components: {
 
@@ -79,7 +87,7 @@ a:hover {
   border-color: $color2;
   outline-color: $color2;
   text-decoration-color: none;
-  color: $color1;
+  color: $color2;
 }
 
 a {

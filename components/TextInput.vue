@@ -1,13 +1,13 @@
 <template>
 	<div class="TextInput">
 		<label v-show="label" v-html="label"></label>
-		<input ref="input" @change="change" class="w-100" type="text" :value="value" @keyup="keyup" :disabled="isDisabled" />
+		<input ref="input" @change="change" class="w-100" :type="inputType" :value="value" @keyup="keyup" :disabled="isDisabled"  />
 	</div>
 </template>
 <script>
 	export default {
 		name: 'TextInput',
-		props:['value','label','disabled'],
+		props:['value','label','disabled','type'],
 		fetch(){
 
 		},
@@ -18,6 +18,9 @@
 			return {}
 		},
 		computed:{
+			inputType(){
+				return this.type!==undefined?this.type:'text'
+			},
 			isDisabled(){
 				return this.disabled!==undefined?this.disabled:false
 			}
@@ -54,6 +57,9 @@ label{
 	min-width: 200px;
 	margin-top:20px;
 	color:grey;
+}
+input{
+	font-size:12px;
 }
 input:hover,input:active,input:focus{
 	text-decoration: none;

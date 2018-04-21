@@ -1,26 +1,33 @@
 <template>
-<div class="container-fluid"
+<div class="APP"
      v-esc="escape">
-  <div class="row">
-    <div class="col-sm-12">
-      <AppHeader :nav="true"></AppHeader>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <AppHeader :nav="true"></AppHeader>
+      </div>
+    </div>
+    <wSidebar class="animated slideInLeft"
+              v-show="sidebar">
+      <wMenu @select="escape"></wMenu>
+    </wSidebar>
+    <wSidebarToggle @click="toggleSidebar"
+                    v-show="showSidebarToggle">
+      <b-btn size="xs"
+             @click="toggleSidebar()"
+             class="rounded-0">Sidebar</b-btn>
+    </wSidebarToggle>
+    <div class="row no-gutters">
+      <div class="col-md-2 d-none d-md-block">
+        <wMenu @select="escape"></wMenu>
+      </div>
+      <div class="col-12 col-md-10 pl-0 pr-0">
+        <nuxt/>
+      </div>
     </div>
   </div>
-  <wSidebar class="animated slideInLeft"
-            v-show="sidebar">
-              <wMenu></wMenu>
-            </wSidebar>
-  <wSidebarToggle @click="toggleSidebar"
-                  v-show="showSidebarToggle">
-    <b-btn size="xs" @click="toggleSidebar()" class="rounded-0">Sidebar</b-btn>
-  </wSidebarToggle>
-  <div class="row no-gutters">
-    <div class="col-md-3 d-none d-md-block">
-      <wMenu></wMenu>
-    </div>
-    <div class="col-12 col-md-9 pl-4 pr-4">
-      <nuxt/>
-    </div>
+  <div class="container-fluid m-0 p-0">
+    <AppFooter></AppFooter>
   </div>
 </div>
 
@@ -29,7 +36,8 @@
 <script>
 import VueEsc from 'vue-esc';
 import { wSidebar, wSidebarToggle } from '@/styledComponents/sidebars';
-import AppHeader from '@/components/AppHeader';
+import AppHeader from '@/components/wra/WraHeader';
+import AppFooter from '@/components/wra/WraFooter';
 import wMenu from '@/components/wMenu';
 import $ from 'jquery';
 import Vue from 'vue';
@@ -38,6 +46,7 @@ export default {
   name: 'appLayout',
   components: {
     AppHeader,
+    AppFooter,
     wMenu,
     wSidebar,
     wSidebarToggle
@@ -67,7 +76,7 @@ export default {
     },
     resize() {
       if (window.innerWidth < 992) {
-        //this.sidebar = true
+        // this.sidebar = true
       }
     }
   },

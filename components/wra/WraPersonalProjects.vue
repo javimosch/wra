@@ -14,12 +14,15 @@
 				<div class="col" v-show="isDetails">
 					<LightButton @click="save(true)" >Save and return</LightButton>
 				</div>
+				<div class="col" v-show="isEdition">
+					<LightButton @click="remove()" >Remove</LightButton>
+				</div>
 				<div class="col" v-show="isDetails">
 					<LightButton @click="back" >Return</LightButton>		
 				</div>
 			</div>
 		</div>
-		<div class="col-12" v-show="isList">
+		<div class="col-12 mt-3" v-show="isList">
 			<WraPersonalProjectsListView 
 			:items="items"
 			@select="select" :item.sync="item"></WraPersonalProjectsListView>
@@ -36,6 +39,7 @@
 	</div>
 </template>
 <script>
+	import { NotyConfirm } from '@/plugins/noty';
 	import LightButton from '@/components/LightButton'
 	import WraPersonalProjectsListView from '@/components/wra/WraPersonalProjectsListView'
 	import TextInput from '@/components/TextInput'
@@ -73,10 +77,23 @@
 				return !this.item._id
 			},
 			isEdition(){
-				return !!this.item._id	
+				return this.isDetails && !!this.item._id	
 			}
 		},
 		methods:{
+			async remove(){
+				if (await NotyConfirm('Confirm Delete?')) {
+					let r = await call('wraRemove',{
+						model:'wra_project',
+						query:{
+							_id:this.item._id
+						}
+					});
+					console.info('RESULT',r);
+					this.$noty.error('Item removed')
+					this.back();
+				}
+			},
 			async checkDatabase(){
 				let r = await call('wraProjectCheckDatabase',{
 					project: this.item._id
@@ -84,7 +101,11 @@
 				if(r.connected){
 					this.$noty.info('Connection success')
 				}else{
-					this.$noty.info('Something went wrong')
+					if(r.err.message==='INVALID_DB_URI'){
+						this.$noty.warning('Invalid dbURI format')
+					}else{
+						this.$noty.warning('Something went wrong')
+					}
 				}
 			},
 			async refresh(){

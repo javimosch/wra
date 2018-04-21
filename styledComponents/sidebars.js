@@ -16,6 +16,11 @@ export const wSidebarToggle = styled.div`
         font-size:8px;
         margin:0px;
         position: absolute;
+        background-color:#F57F22;
+    }
+    button:hover{
+        background-color:#F57F22;
+        opacity: 0.6;    
     }
 `;
 export const wSidebar = styled.div`

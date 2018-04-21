@@ -22,7 +22,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12" v-show="isList">
+		<div class="col-12 mt-3" v-show="isList">
 			<WraMyCollectionsList 
 			:items="items"
 			@select="select" :item.sync="item"></WraMyCollectionsList>
@@ -168,7 +168,7 @@
 
 		},
 		mounted(){
-
+			this.refresh()
 		}
 	}
 </script>

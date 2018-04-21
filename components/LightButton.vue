@@ -1,6 +1,6 @@
 <template>
-	<div class="LightButton mt-2 mx-auto d-block">
-		<button @click="click" :disabled="isDisabled" class="mx-auto d-block">
+	<div class="LightButton mt-2">
+		<button @click="click" :disabled="isDisabled" :class="buttonClass">
 			<slot></slot>
 		</button>
 	</div>
@@ -8,7 +8,7 @@
 <script>
 	export default {
 		name: 'LightButton',
-		props:['disabled'],
+		props:['disabled','className','to'],
 		fetch(){
 
 		},
@@ -19,6 +19,10 @@
 			return {}
 		},
 		computed:{
+			buttonClass(){
+				return this.className!==undefined?this.className:'mx-auto d-block'
+				
+			},
 			isDisabled(){
 				return this.disabled!==undefined?this.disabled:false
 			}
@@ -26,6 +30,9 @@
 		},
 		methods:{
 			click(e){
+				if(this.to){
+					return this.$router.push(to)
+				}
 				return this.$emit('click',e)
 			}
 		},
