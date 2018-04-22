@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import MyHeader from '@/components/Header';
+import MyHeader from '@/components/wra/WraLandingHeader';
 import MyFooter from '@/components/Footer';
 
 export default {

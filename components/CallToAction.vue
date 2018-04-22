@@ -2,9 +2,9 @@
 	<div class="CallToAction">
 		<div class="row no-gutters mt-5">
     <div class="col-12">
-      <h2 class="text-center">5 minutes integration</h2>
+      <h2 class="text-center">Start for free</h2>
       <b-btn 
-      class="mx-auto d-block" @click.stop="track" to="/dashboard" variant="warning" size="lg">Give a try</b-btn>
+      class="mx-auto d-block" @click.stop="track" to="/app" variant="warning" size="lg">Give a try</b-btn>
     </div>
   </div>
 	</div>
@@ -51,13 +51,13 @@ h2{
 }
 a{
 	max-width: 200px;
-    background-color:$color1;
-    border-color:$color1;
+    background-color:$color2;
+    border-color:$color2;
     color:$color6;
   }
   a:hover{
-   background-color:$color2; 
-   border-color:$color2;
+   background-color:$color1; 
+   border-color:$color1;
    color:$color6;
   }
 </style>

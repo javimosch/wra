@@ -2,7 +2,7 @@
 <div class="WraLanding pt-5 pb-5">
   <div class="row no-gutters">
     <div class="col-12">
-      <h2 class="text-center">WRA TRACKING FOR JAVASCRIPT STARTUPPERS</h2>
+      <h2 class="text-center">BACKENDLESS SOLUTION FOR STARTUPS</h2>
     </div>
   </div>
   <CallToAction></CallToAction>
@@ -83,5 +83,6 @@ h2 {
   font-family: $font2;
   word-spacing: 17px;
   font-size:25px;
+  color:$color2
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="Index">
-      <TaeLanding></TaeLanding>
+      <WraLanding></WraLanding>
   </div>
 </template>
 <script>
-  import TaeLanding from '@/components/tae/TaeLanding'
+  import WraLanding from '@/components/wra/WraLanding'
   export default {
     layout:'public',
     name: 'Index',
@@ -24,7 +24,7 @@
 
     },
     components:{
-      TaeLanding
+      WraLanding
     },
     created(){
 

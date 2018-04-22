@@ -181,8 +181,8 @@ h3,h4{
   display:block;
 }
 .card-header,.card-footer{
-   background-color:$color1;  
-   border-color:$color1;
+   background-color:$color2;  
+   border-color:$color2;
    color:$color6;
   }
   p{

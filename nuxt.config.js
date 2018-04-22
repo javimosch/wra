@@ -15,7 +15,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: 'JavaScript Error Tracking',
+    title: 'Backendless Javscript for Startups',
     meta: [{
       charset: 'utf-8'
     }, {
@@ -24,11 +24,11 @@ module.exports = {
     }, {
       hid: 'description',
       name: 'description',
-      content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
+      content: 'Backendless solution for Startups. Javascript Backendless Fast Development. NodeJS and MongoDB'
     }, {
       hid: 'og:description',
       name: 'og:description',
-      content: 'Real-time error tracking for Javascript. Fix and prevent javascript errors.'
+      content: 'Real-time error tracking for Javascript. Javascript Backendless Fast Development. NodeJS and MongoDB'
     }, {
       hid: `og:image`,
       property: 'og:image',
