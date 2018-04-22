@@ -4,7 +4,7 @@
     <div class="col-12">
       <h2 class="text-center">Start for free</h2>
       <b-btn 
-      class="mx-auto d-block" @click.stop="track" to="/app" variant="warning" size="lg">Give a try</b-btn>
+      class="mx-auto d-block" @click.stop="track" href="/app/login" target="_self" variant="warning" size="lg">Give a try</b-btn>
     </div>
   </div>
 	</div>

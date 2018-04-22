@@ -1,5 +1,5 @@
 <template>
-	<div class="Header p-5">
+	<div class="Header p-4">
 		<div>
 			<router-link to="/" class="m-0 p-0 d-block align-self-center w-100 LogoLink">
 	        <h2 class="text-center m-0 p-0 d-block ">
@@ -66,7 +66,6 @@ export default {
 h2{
 	font-family: love_ya_like_a_sisterregular;
 	color:$color2;
-	padding-top:30px;
 }
 a:hover{
 	border-color:$color2;

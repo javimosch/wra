@@ -16,9 +16,9 @@
   </div>
   <div class="parallax"
        data-rellax-speed="-1">
-    <LandingSection title="Inspirations"
+    <LandingSection title="Inspirations" class="p-5"
                     :css="'background-color:white;'">
-      <Partners v-if="true"></Partners>
+      <Partners v-if="true" class="mb-5"></Partners>
     </LandingSection>
   </div>
   <div class="parallax"
@@ -83,6 +83,7 @@ h2 {
   font-family: $font2;
   word-spacing: 17px;
   font-size:25px;
-  color:$color2
+  color:$color2;
+  padding:50px auto 30px auto;
 }
 </style>
