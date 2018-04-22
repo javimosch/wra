@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 export default function mixpanelMixins() {
 	addScript();
-	return{
+	return {
 		trackView(url, route) {
 			mixpanel.track('track_view', {
 				url: url
@@ -69,5 +69,5 @@ function addScript() {
 			c.parentNode.insertBefore(b, c)
 		}
 	})(document, window.mixpanel || []);
-	mixpanel.init("4391ea4d95a6ac34713d58178f621f28");
+	mixpanel.init("af9e695fa4f31f3ba18866779d145444");
 }
