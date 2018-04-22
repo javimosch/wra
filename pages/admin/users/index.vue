@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-  import WraAllUsers from '@/components/wra/WraAllUsers'
+  import WraAllUsers from '@/components/wra/AllUsersView'
   export default {
     layout:'app',
     middleware:['rootAuth'],

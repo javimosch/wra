@@ -1,6 +1,6 @@
 <template>
 	<div class="CallToAction">
-		<div class="row mt-5">
+		<div class="row no-gutters mt-5">
     <div class="col-12">
       <h2 class="text-center">5 minutes integration</h2>
       <b-btn 

@@ -1,8 +1,8 @@
 <template>
 	<div class="Pricing">
-		<div class="row">
+		<div class="row no-gutters">
     <div class="col-12">
-      <div class="row">
+      <div class="row no-gutters">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
