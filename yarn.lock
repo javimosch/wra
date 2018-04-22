@@ -10191,6 +10191,13 @@ wrap-fn@^0.1.0:
   dependencies:
     co "3.1.0"
 
+wrapkend-cli@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/wrapkend-cli/-/wrapkend-cli-0.0.3.tgz#19ba2791ca60fa2fd23661d875a97457c1fb42cc"
+  dependencies:
+    axios "^0.18.0"
+    debug "^3.1.0"
+
 wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"

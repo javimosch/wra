@@ -1,4 +1,7 @@
 import axios from 'axios'
+import {client as createWrapkendClient} from 'wrapkend-cli'
+
+const wrapkend = createWrapkendClient('9OgXLVePIbhXZtplwiASlgXqQuNCMgrrQeXOe9ll');
 
 const instance = axios.create({
 	baseURL: process.env.RPC_ENDPOINT
@@ -18,9 +21,11 @@ export async function sync() {
 }
 
 export function callClient(name,data){
-	return call(name,data, {
-		url:'client/test'
-	})
+	//delete data.$project;
+	return wrapkend(name,data)
+	//return call(name,data, {
+	//	url:'client/test'
+	//})
 }
 
 export async function call(name, data, options = {}) {

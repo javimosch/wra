@@ -61,7 +61,7 @@ export default {
       if (process.server) {
         return false
       }
-      return !this.sidebar && window.innerWidth < 992
+      return !this.sidebar && window.innerWidth < 768
     }
   },
   methods: {

@@ -83,9 +83,9 @@ module.exports = {
       mixins: {}
     },
   env: {
-    ANALYTICS_GA_UA_ID: process.env.ANALYTICS_GA_UA_ID || 'UA-60303213-8',
-    ANALYTICS_FB_PAGE_ID: process.env.ANALYTICS_FB_PAGE_ID || '172735413543583',
-    ANALYTICS_FB_APP_ID: process.env.ANALYTICS_FB_APP_ID || '1958620154410063',
+    ANALYTICS_GA_UA_ID: process.env.ANALYTICS_GA_UA_ID || 'UA-60303213-9',
+    ANALYTICS_FB_PAGE_ID: process.env.ANALYTICS_FB_PAGE_ID || '895490107279528',
+    ANALYTICS_FB_APP_ID: process.env.ANALYTICS_FB_APP_ID || '1799438630117987',
     ANALYTICS_APP_VERSION: package.version,
     appName: package.name,
     appVersion: package.version,

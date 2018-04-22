@@ -80,8 +80,8 @@
 		methods:{
 			async remove(){
 				if (await NotyConfirm('Confirm Delete?')) {
-					let r = await call('wraRemove',{
-						model:'wra_user',
+					let r = await call('taeRemove',{
+						model:'tae_user',
 						query:{
 							_id:this.item._id
 						}
