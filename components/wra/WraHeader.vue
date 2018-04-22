@@ -8,7 +8,7 @@
           <span class="d-inline">wrapkend</span>
         </h2>
     	</router-link>
-    	<p class="Subtitle float-left align-self-center d-none d-md-block">Backendless&nbsp;Software</p>
+    	<p class="Subtitle float-left align-self-center d-none d-md-block">Backendless&nbsp;Solution</p>
     </div>
     <div class="col-12 col-md-6">
       <div class="nav mx-auto d-block d-flex justify-content-center align-items-center h-100">
