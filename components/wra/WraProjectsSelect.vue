@@ -1,7 +1,7 @@
 <template>
 <div class="WraProjectsSelect">
-  <label v-if="label"
-         v-html="label"></label>
+  <LightLabel v-if="label"
+         v-html="label"></LightLabel>
   <SelectKey @onError="(err)=>$noty.warning(err)"
              model="field"
              descriptionField="name"
@@ -22,6 +22,7 @@
 import { call } from '@/plugins/rpcApi';
 import SimpleSelect from '@/components/controls/SimpleSelect';
 import SelectKey from '@/components/controls/SelectKey';
+import { LightLabel } from '@/styledComponents/labels';
 export default {
   name: 'WraProjectsSelect',
   props: [
@@ -84,7 +85,8 @@ export default {
   },
   components: {
     SelectKey,
-    SimpleSelect
+    SimpleSelect,
+    LightLabel
   },
   async created() {
     // await this.$store.dispatch('adminFields/update')

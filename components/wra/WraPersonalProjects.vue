@@ -30,6 +30,12 @@
 		<div class="col-12" v-show="isDetails">
 			<TextInput ref="name" class="w-50" label="Name" v-model="item.name"></TextInput>
 			<TextInput ref="dbURI" class="w-50" label="dbURI (Mongoose connection string)" v-model="item.dbURI"></TextInput>
+			
+			<CollapsableCard text="Integration" class="mt-4">
+			<TextInput ref="apiKey" class="w-50" label="apiKey" :disabled="true" v-model="item.apiKey"></TextInput>
+			<LightButton @click="generateApiKey()" >Generate</LightButton>		
+			</CollapsableCard>
+
 			<StringList v-model="item.dependencies" ref="dependencies" label="Dependencies (npm modules)"></StringList>
 
 			<CollapsableCard text="Monitor" class="mt-4">
@@ -59,7 +65,8 @@
 				item:{
 					_id:'',
 					dbURI:'',
-					dependencies:[]
+					dependencies:[],
+					apiKey:''
 				}
 			}
 		},
@@ -81,6 +88,15 @@
 			}
 		},
 		methods:{
+			generateApiKey(){
+				var self = this;
+				call('wraProjectGenerateApiKey',{
+					project: this.item._id
+				}).then(r=>{
+					self.item.apiKey = r.apiKey
+					self.$noty.info('Key generated')
+				}).catch(err=>self.$noty.warning('Try later'))
+			},
 			async remove(){
 				if (await NotyConfirm('Confirm Delete?')) {
 					let r = await call('wraRemove',{
@@ -169,7 +185,7 @@
 
 		},
 		mounted(){
-
+			this.refresh();
 		}
 	}
 </script>

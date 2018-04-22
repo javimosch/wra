@@ -110,7 +110,7 @@
 
 		},
 		mounted(){
-
+			this.refresh()
 		}
 	}
 </script>

@@ -31,7 +31,7 @@
       </div>
     </li>
     <li class="list-group-item">
-    	<b-link to="/app/dashboard/api-actions" @click="click" :disabled="true">Api actions</b-link>
+    	<b-link to="/app/my-actions" @click="click" :disabled="false">RPC Functions</b-link>
     </li>
     <li class="list-group-item">
     	<b-link to="/app/dashboard/middlewares" @click="click" :disabled="true">Middlewares</b-link>

@@ -17,7 +17,15 @@ export async function sync() {
 	};
 }
 
-export async function call(name, data) {
+export function callClient(name,data){
+	return call(name,data, {
+		url:'client/test'
+	})
+}
+
+export async function call(name, data, options = {}) {
+
+	if(!options.url) options.url = 'rpc/' + name
 
 	data = data || {};
 	try {
@@ -27,7 +35,7 @@ export async function call(name, data) {
 				'Authorization': 'Bearer ' + localStorage.getItem('token')
 			}
 		}
-		let res = await instance.post('rpc/' + name, {
+		let res = await instance.post(options.url, {
 			n: name,
 			d: data
 		}, {

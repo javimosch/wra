@@ -68,7 +68,7 @@ export default {
       return
     }
 
-    startParallax('.parallax')
+    ///startParallax('.parallax')
   }
 }
 
