@@ -15,7 +15,7 @@
             <li>MongoDB/Mongoose built-in</li>
             <li>Multi project</li>
             <li>Multi user</li>
-            <li>RPC Promised Actions</li>
+            <li>RPC Promised Functions</li>
             <li>Middlewares support</li>
             <li>Analytics reports</li>
             <li>Schedules tasks</li>
@@ -102,7 +102,7 @@ export default {
     },
     async login() {
       try {
-        let res = await call('taeAppLogin', {
+        let res = await call('wraAppLogin', {
           email: this.email,
           password: this.password
         })
@@ -114,6 +114,14 @@ export default {
           this.$noty.warning('Wrong password!')
         }
       } catch (err) {
+
+        if(err.message==='EMAIL_NOT_FOUND'){
+          return this.$noty.info('We reached the maximum quota of 50 accounts for the pre-release version. We will be happy to e-mail you as soon as we scale up the current limit!',{
+            killer:true,
+            timeout:null
+          })          
+        }
+
         this.$noty.warning(err.message)
       }
     }
