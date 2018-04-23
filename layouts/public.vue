@@ -35,11 +35,11 @@ export default {
   async mounted() {
 
     // Login using token
-    await this.$store.dispatch('auth/update')
+    //await this.$store.dispatch('auth/update')
     // Ensure session
-    if (!this.$store.state.auth.hasSession) {
-      await this.$store.dispatch('auth/ensureSession')
-    }
+    //if (!this.$store.state.auth.hasSession) {
+//      await this.$store.dispatch('auth/ensureSession')
+  //  }
 
   }
 }

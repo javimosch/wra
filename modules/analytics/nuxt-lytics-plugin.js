@@ -258,7 +258,7 @@ function facebook(debug) {
 		div.className="fb-customerchat";
 		div.setAttribute('attribution', 'setup_tool');
 		div.setAttribute('page_id', pageId);
-		div.setAttribute('theme_color', '#fa3c4c');
+		div.setAttribute('theme_color', '#F57F22');
 		document.body.appendChild(div);
 		log("Adding chat",div)
 	}
