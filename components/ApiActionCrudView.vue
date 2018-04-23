@@ -123,14 +123,16 @@ export default {
         model: 'api_action'
       }))
       this.onSelect(item)
-      this.collapsed = false
+      //this.collapsed = false
       await self.sync()
     },
     sync() {
       call('syncAction', {
         _id: this.item._id
       })
-      this.$noty.info('Sync OK')
+      this.$noty.info('Saved',{
+        layout:"bottomRight"
+      })
     }
   },
   components: {

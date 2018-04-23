@@ -195,6 +195,7 @@ export default {
     },
     reset(){
     	Object.assign(this.$data,this.createData())
+      this.mode = 'details'
     },
    	createData() {
       let data = {
