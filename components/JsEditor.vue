@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  props:["cmMode","value",'height'],
+  props:["cmMode","value",'height','readonly'],
   data () {
     return {
       code: this.value||'',
@@ -16,7 +16,7 @@ export default {
         theme: 'base16-dark',
         lineNumbers: true,
         lineWrapping:true,
-        line: true,
+        line: true
         // more codemirror options, 更多 codemirror 的高级配置...
       }
     }
@@ -53,6 +53,9 @@ export default {
       if(this.height){
         this.codemirror.setSize(null,this.height);
         console.log('HEIGH TO ',this.height)
+      }
+      if(this.readonly){
+        this.codemirror.setOption('readOnly',true)
       }
     }
   }

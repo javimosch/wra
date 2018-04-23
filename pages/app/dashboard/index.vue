@@ -25,6 +25,7 @@
 </template>
 
 <script>
+
 export default {
   layout: 'app',
   name: 'WrakendDashboard',
@@ -46,7 +47,9 @@ export default {
 
   },
   created() {},
-  mounted() {}
+  mounted() {
+    
+  }
 }
 
 </script>

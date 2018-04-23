@@ -12,6 +12,9 @@
       <li class="list-group-item">
         <b-link to="/admin/middlewares" @click="click" :disabled="true">System middlewares</b-link>
       </li>
+      <li class="list-group-item">
+        <b-link to="/admin/logging" @click="click" :disabled="false">System stdin</b-link>
+      </li>
     </ul>
   </div>
   <ul class="list-group">
