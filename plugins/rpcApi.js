@@ -22,10 +22,11 @@ export async function sync() {
 
 export function callClient(name,data){
 	//delete data.$project;
-	return wrapkend(name,data)
-	//return call(name,data, {
-	//	url:'client/test'
-	//})
+	//return wrapkend(name,data)
+	
+	return call(name,data, {
+		url:'client/no-api-key'
+	})
 }
 
 export async function call(name, data, options = {}) {
