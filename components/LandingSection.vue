@@ -14,7 +14,7 @@
 <script>
 	export default {
 		name: 'LandingSection',
-		props:['title','text','css','inverted'],
+		props:['title','text','css','inverted','className'],
 		fetch(){
 
 		},
@@ -26,7 +26,7 @@
 		},
 		computed:{
 			sectionClass(){
-				return `LandingSection pb-5 ${this.inverted?'inverted':''}`
+				return this.className?`LandingSection ${this.className}`:`LandingSection pb-5 ${this.inverted?'inverted':''}`
 			},
 			sectionStyle(){
 				var s = this.css?this.css:'';

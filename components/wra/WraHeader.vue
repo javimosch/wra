@@ -1,16 +1,16 @@
 <template>
-<div class="WraHeader mb-2">
-  <div class="row no-gutters mt-2 mb-5">
-    <div class="col-12 col-md-6 d-block d-flex justify-content-left align-items-center h-100 mt-4 mt-md-0">
-      <router-link to="/" class="m-0 p-0 d-block align-self-center w-100 LogoLink">
+<div class="WraHeader p-4">
+  <div class="row">
+    <div class="col-12 col-sm-4">
+      <router-link to="/"
+                   class="m-0 p-0 d-block align-self-center w-100 LogoLink">
         <h2 class="text-center m-0 p-0 d-block ">
-          <img class="Logo d-inline" :src="Logo"/>
-          <span class="d-inline">wrapkend</span>
-        </h2>
-    	</router-link>
-    	<p class="Subtitle float-left align-self-center d-none d-md-block">Backendless&nbsp;Solution</p>
+            <img class="Logo d-inline" :src="Logo"/>
+            <span class="d-inline">wrapkend</span>
+          </h2>
+      </router-link>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-sm-6 offset-sm-2">
       <div class="nav mx-auto d-block d-flex justify-content-center align-items-center h-100">
         <b-nav class=""
                justified
@@ -94,15 +94,14 @@ export default {
 	margin-right:10px;
 }
 .Subtitle{
-	padding-left:25px;
-	padding-top:20px;
-	font-size:12px;
+	position: relative;
+  top:-10px;
+	font-size:9px;
 }
-h2 {
-  font-family: love_ya_like_a_sisterregular;
+h2 , h2 span{
+  font-family: $font3;
   color: $color2;
-  font-size:35px;
-  line-height: 50px;
+  
 }
 .LogoLink{
   text-decoration: none!important;

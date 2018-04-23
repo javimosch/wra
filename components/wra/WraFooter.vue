@@ -9,7 +9,7 @@
             	<i class="d-inline mr-2 fab fa-facebook-square "></i> <span class="Text">Like Us</span>
         	  </a>
             <span>
-              ||
+              &nbsp;
             <a href="https://m.me/895490107279528" target="_blank" >
               <i class="d-inline ml-1 mr-1 fab fa-facebook-messenger "></i>
               <span class="Text">

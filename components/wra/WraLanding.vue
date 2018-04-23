@@ -2,18 +2,26 @@
 <div class="WraLanding pt-5 pb-5">
   <div class="row no-gutters">
     <div class="col-12">
-      <h2 class="text-center">BACKENDLESS SOLUTION FOR STARTUPS</h2>
+      <h2 class="text-center">Backend as a service (BaaS) for Startups</h2>
     </div>
   </div>
   <CallToAction></CallToAction>
   <div class="parallax"
        data-rellax-speed="-0.5">
     
-       <LandingSection title="Simple pricing" class="mt-5 mb-5"
+       <LandingSection title="Plans" class="mt-5"
                     :css="'background-color:white;'">
       <Pricing></Pricing>
     </LandingSection>
   </div>
+
+  <LandingSection className="pb-0" title=""
+                  :css="'background-color:#033048;position:relative;z-index:20;'">
+    <WraLandingStats :one="1200"
+                  :two="500"
+                  :three="250"></WraLandingStats>
+  </LandingSection>
+
   <div class="parallax"
        data-rellax-speed="-1">
     <LandingSection title="Inspirations" class="p-5"
@@ -23,6 +31,7 @@
   </div>
   <div class="parallax"
        data-rellax-speed="-1.1">
+       <div class="mt-5"></div>
     <CallToAction></CallToAction>
   </div>
 </div>
@@ -31,7 +40,7 @@
 
 <script>
 import LandingSection from '@/components/LandingSection';
-import LandingStats from '@/components/LandingStats';
+import WraLandingStats from '@/components/WraLandingStats';
 import CallToAction from '@/components/CallToAction';
 import Partners from '@/components/Partners';
 import LandingBenefits from '@/components/LandingBenefits';
@@ -56,7 +65,7 @@ export default {
     LandingBenefits,
     Partners,
     LandingSection,
-    LandingStats
+    WraLandingStats
   },
   created() {
     if (process.env.nuxtHome) {
@@ -84,6 +93,6 @@ h2 {
   word-spacing: 17px;
   font-size:25px;
   color:$color2;
-  padding:50px auto 30px auto;
+  padding-bottom:0px;
 }
 </style>

@@ -15,7 +15,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: 'Backendless Javscript for Startups',
+    title: 'BaaS Javscript for Startups',
     meta: [{
       charset: 'utf-8'
     }, {
@@ -24,11 +24,14 @@ module.exports = {
     }, {
       hid: 'description',
       name: 'description',
-      content: 'Backendless solution for Startups. Javascript Backendless Fast Development. NodeJS and MongoDB'
+      content: 'BaaS solution for Startups. Javascript BaaS Fast Development. NodeJS and MongoDB'
+    },{
+      name: 'keywords',
+      content: 'baas, mbaas,parse server,parse-server, parseserver, parse app, parse platform, parse application, push notifications,real time,cloud code, live query,jobs, parse dashboard, parse hosting'
     }, {
       hid: 'og:description',
       name: 'og:description',
-      content: 'Real-time error tracking for Javascript. Javascript Backendless Fast Development. NodeJS and MongoDB'
+      content: 'Real-time error tracking for Javascript. Javascript BaaS Fast Development. NodeJS and MongoDB'
     }, {
       hid: `og:image`,
       property: 'og:image',
@@ -45,7 +48,7 @@ module.exports = {
         href: 'https://use.fontawesome.com/releases/v5.0.8/css/all.css'
       }, {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Montserrat|Gaegu'
+        href: 'https://fonts.googleapis.com/css?family=Trade+Winds|Montserrat|Ubuntu'
       }, {
         rel: 'stylesheet',
         href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'

@@ -1,10 +1,13 @@
 <template>
-	<div class="CallToAction">
-		<div class="row no-gutters mt-5">
+	<div class="CallToAction container">
+		<div class="row no-gutters mt-2">
     <div class="col-12">
-      <h2 class="text-center">Start for free</h2>
+      <p class="text-center">
+      	
+      	<strong>Wrapkend</strong> is an <strong>open-source</strong> solution that includes a scalable server, a singleprotocol <strong>RPC API</strong>, an administration console and a set of tools that provide advanced functionalities like real-time pub/sub, blazing fast search, error tracking, and reporting.
+      </p>
       <b-btn 
-      class="mx-auto d-block" @click.stop="track" href="/app/login" target="_self" variant="warning" size="lg">Give a try</b-btn>
+      class="mx-auto d-block" @click.stop="track" href="/app/login" target="_self" variant="warning" size="lg">Discover</b-btn>
     </div>
   </div>
 	</div>
@@ -45,9 +48,11 @@
 .CallToAction{
 	
 }
-h2{
-	font-family: $font3;
-	font-size: 20px;
+p{
+	font-family: $font2;
+	font-size: 14px;
+	font-weight: 300;
+	color:$color4;
 }
 a{
 	max-width: 200px;

@@ -2,26 +2,7 @@
 <div class="AdminLogin container">
   <div class="row">
     <div class="col-12 col-md-6 mt-5">
-      <div class="row">
-        <div class="col-12">
-          <h3>Welcome to Wrapkend 0.1.0 Alpha (Pre-Release)</h3>
-        </div>
-        <div class="col-12">
-          <p>We are working hard to release the beta version. Stay tuned.</p>
-        </div>
-        <div class="col-12">
-          <ul>
-            <li>NodeJS Enviroment</li>
-            <li>MongoDB/Mongoose built-in</li>
-            <li>Multi project</li>
-            <li>Multi user</li>
-            <li>RPC Promised Functions</li>
-            <li>Middlewares support</li>
-            <li>Analytics reports</li>
-            <li>Schedules tasks</li>
-          </ul>
-        </div>
-      </div>
+      <WelcomeText></WelcomeText>
     </div>
     <div class="col-12 col-md-6 mt-5">
       <h3 class="text-center">Try it here</h3>
@@ -57,6 +38,7 @@
 </template>
 
 <script>
+import WelcomeText from '@/components/WelcomeText'
 import LightButton from '@/components/LightButton';
 import TextInput from '@/components/TextInput';
 import { call } from '@/plugins/rpcApi';
@@ -128,7 +110,8 @@ export default {
   },
   components: {
     LightButton,
-    TextInput
+    TextInput,
+    WelcomeText
   },
   created() {},
   mounted() {
