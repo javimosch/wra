@@ -2,14 +2,14 @@
 <div class="PublicLayout">
   <MyHeader></MyHeader>
   <nuxt/>
-  <MyFooter :contact="true"></MyFooter>
+  <WraFooter :contact="true"></WraFooter>
 </div>
 
 </template>
 
 <script>
 import MyHeader from '@/components/wra/WraLandingHeader';
-import MyFooter from '@/components/Footer';
+import WraFooter from '@/components/wra/WraFooter';
 
 export default {
   name: 'PublicLayout',
@@ -29,7 +29,7 @@ export default {
   },
   components: {
     MyHeader,
-    MyFooter
+    WraFooter
   },
   created() {},
   async mounted() {
