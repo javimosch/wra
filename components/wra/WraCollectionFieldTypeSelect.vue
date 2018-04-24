@@ -2,7 +2,7 @@
 	<div class="WCFTypeSelect mt-3">
 		<LightLabel>Type</LightLabel>
 		<v-select value="String" @input="input" 
-			:options="['String','Number','Boolean','Date','Ref']"></v-select>
+			:options="['String','Number','Boolean','Date','Object','Ref']"></v-select>
 	</div>
 </template>
 <script>

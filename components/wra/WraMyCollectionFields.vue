@@ -143,7 +143,7 @@
 				await call('wraSave',{
 					$grabCurrentUser:'owner',
 					model:'wra_collection_field',
-					fields:['name','description'],
+					fields:['name','description','type'],
 					data: {...this.item,projects:this.item.projects.map(p=>p._id)}
 				})
 				this.$noty.info('Saved')

@@ -41,11 +41,13 @@
                class="w-50"
                label="Name"
                v-model="item.name"></TextInput>
-
-    <WraProjectsSelect class="mt-3" ref="project" label="Project" v-model="item.project"></WraProjectsSelect>           
-
+    <WraProjectsSelect class="mt-3"
+                       ref="project"
+                       label="Project"
+                       v-model="item.project"></WraProjectsSelect>
     <LightLabel>Code</LightLabel>
-    <JsEditor v-model="item.code"></JsEditor>
+    <JsEditor v-model="item.code"
+              :height="800"></JsEditor>
     <CollapsableCard text="Testing"
                      class="mt-3"
                      v-show="item._id">
@@ -54,7 +56,7 @@
                 cmMode="text/json"></JsEditor>
       <LightButton @click="test">Test</LightButton>
       <JsEditor class="mt-3"
-      			v-show="testingResult"
+                v-show="testingResult"
                 v-model="testingResult"
                 cmMode="text/json"></JsEditor>
       <LightButton @click="testClear">Clear</LightButton>
@@ -65,7 +67,7 @@
 </template>
 
 <script>
-import WraProjectsSelect from '@/components/wra/WraProjectsSelect'
+import WraProjectsSelect from '@/components/wra/WraProjectsSelect';
 import CollapsableCard from '@/components/CollapsableCard';
 import { LightLabel } from '@/styledComponents/labels';
 import JsEditor from '@/components/JsEditor';
@@ -103,9 +105,9 @@ export default {
       this.testingResult = ''
     },
     async test() {
-    	if(!this.item.project){
-    		return this.$noty.warning('Project required')
-    	}
+      if (!this.item.project) {
+        return this.$noty.warning('Project required')
+      }
       let payload = {}
       try {
         try {
@@ -113,15 +115,15 @@ export default {
         } catch (err) {
           return this.$noty.warning('Invalid testing payload')
         }
-        let res = await callClient(this.item.name, Object.assign({},payload,{
-        	$project: this.item.project
+        let res = await callClient(this.item.name, Object.assign({}, payload, {
+          $project: this.item.project
         }))
         this.testingResult = JSON.stringify(res, null, 2)
       } catch (err) {
         this.testingResult = JSON.stringify({
           message: err.message
         }, null, 2)
-        //return this.$noty.warning('Almost...')
+      // return this.$noty.warning('Almost...')
       }
     },
     async remove() {
@@ -143,9 +145,9 @@ export default {
       }
       this.items = await call('find', {
         model: 'wra_action',
-        populate:{
-        	path:'project',
-        	select:'name'
+        populate: {
+          path: 'project',
+          select: 'name'
         },
         owner: this.$store.state.auth.user._id
       })
@@ -177,27 +179,31 @@ export default {
       if (this.validate() !== true) {
         return this.$noty.warning('Complete ' + this.validate())
       }
-      await call('wraSave', {
-        $grabCurrentUser: 'owner',
-        model: 'wra_action',
-        fields: [
-          'name',
-          'code',
-          'project',
-          'metadata'
-        ],
-        data: this.item
-      })
-      this.$noty.info('Saved')
-      if (back) {
-        this.back()
+      try {
+        await call('wraSave', {
+          $grabCurrentUser: 'owner',
+          model: 'wra_action',
+          fields: [
+            'name',
+            'code',
+            'project',
+            'metadata'
+          ],
+          data: this.item
+        })
+        this.$noty.info('Saved')
+        if (back) {
+          this.back()
+        }
+      } catch (err) {
+        this.$noty.warning(err.message)
       }
     },
-    reset(){
-    	Object.assign(this.$data,this.createData())
+    reset() {
+      Object.assign(this.$data, this.createData())
       this.mode = 'details'
     },
-   	createData() {
+    createData() {
       let data = {
         mode: 'list',
         items: [],
@@ -205,12 +211,12 @@ export default {
           _id: '',
           name: '',
           metadata: {
-            testingPayload: '',
+            testingPayload: ''
           }
         },
-        testingResult:''
+        testingResult: ''
       }
-      //Object.assign(this.$data, data)
+      // Object.assign(this.$data, data)
       return data
     }
   },

@@ -21,7 +21,6 @@
 
           <b-nav-item class="" 
                       :active="isActive('index')"
-                      v-show="!isLogged"
                       to="/">Homepage</b-nav-item>
 
           <b-nav-item class="" 
@@ -115,12 +114,12 @@ a:hover {
 }
 
 a{
-  color:lightgrey;
+  
   border: 0!important;
   border-top: 0;
   border-bottom: 0;
-  font-size:12px;
-  text-decoration: underline;
+  
+  text-decoration: none;
 }
 
 .nav {

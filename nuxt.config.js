@@ -48,7 +48,7 @@ module.exports = {
         href: 'https://use.fontawesome.com/releases/v5.0.8/css/all.css'
       }, {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Trade+Winds|Montserrat|Ubuntu'
+        href: 'https://fonts.googleapis.com/css?family=Trade+Winds|Source+Sans+Pro|Ubuntu'
       }, {
         rel: 'stylesheet',
         href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'

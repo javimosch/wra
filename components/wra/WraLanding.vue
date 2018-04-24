@@ -1,11 +1,21 @@
 <template>
 <div class="WraLanding pt-5 pb-5">
   <div class="row no-gutters">
-    <div class="col-12">
+    
+
+    <div class="col-12 mt-5">
       <h2 class="text-center">Backend as a service (BaaS) for Startups</h2>
     </div>
   </div>
-  <CallToAction></CallToAction>
+  <CallToAction class="mb-5"></CallToAction>
+  <div class="mb-5 mt-5">&nbsp;</div>
+
+  
+  <LandingSection title="Where we are" class="mt-5"
+                    :css="'background-color:white;'">
+      <img class="Brands" :src="Brands"/>
+    </LandingSection>
+
   <div class="parallax"
        data-rellax-speed="-0.5">
     
@@ -39,6 +49,7 @@
 </template>
 
 <script>
+import Brands from '@/assets/brands.svg'
 import LandingSection from '@/components/LandingSection';
 import WraLandingStats from '@/components/WraLandingStats';
 import CallToAction from '@/components/CallToAction';
@@ -50,6 +61,11 @@ export default {
   name: 'WraLanding',
   props: [],
   fetch() {},
+  data(){
+    return {
+      Brands
+    }
+  },
   async asyncData() {
     return {}
   },
@@ -87,7 +103,11 @@ export default {
 .WraLanding {
   background-color: $color3;
 }
-
+.Brands{
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
+}
 h2 {
   font-family: $font2;
   word-spacing: 17px;

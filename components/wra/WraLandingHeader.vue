@@ -5,10 +5,27 @@
       <router-link to="/"
                    class="m-0 p-0 d-block align-self-center w-100 LogoLink">
         <h2 class="text-center m-0 p-0 d-block ">
-	          <img class="Logo d-inline" :src="Logo"/>
-	          <span class="d-inline">wrapkend</span>
-	        </h2>
+            <img class="Logo d-inline" :src="Logo"/>
+            <span class="d-inline">wrapkend</span>
+          </h2>
       </router-link>
+    </div>
+    <div class="col-12 col-sm-6 offset-sm-2">
+      <div class="nav mx-auto d-block d-flex justify-content-center align-items-center h-100">
+        <b-nav class=""
+               justified
+               tabs>
+          <b-nav-item class=""
+                      href="/app/dashboard"
+                      >Console</b-nav-item>
+          <b-nav-item class=""
+                      href="https://www.facebook.com/Wrapkend-895490107279528/"
+                      target="_blank">Community</b-nav-item>
+          <b-nav-item class=""
+                      to="/privacy-policy"
+                      >Privacy&nbsp;Policy</b-nav-item>                      
+        </b-nav>
+      </div>
     </div>
   </div>
 </div>
