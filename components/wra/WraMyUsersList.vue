@@ -1,6 +1,6 @@
 <template>
 <div class="WraMyUsersList">
-  <h3>My Users</h3>
+  <h3 v-html="label"></h3>
   <ListView :columns="columns"
             :items="items"
             @select="select"></ListView>
@@ -14,7 +14,7 @@ import ListView from '@/components/controls/ListView';
 export default {
   name: 'WraMyUsersList',
   props: [
-    'item','items'
+    'item','items','label'
   ],
   fetch() {},
   data() {

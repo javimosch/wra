@@ -73,6 +73,7 @@
 			},
 			change(item){
 				this.item = {...this.item,...item}
+				this.add()
 			}
 		},
 		components:{

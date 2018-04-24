@@ -42,6 +42,7 @@
 			<LightCheckbox v-show="isDetails" label="Is Required?" v-model="item.required"></LightCheckbox>
 			<LightCheckbox v-show="isDetails" label="Is Unique?" v-model="item.unique"></LightCheckbox>
 			<LightCheckbox v-show="isDetails" label="Is Index?" v-model="item.index"></LightCheckbox>
+			<LightCheckbox v-show="isDetails" label="Mark as public (To Share it with the network)" v-model="item.public"></LightCheckbox>
 		</div>
 	</div>
 </template>
@@ -67,7 +68,7 @@
 					value:'Number',label:'Number',
 					value:'Boolean',label:'Boolean',
 					value:'Date',label:'Date',
-					value:'Ref',label:'Ref'
+					//value:'Ref',label:'Ref'
 				}],
 				mode:'list',
 				items:[],
@@ -112,10 +113,16 @@
 				}
 			},
 			async refresh(){
-				this.items = await call('find',{
+				this.items = await call('findPaginate',{
 					model:'wra_collection_field',
 					query:{
-						owner: this.$store.state.auth.user._id
+						$or:[
+						{
+							owner: this.$store.state.auth.user._id
+						},{
+							public:true
+						}
+						]
 					}
 				});
 			},
@@ -143,7 +150,7 @@
 				await call('wraSave',{
 					$grabCurrentUser:'owner',
 					model:'wra_collection_field',
-					fields:['name','description','type'],
+					fields:['name','description','type','index','required','unique','public'],
 					data: {...this.item,projects:this.item.projects.map(p=>p._id)}
 				})
 				this.$noty.info('Saved')

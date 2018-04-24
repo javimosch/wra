@@ -1,6 +1,6 @@
 <template>
 <div class="WraMyCollectionFieldsList">
-  <h3>My Collections fields</h3>
+  <h3>Collections fields</h3>
   <ListView :columns="columns"
             :items="items"
             @select="select"></ListView>

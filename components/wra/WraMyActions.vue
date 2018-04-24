@@ -145,9 +145,14 @@ export default {
       }
       this.items = await call('find', {
         model: 'wra_action',
-        populate: {
+        /*populate: {
           path: 'project',
           select: 'name'
+        }*/
+        query:{
+          project: {
+            $in: [this.$store.state.project.selected._id]
+          }
         },
         owner: this.$store.state.auth.user._id
       })
@@ -231,7 +236,9 @@ export default {
   },
   created() {},
   mounted() {
-    this.refresh()
+    if(!process.server){
+      this.refresh()
+    }
   }
 }
 

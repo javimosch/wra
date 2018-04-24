@@ -24,6 +24,7 @@
 		</div>
 		<div class="col-12 mt-3" v-show="isList">
 			<WraMyUsersList 
+			:label="listName"
 			:items="items"
 			@select="select" :item.sync="item"></WraMyUsersList>
 		</div>
@@ -61,6 +62,13 @@
 			return {}
 		},
 		computed:{
+			project(){
+				return this.$store.state.project.selected
+			},
+			listName(){
+				var p = this.$store.state.project.selected;
+				return p ? p.name+' team':'Team'
+			},
 			isList(){
 				return this.mode =='list'
 			},
@@ -89,7 +97,9 @@
 				}
 			},
 			async refresh(){
-				this.items = await call('wraFetchMyUsers');
+				this.items = await call('wraFetchMyUsers',{
+					project: this.project._id
+				});
 			},
 			select(item){
 				this.mode="details";
@@ -111,7 +121,9 @@
 				if(this.validate()!==true){
 					return this.$noty.warning('Complete '+this.validate())
 				}
-				await call('wraSaveMyUser',this.item)
+				await call('wraSaveMyUser',Object.assign({},this.item,{
+					project:this.project._id
+				}))
 				this.$noty.info('Saved')
 				if(back){
 					this.back();

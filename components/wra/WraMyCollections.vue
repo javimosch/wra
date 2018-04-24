@@ -28,20 +28,16 @@
 			@select="select" :item.sync="item"></WraMyCollectionsList>
 		</div>
 		<div class="col-12 mt-3" v-show="isDetails">
-			<h2 v-html="item.name+' collection'"></h2>
-			<CollapsableCard text="Details">
+			<h2 v-html="detailsTitle"></h2>
+			
 			<TextInput ref="name" class="w-50" label="Name" v-model="item.name"></TextInput>
 			
-
+			<!--
 			<WraMultipleProjectsSelect label="Projects" ref="projects" class="mt-3" v-model="item.projects"></WraMultipleProjectsSelect>
-
+			-->
 			<WraMultipleCollectionFieldsSelect label="Fields" ref="fields" class="mt-3" v-model="item.fields" :owner="userId"></WraMultipleCollectionFieldsSelect>
-			</CollapsableCard>
-
-			<CollapsableCard text="Query" class="mt-3" v-show="item._id">
-				<CollectionQuery :collection="item"></CollectionQuery>
-			</CollapsableCard>
-
+			
+	
 		</div>
 	</div>
 </template>
@@ -77,6 +73,12 @@
 			return {}
 		},
 		computed:{
+			detailsTitle(){
+				return this.item?this.item.name+' collection':'(New)'
+			},
+			project(){
+				return this.$store.state.project.selected
+			},
 			userId(){
 				return this.$store.state.auth.user && this.$store.state.auth.user._id
 			},
@@ -108,7 +110,9 @@
 				}
 			},
 			async refresh(){
-				this.items = await call('wraFetchMyCollections');
+				this.items = await call('wraFetchMyCollections',{
+					project: this.project._id
+				});
 			},
 			select(item){
 				this.mode="details";
@@ -139,7 +143,7 @@
 					return this.$noty.warning('Complete '+this.validate())
 				}
 				await call('wraSaveMyCollection',{...this.item
-					,projects:this.item.projects.map(p=>p._id)
+					//,projects:this.item.projects.map(p=>p._id)
 					,fields:this.item.fields.map(p=>p._id)
 				})
 				this.$noty.info('Saved')
@@ -153,6 +157,9 @@
 				self.item.projects = [];
 				self.item.fields = [];
 				this.mode = 'details';
+				if(this.$store.state.project.selected._id){
+					self.item.projects = [this.$store.state.project.selected._id];
+				}
 			}
 		},
 		components:{
@@ -169,6 +176,7 @@
 		},
 		mounted(){
 			this.refresh()
+
 		}
 	}
 </script>

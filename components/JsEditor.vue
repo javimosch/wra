@@ -1,11 +1,17 @@
 <template>
 	<div>
+    <LightLabel v-show="label" v-html="label"></LightLabel>
 		<codemirror ref="myCm" v-model="code" :options="cmOptions"></codemirror>
 	</div>	
 </template>
 <script>
+import {LightLabel} from '@/styledComponents/labels'
 export default {
-  props:["cmMode","value",'height','readonly'],
+  components:{
+    LightLabel
+  },
+  name:'JsEditor',
+  props:["cmMode","value",'height','readonly','label'],
   data () {
     return {
       code: this.value||'',

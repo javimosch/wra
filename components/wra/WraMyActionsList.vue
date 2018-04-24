@@ -26,13 +26,6 @@ export default {
           filterOptions: {
             enabled: true
           }
-        },
-        {
-          label: 'Project',
-          field: 'project.name',
-          filterOptions: {
-            enabled: true
-          }
         }
       ]
     }
