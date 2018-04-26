@@ -9,6 +9,9 @@
 import WelcomeText from '@/components/WelcomeText'
 export default {
   layout: 'app',
+  middleware: [
+    'appAuth'
+  ],
   name: 'WrakendDashboard',
   props: [],
   fetch() {},
@@ -27,7 +30,9 @@ export default {
   components: {
     WelcomeText
   },
-  created() {},
+  created() {
+
+  },
   mounted() {
     
   }

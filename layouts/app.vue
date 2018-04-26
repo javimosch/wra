@@ -1,7 +1,12 @@
 <template>
 <div class="APP"
      v-esc="escape">
-  <div class="container-fluid">
+  <div v-show="!isLogged"
+       class="d-flex justify-content-center align-items-center h-100 position-fixed w-100">
+    <LoadingDiamond v-show="!isLogged"></LoadingDiamond>
+  </div>
+  <div class="container-fluid"
+       v-show="isLogged">
     <div class="row">
       <div class="col-sm-12">
         <AppHeader :nav="true"></AppHeader>
@@ -26,7 +31,8 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid m-0 p-0">
+  <div class="container-fluid m-0 p-0"
+       v-show="isLogged">
     <AppFooter></AppFooter>
   </div>
 </div>
@@ -34,9 +40,11 @@
 </template>
 
 <script>
+import {call} from '@/plugins/rpcApi';
 import VueEsc from 'vue-esc';
 import { wSidebar, wSidebarToggle } from '@/styledComponents/sidebars';
 import AppHeader from '@/components/wra/WraHeader';
+import LoadingDiamond from '@/components/LoadingDiamond';
 import AppFooter from '@/components/wra/WraFooter';
 import wMenu from '@/components/wMenu';
 import $ from 'jquery';
@@ -49,7 +57,8 @@ export default {
     AppFooter,
     wMenu,
     wSidebar,
-    wSidebarToggle
+    wSidebarToggle,
+    LoadingDiamond
   },
   data() {
     return {
@@ -62,6 +71,9 @@ export default {
         return false
       }
       return !this.sidebar && window.innerWidth < 768
+    },
+    isLogged() {
+      return this.$store.state.auth.isLogged
     }
   },
   methods: {
@@ -83,19 +95,24 @@ export default {
   destroyed() {
     $(window).on('resize', this.resize)
   },
-  mounted() {
+  created() {},
+  async mounted() {
     if (process.server) {
       return
     }
 
-    this.$ma.setRouterTracking(false)
-
-    $(window).on('resize', this.resize)
-
     if (!this.$store.state.auth.isLogged) {
-      this.$router.push('/app/login')
+      const isLogged = (await call('taeIsLogged')).isLogged
+      if (!isLogged) {
+        window.location.href = '/app/login'
+      }else{
+        await this.$store.dispatch('auth/update')
+      }
     }
 
+    this.$ma.setRouterTracking(true)
+
+  // $(window).on('resize', this.resize)
   }
 }
 

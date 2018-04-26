@@ -5,7 +5,7 @@
       <WelcomeText></WelcomeText>
     </div>
     <div class="col-12 col-md-6 mt-5">
-      <h3 class="text-center">Try it here</h3>
+      
       <div class="row justify-content-center">
         <div class="col-12 mt-2 d-flex justify-content-center">
           <TextInput class=""

@@ -16,7 +16,7 @@ export default {
   mounted(){
     if(!process.server){
       this.$noty.warning(this.error.message)
-      this.$router.push('/app/dashboard')
+      //this.$router.push('/app/dashboard')
     }
   },
   methods:{

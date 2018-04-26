@@ -114,7 +114,7 @@ export default {
       this.$emit('input', doc._id)
       this.$emit('change', doc)
       this.item = doc
-      this.original = _.clone(doc)
+      this.original = _.cloneDeep(doc)
       this.hasSelection = true
       this.toggleModal(false)
     },
@@ -122,6 +122,7 @@ export default {
       this.item._id = null
       this.item[this.descriptionField] = ''
       this.hasSelection = false
+      this.original = _.cloneDeep(this.item);
       this.$emit('onClear');
     },
     async findById(id) {
@@ -236,12 +237,15 @@ input.selected {
 
 input.description {
   border-radius: 0.25rem 0px 0px 0.25rem;
+  font-size:12px;
 }
 
 .ClearButton{
   color: white;
+    background-color:lightgrey;
+    border:0px;
     position: absolute;
-    height: 38px;
+    height: 32px;
     right: 50px;
     width: 30px;
     top: 0px;
@@ -250,9 +254,11 @@ input.description {
     border-radius: 0px 0px 0px 0px;
 }
 .SearchButton {
+  background-color:$color2;
+  border-color:transparent;
   color: white;
   position: absolute;
-  height: 38px;
+  height: 32px;
   right: 0px;
   width: 50px;
   top: 0px;

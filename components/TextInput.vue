@@ -60,11 +60,15 @@ label{
 }
 input{
 	font-size:12px;
+	border:0px;
+	border-bottom:1px solid grey;
 }
 input:hover,input:active,input:focus{
+	border:0px;
+	border-bottom:1px solid grey;
 	text-decoration: none;
 	box-shadow: none;
-	outline:1px solid grey;
+	outline:0px solid grey;
 }
 input[disabled]:hover,input[disabled]:active,input[disabled]:focus{
 	outline:0px

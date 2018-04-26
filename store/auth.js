@@ -30,7 +30,7 @@ function getFingerprint() {
 }
 
 export const state = () => ({
-  isLogged: null,
+  isLogged: false,
   user: null,
   hasSession: false,
   session: null,

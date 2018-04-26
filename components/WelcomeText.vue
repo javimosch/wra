@@ -2,21 +2,18 @@
 <div class="WelcomeText">
   <div class="row">
     <div class="col-12">
-      <h3>Welcome to Wrapkend 0.2.1 (Pre-Release)</h3>
+      <h3>Welcome to Wrapkend</h3>
     </div>
     <div class="col-12">
-      <p>Documentation is Work in progress</p>
+      <p>Main features</p>
     </div>
     <div class="col-12">
       <ul>
-        <li>NodeJS Enviroment</li>
-        <li>MongoDB/Mongoose built-in</li>
-        <li>Multi project</li>
-        <li>Multi user</li>
-        <li>Remote Procedure Call Functions (Javascript Promises)</li>
-        <li>Middlewares support (Pre, Post)</li>
-        <li>Analytics reports</li>
-        <li>Schedules tasks (Cron style)</li>
+        <li>Data persistance</li>
+        <li>User management</li>
+        <li>Analytics</li>
+        <li>Monitoring</li>
+        <li>Programmable services</li>
       </ul>
     </div>
   </div>

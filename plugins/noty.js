@@ -11,6 +11,7 @@ export function NotyConfirm(text) {
 	return new Promise((resolve, reject) => {
 		const n = new Noty({
 			text: text,
+			layout:'bottomRight',
 			buttons: [
 				Noty.button('Yes', 'btn btn-danger', function() {
 					resolve(true);
