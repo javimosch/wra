@@ -159,7 +159,7 @@ module.exports = {
   },
   manifest: {
     display: 'standalone',
-    name: 'errortracky',
+    name: 'wrapkend',
     lang: 'en'
   },
   render: {

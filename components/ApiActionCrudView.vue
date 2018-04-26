@@ -39,6 +39,13 @@
                   cmMode="text/javascript"
                   v-model="item.code"></JsEditor>
       </div>
+      <div class="col-12 mt-3" v-show="isSaveVisible">
+          <b-btn class="mx-auto d-block mt-2"
+                 size="lg"
+                 variant="warning"
+                 v-html="saveLabel"
+                 @click="save"></b-btn>
+        </div>
     </div>
   </CollapsableCard>
 </div>

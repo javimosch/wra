@@ -7,7 +7,7 @@
       <b-link to="/app/dashboard" @click="click">Dashboard</b-link>
     </li>
     <li class="list-group-item">
-      <b-link to="/app/dashboard/my-account" @click="click">Account</b-link>
+      <b-link to="/app/account" @click="click">Account</b-link>
     </li>
     <li class="list-group-item">
       <b-link to="/app/my-projects" @click="click" >Projects</b-link>
@@ -51,6 +51,9 @@
     <li class="list-group-item">
     	<b-link to="/wip/schedules" @click="click" :disabled="true">Schedules</b-link>
     </li>
+    <li class="list-group-item">
+      <b-link to="/app/monitoring" @click="click" :disabled="!hasPrj">Monitoring</b-link>
+    </li>
     
   </ul>
 
@@ -70,7 +73,7 @@
         <b-link to="/admin/logging" @click="click" :disabled="false">Logs</b-link>
       </li>
       <li class="list-group-item">
-        <b-link href="/admin/login" target="_blank">Open&nbsp;new&nbsp;tab</b-link>
+        <b-link href="/app/dashboard" target="_blank">Open&nbsp;new&nbsp;tab</b-link>
       </li>
       
     </ul>
@@ -125,12 +128,16 @@ export default {
       this.$store.commit('project/setSelected',_.cloneDeep(this.item))
 
       if(!process.server){
-        window.localStorage.setItem('project.selected',this.item._id)
+        window.localStorage.setItem('project.selected',JSON.stringify(this.item))
       }
 
     },
     click(){
       this.$emit('select')
+      window.scroll({
+        top:0,
+         behavior: "smooth"
+      })
     }
   },
   components: {
@@ -148,9 +155,15 @@ export default {
     if(this.selectedProjectId){
       this.item._id = this.selectedProjectId
     }else{
-      let _id = window.localStorage.getItem('project.selected')
-      if(_id){
-        this.item._id = _id
+      var item
+      try{
+        item = JSON.parse(window.localStorage.getItem('project.selected'))
+        this.$store.commit('project/setSelected',_.cloneDeep(item))
+      }catch(err){
+
+      }
+      if(item){
+        this.item._id = item._id
       }
     }
   }

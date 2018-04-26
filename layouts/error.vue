@@ -11,12 +11,13 @@ export default {
   props: ['error'],
   layout: 'app-guess',
   created(){
-    console.warn(this.error);
+    //console.warn(this.error);
   },
   mounted(){
     if(!process.server){
       this.$noty.warning(this.error.message)
-      //this.$router.push('/app/dashboard')
+      console.error(this.error)
+      this.$router.push('/app/dashboard')
     }
   },
   methods:{

@@ -23,10 +23,10 @@
              class="rounded-0">Sidebar</b-btn>
     </wSidebarToggle>
     <div class="row no-gutters">
-      <div class="col-md-3 d-none d-md-block">
+      <div class="col-md-2 d-none d-md-block">
         <wMenu @select="escape"></wMenu>
       </div>
-      <div class="col-12 col-md-9 pl-0 pr-0">
+      <div class="col-12 col-md-10 pl-0 pr-0">
         <nuxt/>
       </div>
     </div>
