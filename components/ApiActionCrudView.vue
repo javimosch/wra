@@ -3,8 +3,8 @@
   <CollapsableCard :text="itemName"
                    :collapsed.sync="collapsed">
     <div slot="title">
-      <h3 class="text-center m-0 Title"
-          v-html="itemName"></h3>
+      <h4 class="text-center m-0 mt-3 Title"
+          v-html="itemName"></h4>
     </div>
     <div class="row">
       <div class="col-12"
@@ -92,7 +92,7 @@ export default {
       return true
     },
     itemName() {
-      return this.item.original || this.item.name || '(Choice or create a record)'
+      return this.item.original || this.item.name || '(Choice to edit)'
     },
     saveLabel() {
       return this.item._id ? 'Update' : 'Create'

@@ -50,14 +50,26 @@
                class="w-50"
                label="dbURI (Mongoose connection string)"
                v-model="item.dbURI"></TextInput>
+
+    <ProjectLogoUploader 
+    :project="item._id" 
+    :image="item.images && item.images.brand_logo" class="mt-3"
+    ></ProjectLogoUploader>
+
     <CollapsableCard text="Integration"
                      class="mt-4">
       <TextInput ref="apiKey"
                  class="w-50"
-                 label="apiKey"
+                 label="Client key"
                  :disabled="true"
                  v-model="item.apiKey"></TextInput>
-      <LightButton @click="generateApiKey()">Generate</LightButton>
+      <LightButton @click="generateApiKey()">Generate client key</LightButton>
+      <TextInput ref="serverKey"
+                 class="w-50"
+                 label="Server key"
+                 :disabled="true"
+                 v-model="item.serverKey"></TextInput>
+      <LightButton @click="generateServerKey()">Generate server key</LightButton>
     </CollapsableCard>
     <StringList v-model="item.dependencies"
                 ref="dependencies"
@@ -74,6 +86,7 @@
 <script>
 import { NotyConfirm } from '@/plugins/noty';
 import LightButton from '@/components/LightButton';
+import ProjectLogoUploader from '@/components/ProjectLogoUploader';
 import WraPersonalProjectsListView from '@/components/wra/WraPersonalProjectsListView';
 import TextInput from '@/components/TextInput';
 import StringList from '@/components/controls/StringList';
@@ -91,7 +104,11 @@ export default {
         _id: '',
         dbURI: '',
         dependencies: [],
-        apiKey: ''
+        apiKey: '',
+        serverKey:'',
+        images:{
+          brand_logo:{}
+        }
       }
     }
   },
@@ -119,6 +136,15 @@ export default {
         project: this.item._id
       }).then(r => {
         self.item.apiKey = r.apiKey
+        self.$noty.info('Key generated')
+      }).catch(err => self.$noty.warning('Try later'))
+    },
+    generateServerKey() {
+      var self = this
+      call('wraProjectGenerateServerKey', {
+        project: this.item._id
+      }).then(r => {
+        self.item.serverKey = r.serverKey
         self.$noty.info('Key generated')
       }).catch(err => self.$noty.warning('Try later'))
     },
@@ -224,7 +250,8 @@ export default {
     LightButton,
     WraPersonalProjectsListView,
     StringList,
-    CollapsableCard
+    CollapsableCard,
+    ProjectLogoUploader
   },
   created() {},
   mounted() {

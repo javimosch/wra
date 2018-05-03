@@ -1945,6 +1945,13 @@ clone@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.1.tgz#d217d1e961118e3ac9a4b8bba3285553bf647cdb"
 
+cloudinary@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.11.0.tgz#3f6b21961d17859f271738f452427d9899591ff1"
+  dependencies:
+    lodash "^4.17.4"
+    q "^1.5.1"
+
 co@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/co/-/co-3.1.0.tgz#4ea54ea5a08938153185e15210c68d9092bc1b78"
@@ -7621,7 +7628,7 @@ pupa@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/pupa/-/pupa-1.0.0.tgz#9a9568a5af7e657b8462a6e9d5328743560ceff6"
 
-q@^1.1.2:
+q@^1.1.2, q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
 

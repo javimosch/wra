@@ -62,7 +62,8 @@ export default {
   },
   data() {
     return {
-      sidebar: false
+      sidebar: false,
+      innerWidth: 0
     }
   },
   computed: {
@@ -70,7 +71,7 @@ export default {
       if (process.server) {
         return false
       }
-      return !this.sidebar && window.innerWidth < 768
+      return !this.sidebar && this.innerWidth < 768
     },
     isLogged() {
       return this.$store.state.auth.isLogged
@@ -87,13 +88,16 @@ export default {
       this.sidebar = !this.sidebar
     },
     resize() {
+      this.innerWidth = window.innerWidth
       if (window.innerWidth < 992) {
-        // this.sidebar = true
+        //this.sidebar = true
+      }else{
+        this.sidebar = false
       }
     }
   },
   destroyed() {
-    $(window).on('resize', this.resize)
+    $(window).off('resize', this.resize)
   },
   created() {},
   async mounted() {
@@ -112,7 +116,8 @@ export default {
 
     this.$ma.setRouterTracking(true)
 
-  // $(window).on('resize', this.resize)
+     $(window).on('resize', this.resize)
+     this.resize()
   }
 }
 

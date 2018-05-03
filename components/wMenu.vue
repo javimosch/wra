@@ -10,7 +10,7 @@
       <b-link to="/app/account" @click="click">Account</b-link>
     </li>
     <li class="list-group-item">
-      <b-link to="/app/my-projects" @click="click" >Projects</b-link>
+      <b-link to="/app/projects" @click="click" >Projects</b-link>
     </li>
     <li class="list-group-item">
       <b-link to="/app/my-collections/fields" @click="click" :disabled="true">Explore</b-link>
@@ -68,6 +68,9 @@
       </li>
       <li class="list-group-item">
         <b-link to="/admin/middlewares" @click="click" :disabled="false">Middlewares</b-link>
+      </li>
+      <li class="list-group-item">
+        <b-link to="/admin/workers" @click="click" :disabled="false">Workers</b-link>
       </li>
       <li class="list-group-item">
         <b-link to="/admin/logging" @click="click" :disabled="false">Logs</b-link>

@@ -8,6 +8,14 @@ export const state = () => ({
 	}
 });
 
+export const getters = {
+  brandLogo (state, items) {
+  	let logo = state.selected.images && state.selected.images.brand_logo ;
+  	let basePath = logo && logo.url.substring(0,logo.url.indexOf('/upload/')+8)
+    return logo && basePath + `v${logo.version.toString()}/${logo.public_id}`
+  },
+};
+
 export const mutations = {
 	setSelected(state, item) {
 		state.selected = item;

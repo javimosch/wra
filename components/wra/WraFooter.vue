@@ -1,7 +1,7 @@
 <template>
 <div class="WraFooter">
   <div class="row h-100 no-gutters">
-    <div class="col-12 col-sm-5 pl-4 pr-4">
+    <div class="col-12 col-sm-7 pl-4 pr-4">
       <div class="outer">
         <div class="middle">
           <div class="inner">
@@ -13,7 +13,7 @@
             <a href="https://m.me/895490107279528" target="_blank" >
               <i class="d-inline ml-1 mr-1 fab fa-facebook-messenger "></i>
               <span class="Text">
-               Chat with us on messenger
+               Chat&nbsp;with&nbsp;us&nbsp;on&nbsp;messenger
               </span>
             </a>
             </span>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-sm-5 offset-sm-2 pl-4 pr-4">
+    <div class="col-12 col-sm-5  pl-4 pr-4">
       <div class="outer w-100 float-right">
         <div class="middle">
           <div class="inner">
