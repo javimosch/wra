@@ -1,11 +1,13 @@
 <template>
 <div class="WrakendDashboard container">
-  <WelcomeText></WelcomeText>
+  <ProjectsBlocks></ProjectsBlocks>
 </div>
 
 </template>
 
 <script>
+
+import ProjectsBlocks from '@/components/ProjectsBlocks'
 import WelcomeText from '@/components/WelcomeText'
 export default {
   layout: 'app',
@@ -28,7 +30,8 @@ export default {
 
   },
   components: {
-    WelcomeText
+    WelcomeText,
+    ProjectsBlocks
   },
   created() {
 

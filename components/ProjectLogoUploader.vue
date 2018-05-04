@@ -8,7 +8,7 @@
       
     </div>
     <div class="col-12 col-sm-4 mt-2">
-      <img :src="image.url" class="Image img-thumbnail img-fluid"/>
+      <img :src="imageUrl" class="Image img-thumbnail img-fluid"/>
     </div>
   </div>
 </div>
@@ -32,6 +32,9 @@ export default {
     return {}
   },
   computed: {
+    imageUrl(){
+      return this.image && this.image.url||''
+    }
   },
   methods: {
     async upload(file) {

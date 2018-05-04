@@ -50,12 +50,9 @@
                class="w-50"
                label="dbURI (Mongoose connection string)"
                v-model="item.dbURI"></TextInput>
-
-    <ProjectLogoUploader 
-    :project="item._id" 
-    :image="item.images && item.images.brand_logo" class="mt-3"
-    ></ProjectLogoUploader>
-
+    <ProjectLogoUploader :project="item._id"
+                         :image="item.images && item.images.brand_logo"
+                         class="mt-3"></ProjectLogoUploader>
     <CollapsableCard text="Integration"
                      class="mt-4">
       <TextInput ref="apiKey"
@@ -105,9 +102,9 @@ export default {
         dbURI: '',
         dependencies: [],
         apiKey: '',
-        serverKey:'',
-        images:{
-          brand_logo:{}
+        serverKey: '',
+        images: {
+          brand_logo: {}
         }
       }
     }
@@ -210,24 +207,22 @@ export default {
         return this.$noty.warning('Complete ' + this.validate())
       }
       await call('wraSavepersonalProject', this.item)
-      
+
       this.$noty.info('Saved')
 
-      
-        try {
-          await call('wraUpdateSharedWorkerDependencies', {
-            project: this.item._id
-          })
-          this.$noty.info(this.item.name+': Dependencies were updated successfully',{
-          	layout:'bottom',
-          	timeout:5000
-          })
-        } catch (err) {
-          this.$noty.warning('Unable to update dependencies.', {
-            timeout: false
-          })
-        }
-      
+      try {
+        await call('wraUpdateSharedWorkerDependencies', {
+          project: this.item._id
+        })
+        this.$noty.info(this.item.name + ': Dependencies were updated successfully', {
+          layout: 'bottom',
+          timeout: 5000
+        })
+      } catch (err) {
+        this.$noty.warning('Unable to update dependencies.', {
+          timeout: false
+        })
+      }
 
       if (back) {
         this.back()
@@ -254,8 +249,24 @@ export default {
     ProjectLogoUploader
   },
   created() {},
-  mounted() {
-    this.refresh()
+  async mounted() {
+    if (!process.server) {
+      let projectDetails = window.sessionStorage.getItem('projectDetails')
+      if (projectDetails) {
+        if (projectDetails === 'create') {
+          this.create()
+        } else {
+          this.select(await call('findOne', {
+            model: 'wra_project',
+            _id: projectDetails
+          }))
+        }
+        window.sessionStorage.removeItem('projectDetails')
+      } else {
+        this.refresh()
+      }
+    }
+
   }
 }
 

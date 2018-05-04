@@ -76,9 +76,14 @@ export default {
   },
   methods: {
     sync(){
+      var self = this
       call('workerSynchronizeFunctions',{
         project: this.projectId
-      }).then(console.info)
+      }).then(console.info).catch(err=>{
+        if(err.message==='WORKERS_OFFLINE'){
+          self.$noty.warning('Workers offline')
+        }
+      })
     },
     refresh() {
       this.socket.emit('refresh')
