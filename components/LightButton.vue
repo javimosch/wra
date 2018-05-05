@@ -1,5 +1,5 @@
 <template>
-	<div class="LightButton mt-2">
+	<div class="LightButton">
 		<button @click="click" :disabled="isDisabled" :class="buttonClass">
 			<slot></slot>
 		</button>

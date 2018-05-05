@@ -1,5 +1,5 @@
 <template>
-<div class="WraMyActions row">
+<div class="ApiActionsAdminCrud row">
   <div class="col-12 mb-2">
     <div class="row no-gutters">
       <div class="col"
@@ -31,40 +31,24 @@
   </div>
   <div class="col-12 mt-3"
        v-show="isList">
-    <WraMyActionsList :items="items"
-                      @select="select"
-                      :item.sync="item"></WraMyActionsList>
+    <ApiActionsList :items="items"
+                    @select="select"
+                    :item.sync="item"></ApiActionsList>
   </div>
   <div class="col-12"
        v-show="isDetails">
        <DocumentHistorySelect :disabled="!item._id"
                            :id="item._id"
-                           type="wra_action_history"
+                           type="api_action_history"
                            @select="onHistorySelect"></DocumentHistorySelect>
     <TextInput ref="name"
                class="w-50"
                label="Name"
                v-model="item.name"></TextInput>
-    <WraProjectsSelect class="mt-3" v-if="false"
-                       ref="project"
-                       label="Project"
-                       v-model="item.project"></WraProjectsSelect>
+    
     <LightLabel>Code</LightLabel>
     <JsEditor v-model="item.code"
-              :height="800"></JsEditor>
-    <CollapsableCard text="Testing"
-                     class="mt-3"
-                     v-show="item._id">
-      <LightLabel>Payload (JSON)</LightLabel>
-      <JsEditor v-model="item.metadata.testingPayload"
-                cmMode="text/json"></JsEditor>
-      <LightButton @click="test">Test</LightButton>
-      <JsEditor class="mt-3"
-                v-show="testingResult"
-                v-model="testingResult"
-                cmMode="text/json"></JsEditor>
-      <LightButton @click="testClear">Clear</LightButton>
-    </CollapsableCard>
+              :height="500"></JsEditor>
   </div>
 </div>
 
@@ -72,17 +56,16 @@
 
 <script>
 import DocumentHistorySelect from '@/components/DocumentHistorySelect';
-import WraProjectsSelect from '@/components/wra/WraProjectsSelect';
 import CollapsableCard from '@/components/CollapsableCard';
 import { LightLabel } from '@/styledComponents/labels';
 import JsEditor from '@/components/JsEditor';
 import LightButton from '@/components/LightButton';
-import WraMyActionsList from '@/components/wra/WraMyActionsList';
+import ApiActionsList from '@/components/ApiActionsList';
 import TextInput from '@/components/TextInput';
 import { NotyConfirm } from '@/plugins/noty';
 import { call, callClient } from '@/plugins/rpcApi';
 export default {
-  name: 'WraMyActions',
+  name: 'ApiActionsAdminCrud',
   props: [],
   fetch() {},
   data() {
@@ -92,9 +75,6 @@ export default {
     return this.createData()
   },
   computed: {
-    projectId(){
-      return this.$store.state.project && this.$store.state.project.selected && this.$store.state.project.selected._id
-    },
     isList() {
       return this.mode === 'list'
     },
@@ -142,7 +122,7 @@ export default {
     async remove() {
       if (await NotyConfirm('Confirm Delete?')) {
         let r = await call('wraRemove', {
-          model: 'wra_action',
+          model: 'api_action',
           query: {
             _id: this.item._id
           }
@@ -157,17 +137,8 @@ export default {
         return
       }
       this.items = await call('find', {
-        model: 'wra_action',
-        /*populate: {
-          path: 'project',
-          select: 'name'
-        }*/
-        query:{
-          project: {
-            $in: [this.$store.state.project.selected._id]
-          }
-        },
-        owner: this.$store.state.auth.user._id
+        model: 'api_action',
+        query: {}
       })
     },
     select(item) {
@@ -186,21 +157,15 @@ export default {
         this.$refs.name.focus()
         return 'name'
       }
-      /*
-      if (!this.item.project) {
-        this.$refs.project.focus()
-        return 'project'
-      }*/
-
+      
       return true
     },
-    async save(back,customMessage) {
+    async save(back, customMessage) {
       if (this.validate() !== true) {
         return this.$noty.warning('Complete ' + this.validate())
       }
       try {
-        this.item.project = this.projectId
-        Object.assign(this.item, await call('wraSaveProjectFunction',this.item))
+        Object.assign(this.item, await call('wraSaveApiAction',this.item))
         if (customMessage === undefined) {
           this.$noty.info('Saved')
         } else {
@@ -239,17 +204,16 @@ export default {
   components: {
     TextInput,
     LightButton,
-    WraMyActionsList,
+    ApiActionsList,
     JsEditor,
     LightLabel,
     CollapsableCard,
-    WraProjectsSelect,
     DocumentHistorySelect
   },
   created() {},
   mounted() {
-    if(!process.server){
-      this.refresh()
+    if (!process.server) {
+      //this.refresh()
     }
   }
 }
@@ -257,5 +221,5 @@ export default {
 </script>
 
 <style lang="scss" scoped="">
-.WraMyActions {}
+.ApiActionsAdminCrud {}
 </style>

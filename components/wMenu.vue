@@ -43,9 +43,9 @@
               :disabled="!hasPrj">Collections</b-link>
     </li>
     <li class="list-group-item">
-      <router-link to="/app/my-actions"
+      <b-link to="/app/my-actions"
               @click="click"
-              :disabled="!hasPrj">Functions</router-link>
+              :disabled="!hasPrj">Functions</b-link>
     </li>
     <li class="list-group-item">
       <b-link to="/app/dashboard/middlewares"
@@ -83,6 +83,10 @@
     <LightLabel>Root Menu</LightLabel>
     <ul class="list-group">
       <li class="list-group-item">
+        <b-link to="/admin/editor"
+                @click="click">Editor</b-link>
+      </li>
+      <li class="list-group-item">
         <b-link to="/admin/users"
                 @click="click">Users</b-link>
       </li>
@@ -104,6 +108,10 @@
         <b-link to="/admin/logging"
                 @click="click"
                 :disabled="false">Logs</b-link>
+      </li>
+      <li class="list-group-item">
+        <b-link to="/admin/models"
+                @click="click">Models</b-link>
       </li>
       <li class="list-group-item">
         <b-link href="/app/dashboard"

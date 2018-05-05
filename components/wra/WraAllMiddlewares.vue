@@ -38,6 +38,11 @@
   </div>
   <div class="col-12"
        v-show="isDetails">
+       <DocumentHistorySelect :disabled="!item._id"
+                           :id="item._id"
+                           type="api_action_middleware_history"
+                           @select="onHistorySelect"></DocumentHistorySelect>
+
     <TextInput ref="name"
                class="w-50"
                label="Name"
@@ -46,15 +51,18 @@
                  v-model="item.type"
                  label="Type"
                  :options="[{label:'Pre',value:'pre'},{label:'Post',value:'post'}]"></LightSelect>
-     
-
-     <JsEditor label="Code" class="mt-3" :height="800" v-model="item.code"></JsEditor>
+    
+    <JsEditor label="Code"
+              class="mt-3"
+              :height="800"
+              v-model="item.code"></JsEditor>
   </div>
 </div>
 
 </template>
 
 <script>
+import DocumentHistorySelect from '@/components/DocumentHistorySelect';
 import LightSelect from '@/components/controls/LightSelect';
 import LightButton from '@/components/LightButton';
 import JsEditor from '@/components/JsEditor';
@@ -104,6 +112,11 @@ export default {
     }
   },
   methods: {
+    async onHistorySelect(historyDoc) {
+      await this.save(false, '')
+      this.item.code = historyDoc.code
+      await this.save(false, 'Restored')
+    },
     async remove() {
       if (await NotyConfirm('Confirm Delete?')) {
         let r = await call('removeWhen', {
@@ -118,8 +131,8 @@ export default {
       }
     },
     async refresh() {
-      this.items = await call('findPaginate',{
-      	model:'api_action_middleware'
+      this.items = await call('findPaginate', {
+        model: 'api_action_middleware'
       })
     },
     select(item) {
@@ -144,22 +157,24 @@ export default {
 
       return true
     },
-    async save(back) {
+    async save(back, customMessage) {
       if (this.validate() !== true) {
         return this.$noty.warning('Complete ' + this.validate())
       }
-      await call('wraSave', {
-        model: 'api_action_middleware',
-        fields: [
-          'name',
-          'code',
-          'type'
-        ],
-        data: this.item
-      })
-      this.$noty.info('Saved')
-      if (back) {
-        this.back()
+      try {
+        Object.assign(this.item, await call('wraSaveApiActionMiddleware', this.item))
+        if (customMessage === undefined) {
+          this.$noty.info('Saved')
+        } else {
+          if (customMessage !== '') {
+            this.$noty.info(customMessage)
+          }
+        }
+        if (back) {
+          this.back()
+        }
+      } catch (err) {
+        this.$noty.warning(err.message)
       }
     },
     create() {
@@ -173,7 +188,8 @@ export default {
     LightButton,
     LightSelect,
     ListView,
-    JsEditor
+    JsEditor,
+    DocumentHistorySelect
   },
   created() {},
   mounted() {}

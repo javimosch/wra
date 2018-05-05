@@ -1,6 +1,6 @@
 <template>
-<div class="WraMyActionsList">
-  <h3><span v-html="title"></span> functions</h3>
+<div class="ApiActionsList">
+  <h3>All Actions (api_action)</h3>
   <ListView :columns="columns"
             :items="items"
             @select="select"></ListView>
@@ -12,7 +12,7 @@
 import { call } from '@/plugins/rpcApi';
 import ListView from '@/components/controls/ListView';
 export default {
-  name: 'WraMyActionsList',
+  name: 'ApiActionsList',
   props: [
     'item','items'
   ],
@@ -34,14 +34,12 @@ export default {
     return {}
   },
   computed: {
-    title(){
-      return this.$store.state.project && this.$store.state.project.selected && this.$store.state.project.selected.name
-    }
+    
   },
   methods: {
     select(doc) {
       call('findOne', {
-        model: 'wra_action',
+        model: 'api_action',
         _id: doc._id
       }).then(item => {
         this.$emit('input', item._id)
@@ -61,5 +59,5 @@ export default {
 </script>
 
 <style lang="scss" scoped="">
-.WraMyActionsList {}
+.ApiActionsList {}
 </style>

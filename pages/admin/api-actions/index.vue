@@ -2,13 +2,14 @@
 	<div class="ApiActions container">
 		<div class="row no-gutters">
 			<div class="col-12">
-				<ApiActionCrudView></ApiActionCrudView>
+				<ApiActionsAdminCrud></ApiActionsAdminCrud>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 import ApiActionCrudView from '@/components/ApiActionCrudView';
+import ApiActionsAdminCrud from '@/components/ApiActionsAdminCrud';
 import {call} from '@/plugins/rpcApi';
 	export default {
 		middleware:['rootAuth'],
@@ -28,7 +29,8 @@ import {call} from '@/plugins/rpcApi';
 			
 		},	
 		components:{
-			ApiActionCrudView
+			ApiActionCrudView,
+			ApiActionsAdminCrud
 		},
 		created(){
 
