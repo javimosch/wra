@@ -17,44 +17,26 @@
           </div>
         </b-link>
       </li>
-      <li class="list-group-item">
-        <b-link to="/app/dashboard"
-                class=""
-                @click="click">
-          <div class="row no-gutters">
-            <div class="col-12">
-              <i class="fas fa-tachometer-alt mx-auto d-block text-center"></i>
-            </div>
-            <div class="col-12">
-              <span class="mx-auto d-block text-center">Dashboard</span>
-            </div>
-          </div>
-        </b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/account"
-                @click="click">
-          <div class="row no-gutters">
-            <div class="col-12">
-              <i class="fas fa-user-circle mx-auto d-block text-center"></i>
-            </div>
-            <div class="col-12">
-              <span class="mx-auto d-block text-center">Account</span>
-            </div>
-          </div>
-        </b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/projects"
-                @click="click">Projects</b-link>
-      </li>
-      <li class="list-group-item"
+
+      <MenuListItem to="/app/dashboard" icon="fa-tachometer-alt" @click="click">
+        Dashboard
+      </MenuListItem>
+
+      <MenuListItem to="/app/account" icon="fa-user-circle" @click="click">
+        Account
+      </MenuListItem>
+
+      <MenuListItem to="/app/projects" icon="fa-th-large" @click="click">
+        Projects
+      </MenuListItem>
+
+      <li class="list-group-item" v-if="false"
           v-show="isRoot">
         <b-link to="/app/my-collections/fields"
                 @click="click"
                 :disabled="true">Explore</b-link>
       </li>
-      <li class="list-group-item"
+      <li class="list-group-item" v-if="false"
           v-show="isRoot">
         <b-link to="/app/my-collections/fields"
                 @click="click"
@@ -63,56 +45,41 @@
     </ul>
     <LightLabel class="text-center">PROJECT</LightLabel>
     
+    
+
     <ul class="list-group">
-      <li class="list-group-item">
-        <b-link to="/wip/team"
-                @click="click"
-                :disabled="true">Team</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/my-collections"
-                @click="click"
-                :disabled="!hasPrj">Collections</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/my-actions"
-                @click="click"
-                :disabled="!hasPrj">Functions</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/dashboard/middlewares"
-                @click="click"
-                :disabled="true">Middlewares</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/my-actions"
-                @click="click"
-                :disabled="true">Services</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/my-actions"
-                @click="click"
-                :disabled="true">Modules</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/wip/analytics"
-                @click="click"
-                :disabled="true">Analytics</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/wip/schedules"
-                @click="click"
-                :disabled="true">Schedules</b-link>
-      </li>
-      <li class="list-group-item">
-        <b-link to="/app/monitoring"
-                @click="click"
-                :disabled="!hasPrj">Monitoring</b-link>
-      </li>
+      <MenuListItem to="/app/team" icon="fa-users" @click="click" :disabled="true">
+        Team
+      </MenuListItem>
+      
+      <MenuListItem to="/app/my-collections" icon="fa-database" @click="click" :disabled="!hasPrj">
+        Collections
+      </MenuListItem>
+
+      <MenuListItem to="/app/my-actions" icon="fa-code" @click="click" :disabled="!hasPrj">
+        Functions
+      </MenuListItem>
+
+      <MenuListItem to="/app/middlewares" icon="fa-code-branch" @click="click" :disabled="true">
+        Middlewares
+      </MenuListItem>
+      
+      <MenuListItem to="/app/services" icon="fa-box-open" @click="click" :disabled="true">
+        Services
+      </MenuListItem>
+
+      <MenuListItem to="/app/schedules" icon="fa-clock" @click="click" :disabled="true">
+        Schedules
+      </MenuListItem>
+     
+      <MenuListItem to="/app/monitoring" icon="fa-signal" @click="click" :disabled="!hasPrj">
+        Monitoring
+      </MenuListItem>
+
     </ul>
     <div v-show="isRoot"
          class="mb-5">
-      <LightLabel>Root Menu</LightLabel>
+      <LightLabel class="text-center">ROOT MENU</LightLabel>
       <ul class="list-group">
         <li class="list-group-item">
           <b-link to="/admin/editor"
@@ -160,10 +127,12 @@
 import NoSSR from 'vue-no-ssr';
 import { LightLabel } from '@/styledComponents/labels';
 import MenuProjectSelector from '@/components/menu/MenuProjectSelector';
+import MenuListItem from '@/components/MenuListItem';
 import _ from 'lodash';
 import $ from 'jquery';
 export default {
   components: {
+    MenuListItem,
     MenuProjectSelector,
     LightLabel,
     'no-ssr': NoSSR
@@ -223,21 +192,7 @@ export default {
     if (process.server) {
       return
     }
-    if (!this.$store.state.auth.isLogged) {
-      return
-    }
-    if (this.selectedProjectId) {
-      this.item._id = this.selectedProjectId
-    } else {
-      var item
-      try {
-        item = JSON.parse(window.localStorage.getItem('project.selected'))
-        this.$store.commit('project/setSelected', _.cloneDeep(item))
-      } catch (err) {}
-      if (item) {
-        this.item._id = item._id
-      }
-    }
+    
 
     $(window).on('resize', this.resize)
     this.resize()

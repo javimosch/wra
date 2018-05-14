@@ -1,6 +1,6 @@
 <template>
 <div class="ConsoleProjectSelector">
-  <div class="row ">
+  <div class="row no-gutters">
   	<div class="col-12 col-md-4">
   		<LightLabel>Project</LightLabel>
   		<MenuProjectSelector class="mb-3"
@@ -57,11 +57,33 @@ export default {
       var self = this
       _.keys(this.item).forEach(k => self.item[k] = null)
       this.onProjectChange(this.item)
+    },
+    selectedProjectId() {
+      return this.$store.state.project.selected && this.$store.state.project.selected._id
     }
   },
 
   created() {},
-  mounted() {}
+  mounted() {
+    if (process.server) {
+      return
+    }
+    if (!this.$store.state.auth.isLogged) {
+      return
+    }
+    if (this.selectedProjectId) {
+      this.item._id = this.selectedProjectId
+    } else {
+      var item
+      try {
+        item = JSON.parse(window.localStorage.getItem('project.selected'))
+        this.$store.commit('project/setSelected', _.cloneDeep(item))
+      } catch (err) {}
+      if (item) {
+        this.item._id = item._id
+      }
+    }
+  }
 }
 
 </script>

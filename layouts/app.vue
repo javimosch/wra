@@ -49,7 +49,7 @@
   </div>
   <div class="container-fluid m-0 p-0"
        v-show="isLogged">
-    <AppFooter></AppFooter>
+    <AppFooter class="mt-0"></AppFooter>
   </div>
 </div>
 
