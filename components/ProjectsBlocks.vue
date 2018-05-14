@@ -1,15 +1,20 @@
 <template>
-	<div class="ProjectsBlocks d-flex p-2 bd-highlight">
+	<no-ssr>
+	<div class="ProjectsBlocks d-flexbd-highlight">
+		<h2>My projects</h2>
 		<div class="ProjectBlock d-flex justify-content-center align-items-center" v-for="(item) in items" :key="item._id" @click="openProject(item)">
 			<p class="ProjectName" v-html="item.name"></p>
 		</div>
 		
-		<div class="ProjectBlock d-flex justify-content-center align-items-center">
-			<i class="ProjectBlockPlus fas fa-plus" @click="createProject()"></i>
+		<div class="ProjectBlock d-flex justify-content-center align-items-center" @click="createProject()">
+			<i class="ProjectBlockPlus fas fa-plus" ></i>
 		</div>
+
 	</div>
+</no-ssr>
 </template>
 <script>
+import NoSSR from 'vue-no-ssr';
 	import {getCurrentUserProjects} from '@/plugins/wraProjects'
 	import {call} from '@/plugins/rpcApi';
 	export default {
@@ -44,7 +49,7 @@
 			}
 		},
 		components:{
-
+			'no-ssr': NoSSR,
 		},
 		created(){
 
@@ -53,7 +58,11 @@
 			if(process.server){
 				return
 			}
-			this.items = await getCurrentUserProjects(this.$store.state.auth)
+			try{
+				this.items = await getCurrentUserProjects(this.$store.state.auth)
+			}catch(err){
+				this.$noty.warning('Unable to fetch projects: '+err.message)
+			}
 		}
 	}
 </script>

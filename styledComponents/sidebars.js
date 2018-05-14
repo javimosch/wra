@@ -16,28 +16,38 @@ export const wSidebarToggle = styled.div`
         font-size:8px;
         margin:0px;
         position: absolute;
-        background-color:#F57F22;
+        background-color:#033048;
     }
     button:hover{
-        background-color:#F57F22;
         opacity: 0.6;    
     }
 `;
 export const wSidebar = styled.div`
-    top: 5%;
-    padding: 1em;
+    top: 0px;
+    padding: 0px;
     width: 90%;
     background: white;
     z-index: 10;
     position: fixed;
     left: 0;
-    border: 1px solid #D42B2F;
+    border: 0;
     overflow: scroll;
-    height: 90%;
-    border-radius: 0px 20px 20px 0;
+    height: 100%;
+    border-radius: 0px 0px 0px 0;
+    border: 1px solid rgba(0,0,0,.05);
+    
     @media only screen and (min-width: 320px) {
-        width:300px;
+        width:150px;
     }
 `;
 
+export const wSidebar2 = styled.div`
+    padding: 0px;
+    background: white;
+    overflow: scroll;
+    @media only screen and (min-width: 320px) {
+        width:150px;
+        
+    }
+`;
 

@@ -31,7 +31,7 @@
 		methods:{
 			click(e){
 				if(this.to){
-					return this.$router.push(to)
+					return this.$router.push(this.to)
 				}
 				return this.$emit('click',e)
 			}
