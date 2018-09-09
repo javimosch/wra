@@ -10,11 +10,13 @@
   <CallToAction class="mb-5"></CallToAction>
   <div class="mb-5 mt-5">&nbsp;</div>
 
+<!--
   
   <LandingSection title="Where we are" class="mt-5"
                     :css="'background-color:white;'">
       <img class="Brands" :src="Brands"/>
     </LandingSection>
+  -->
 
   <div class="parallax"
        data-rellax-speed="-0.5">

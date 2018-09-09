@@ -16,8 +16,8 @@
                justified
                tabs>
           <b-nav-item class=""
-                      href="/app/dashboard"
-                      >Console</b-nav-item>
+                      href="https://editor.wrapkend.com"
+                      >Editor</b-nav-item>
           <b-nav-item class=""
                       href="https://www.facebook.com/Wrapkend-895490107279528/"
                       target="_blank">Community</b-nav-item>

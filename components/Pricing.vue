@@ -3,10 +3,10 @@
 		<div class="row no-gutters">
     <div class="col-12">
       <div class="row no-gutters">
-        <div class="col-md-6 mt-3">
+        <div class="col-md-12 mt-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="text-center">FREE</h3></div>
+              <h3 class="text-center">Community</h3></div>
             <div class="card-body">
               <ul class="list-group mt-4">
                 
@@ -19,7 +19,7 @@
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">20 RPC Functions</p>
+                      <p class="m-0">Unlimited Project Files</p>
                     </div>
                   </div>
                 </li>
@@ -32,7 +32,7 @@
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">2 Projects</p>
+                      <p class="m-0">1 Projects</p>
                     </div>
                   </div>
                 </li>
@@ -45,38 +45,13 @@
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">2 service accounts</p>
+                      <p class="m-0">1 Service Account</p>
                     </div>
                   </div>
                 </li>
 
                
 
-                <li class="list-group-item border-0">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="float-right d-block">
-                        <i class="fas fa-check"></i>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <p class="m-0">5 Function Middlewares</p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item border-0">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="float-right d-block">
-                        <i class="fas fa-check"></i>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <p class="m-0">5 Schedules tasks</p>
-                    </div>
-                  </div>
-                </li>
 
                <li class="list-group-item border-0">
                   <div class="row">
@@ -100,20 +75,7 @@
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">Graphical Function builder</p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item border-0">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="float-right d-block">
-                        <i class="fas fa-times"></i>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <p class="m-0">Graphical Report builder</p>
+                      <p class="m-0">Plugins</p>
                     </div>
                   </div>
                 </li>
@@ -122,10 +84,10 @@
               </ul>
             </div>
             <div class="card-footer">
-              <h4 class="text-center">0€ / Month</h4></div>
+              <h4 class="text-center">FREE</h4></div>
           </div>
         </div>
-        <div class="col-md-6 mt-3" v-if="true">
+        <div class="col-md-6 mt-3" v-if="false">
           <div class="card" >
             <div class="card-header">
               <h3 class="text-center">TIER 1</h3></div>
