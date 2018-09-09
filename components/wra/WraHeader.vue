@@ -22,13 +22,13 @@
                justified
                tabs>
 
-          <b-nav-item class="" 
+          <b-nav-item class=""  v-if="false"
                       v-show="isLogged"
                       :active="isActive('app-my-projects')"
                       to="/app/projects"
                       >Projects</b-nav-item>
 
-          <b-nav-item class="" 
+          <b-nav-item class="" v-if="false" 
                       v-show="isLogged"
                       @click="logout()">Logout</b-nav-item>
 

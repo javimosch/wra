@@ -7,17 +7,16 @@
           <div class="inner">
             <a href="https://www.facebook.com/Wrapkend-895490107279528/"
                target="_blank">
-              <i class="d-inline mr-2 fab fa-facebook-square "></i> <span class="Text">Like Us</span>
+              <i class="d-inline mr-2 fab fa-facebook-square "></i> <span class="Text">Community</span>
             </a>
-            <span>
-              &nbsp;
+            /
             <a href="https://m.me/895490107279528" target="_blank" >
               <i class="d-inline ml-1 mr-1 fab fa-facebook-messenger "></i>
               <span class="Text">
-               Chat&nbsp;with&nbsp;us&nbsp;on&nbsp;messenger
+               Messenger
               </span>
             </a>
-            </span>
+            
           </div>
         </div>
       </div>
@@ -27,11 +26,13 @@
         <div class="col-6 text-center">
           <a class="Text"
              target="_blank"
-             href="mailto:arancibiajav@gmail.com">Contact Us</a>
+             href="mailto:arancibiajav@gmail.com">Questions?</a>
         </div>
         <div class="col-6 text-center">
           <a class="Text"
-             href="tel:+33782809054">+33&nbsp;7&nbsp;82&nbsp;80&nbsp;90&nbsp;54</a>
+             href="tel:+33782809054">
+               <strong>+33&nbsp;7&nbsp;82&nbsp;80&nbsp;90&nbsp;54</strong>
+             </a>
         </div>
       </div>
     </div>

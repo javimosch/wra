@@ -1,79 +1,82 @@
 <template>
-  <div class="VueToNuxtLogo">
-    <div class="Triangle Triangle--two"/>
-    <div class="Triangle Triangle--one"/>
-    <div class="Triangle Triangle--three"/>
-    <div class="Triangle Triangle--four"/>
+  <div class="AppLogo">
+    
+    <a href="/" class="m-0 p-0  align-self-center w-100 LogoLink" 
+      v-show="!projectBrandLogo">
+          <h2 class="text-center m-0 p-0" v-show="!projectBrandLogo">
+            <img class="Logo" :src="Logo" v-show="!projectBrandLogo"/>
+            <span class="LogoSpan" v-show="!projectBrandLogo">wrapkend</span>
+          </h2>
+      </a>
+
+       <a href="/app/dashboard" class="m-0 p-0 d-block align-self-center w-100 LogoLink" v-show="projectBrandLogo">
+          <img class="CustomLogo d-inline" :src="projectBrandLogo"/>
+      </a>
+
   </div>
 </template>
+<script>
 
-<style>
-.VueToNuxtLogo {
-  display: inline-block;
-  animation: turn 2s linear forwards 1s;
-  transform: rotateX(180deg);
-  position: relative;
-  overflow: hidden;
-  height: 180px;
-  width: 245px;
-}
+import Logo from '@/assets/wra_logo.svg';
+  export default {
+    name: 'AppLogo',
+    props:[],
+    fetch(){
 
-.Triangle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-}
+    },
+    data(){
+      return{
+        Logo
+      }
+    },
+    async asyncData(){
+      return {}
+    },
+    computed:{
+      projectBrandLogo(){
+      return this.$store.getters && this.$store.getters['project/brandLogo']
+      },
+    },
+    methods:{
 
-.Triangle--one {
-  border-left: 105px solid transparent;
-  border-right: 105px solid transparent;
-  border-bottom: 180px solid #41B883;
-}
+    },
+    components:{
 
-.Triangle--two {
-  top: 30px;
-  left: 35px;
-  animation: goright 0.5s linear forwards 3.5s;
-  border-left: 87.5px solid transparent;
-  border-right: 87.5px solid transparent;
-  border-bottom: 150px solid #3B8070;
-}
+    },
+    created(){
 
-.Triangle--three {
-  top: 60px;
-  left: 35px;
-  animation: goright 0.5s linear forwards 3.5s;
-  border-left: 70px solid transparent;
-  border-right: 70px solid transparent;
-  border-bottom: 120px solid #35495E;
-}
+    },
+    mounted(){
 
-.Triangle--four {
-  top: 120px;
-  left: 70px;
-  animation: godown 0.5s linear forwards 3s;
-  border-left: 35px solid transparent;
-  border-right: 35px solid transparent;
-  border-bottom: 60px solid #fff;
-}
-
-@keyframes turn {
-  100% {
-    transform: rotateX(0deg);
+    }
   }
+</script>
+<style lang="scss" scoped>
+.AppLogo{
+  
 }
-
-@keyframes godown {
-  100% {
-    top: 180px;
-  }
+.Logo{
+  max-width: 25px;
+  margin-right:10px;
+  display: inline;
 }
-
-@keyframes goright {
-  100% {
-    left: 70px;
-  }
+.LogoSpan{
+ display: inline; 
+}
+.LogoLink{
+  text-decoration: none!important;
+  display:block;
+}
+.CustomLogo{
+  max-width: 250px;
+  max-height: 100px;
+}
+h2{
+  font-size:25px;
+}
+h2 span{
+    font-family: "Trade Winds", cursive;
+    color: #F57F22;
+    display: block;
 }
 </style>

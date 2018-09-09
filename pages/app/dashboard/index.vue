@@ -1,5 +1,5 @@
 <template>
-<div class="WrakendDashboard container">
+<div class="WrakendDashboard">
   <ProjectsBlocks></ProjectsBlocks>
 </div>
 

@@ -3,10 +3,10 @@ import _ from 'lodash';
 
 const safeCallTimeout = 5000;
 
-var state = {
+var state = window.$maState = {
 	userId: '',
 	options: {},
-	routerTrackViews:true
+	routerTrackViews: true
 }
 
 function log() {
@@ -14,6 +14,12 @@ function log() {
 	var args = Array.prototype.slice.call(arguments);
 	args.unshift('$ma');
 	console.log.apply(this, args);
+}
+
+function hasFacebook(){
+	var res = state.facebook!=false && state.fb!=false && typeof window!=='undefined' && window.FB!==undefined && window.FB.initCalled
+	console.log('$ma: hasFacebook',res)
+	return res;
 }
 
 export default async function({
@@ -29,21 +35,28 @@ export default async function({
 
 
 	app.router.afterEach((to, from) => {
-		if(!state.routerTrackViews) return;
-		if (state.options.ga !== false && window.ga) {
-			ga('set', 'page', to.fullPath)
-			ga('send', 'pageview')
+		if(process.server) return;
+
+
+		try {
+			to = Object.assign({},to)
+			if (!state.routerTrackViews) return;
+			if (state.options.ga !== false && window.ga) {
+				ga('set', 'page', to.fullPath)
+				ga('send', 'pageview')
+			}
+			if (hasFacebook()) {
+				//FB.AppEvents.setUserID(state.userId);
+				FB.AppEvents.logPageView();
+			}
+			callMixinMethod(state.scope, state.options.mixins, 'trackView', [to.fullPath, to, true]);
+		} catch (err) {
+			window.error = err;
+			console.error('$ma: ',err)
 		}
-		if (state.fb !== false && window.FB) {
-			FB.AppEvents.setUserID(state.userId);
-			FB.AppEvents.logPageView();
-		}
-		callMixinMethod(state.scope, state.options.mixins, 'trackView', [to.fullPath, to, true]);
 	});
 
 }
-
-
 
 
 
@@ -56,7 +69,7 @@ function callMethodSafely(scopeFn, key, params, condition) {
 	let self = this || {};
 	if (typeof scope === 'undefined') {
 		return setTimeout(() => {
-			
+
 			if (self.start && Date.now() - self.start > safeCallTimeout) return console.warn('Analytics: safe-call timeout', key)
 			let s = self.start ? self : {
 				start: Date.now()
@@ -108,13 +121,13 @@ AnalyticsPlugin.install = function(Vue, options = {
 		callMethodSafely(() => window.ga, '', ['set', 'sendHitTask', null], (options.ga && options.ga.disableLocalhost && location.hostname == 'localhost') ? true : false)
 	}
 
-	
+
 	var scope = window.$ma = state.scope = Vue.prototype.$ma = _.assign(Vue.prototype.$ma || {}, {
-		setRouterTracking: (v)=> {
+		setRouterTracking: (v) => {
 			state.routerTrackViews = v
-			log('router toggle',v)
+			log('router toggle', v)
 		},
-		trackEvent: (params, a, l, v) => {
+		trackEvent: (params, a, l, v, data) => {
 			if (!params) {
 				throw new Error('trackEvent: string of object required')
 			}
@@ -127,7 +140,8 @@ AnalyticsPlugin.install = function(Vue, options = {
 					category: category,
 					action: action,
 					label: label,
-					value: value
+					value: value,
+					data: data
 				};
 			}
 
@@ -140,15 +154,15 @@ AnalyticsPlugin.install = function(Vue, options = {
 				eventAction: params.action || '',
 				eventLabel: params.label || '',
 				eventValue: params.value || 0,
-				fieldsObject: params.fieldsObject || {}
+				fieldsObject: params.fieldsObject || params.data || {}
 			};
 			log('trackEvent goggle ', payload);
 			callMethodSafely(() => window.ga, '', ['send', payload], options.ga !== false)
 			ga('send', payload);
 
 			let paramsAsString = params.category + (params.action ? '_' + params.action : '') + (params.label ? '_' + params.label : '');
-			
-			if (options.fb !== false && window.FB!=='undefined') {
+
+			if (hasFacebook()) {
 				var fbParams = {};
 				fbParams[FB.AppEvents.ParameterNames.LEVEL] = paramsAsString;
 				if (params.description) {
@@ -166,19 +180,22 @@ AnalyticsPlugin.install = function(Vue, options = {
 		setUserId: (id) => {
 			log('setUserId', id)
 			if (id) {
+				log('setUserID', id)
 				state.userId = id;
 				if (options.ga !== false) {
-					ga('set', 'userId', id);
 					log('setUserID:ga', id)
+					ga('set', 'userId', id);
+					
 				}
-				if (options.fb !== false&&window.FB!=='undefined') {
-
-					FB.AppEvents.setUserID(state.userId);
+				if (hasFacebook()) {
 					log('setUserID:fb', id)
+					FB.AppEvents.setUserID(state.userId);
+					
 				}
 
 			} else {
-				if (options.fb !== false&&window.FB!=='undefined') {
+				state.userId = null;
+				if (hasFacebook()) {
 					FB.AppEvents.clearUserID()
 					log('setUserId:fb:clear (id was null/undefined/empty)')
 				}
@@ -194,7 +211,8 @@ AnalyticsPlugin.install = function(Vue, options = {
 			if (pick) {
 				props = _.pick(props, pick);
 			}
-			if (options.fb !== false && window.FB!=='undefined') {
+			if (hasFacebook() && state.userId) {
+				log('setUserProps:fb', props)
 				FB.AppEvents.updateUserProperties(normalizeFacebookUserProperties(props), (res) => {
 					console.log('Analytics: Facebook set user props ', res);
 				});
@@ -241,7 +259,7 @@ function normalizeFacebookUserProperties(props) {
 
 
 function facebook(debug) {
-	
+
 	const pageId = process.env.ANALYTICS_FB_PAGE_ID;
 	const appId = process.env.ANALYTICS_FB_APP_ID;
 	if (!pageId || !appId) {
@@ -255,12 +273,12 @@ function facebook(debug) {
 	var div;
 	if (!document.querySelector('.fb-customerchat')) {
 		div = document.createElement('div');
-		div.className="fb-customerchat";
+		div.className = "fb-customerchat";
 		div.setAttribute('attribution', 'setup_tool');
 		div.setAttribute('page_id', pageId);
-		div.setAttribute('theme_color', '#F57F22');
+		div.setAttribute('theme_color', '#105BB1');
 		document.body.appendChild(div);
-		log("Adding chat",div)
+		log("Adding chat", div)
 	}
 	if (!document.querySelector('#fb-root')) {
 		div = document.createElement('div');
@@ -285,6 +303,7 @@ function facebook(debug) {
 			xfbml: true,
 			version: 'v2.12'
 		});
+		window.FB.initCalled=true
 	};
 
 	div = document.createElement('img');
@@ -326,17 +345,17 @@ function google(debug) {
 	if (debug) {
 		log('GA DEBUG MODE');
 
-			(function(i, s, o, g, r, a, m) {
-				i['GoogleAnalyticsObject'] = r;
-				i[r] = i[r] || function() {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o),
-					m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+		(function(i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function() {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 		window.ga_debug = {
 			trace: true
 		};
