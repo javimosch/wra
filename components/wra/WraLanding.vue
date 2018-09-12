@@ -44,7 +44,7 @@
   <div class="parallax"
        data-rellax-speed="-1.1">
        <div class="mt-5"></div>
-    <CallToAction></CallToAction>
+    <CallToAction :className="'mt-5'"></CallToAction>
   </div>
 </div>
 
@@ -112,7 +112,6 @@ export default {
 }
 h2 {
   font-family: $font2;
-  word-spacing: 17px;
   font-size:25px;
   color:$color2;
   padding-bottom:0px;

@@ -1,9 +1,8 @@
 <template>
 	<div class="CallToAction container">
 		<div class="row no-gutters mt-4">
-    <div class="col-12">
+    <div :class="'col-12 '+className||''">
       <p class="text-center">
-      	
       	<strong>Wrapkend</strong> is an CloudIDE/Backend As Service solution that provides instant nodejs app deployment with custom domain, and a set of ease to use development tools that provide advanced functionalities like real-time pub/sub, blazing fast search, error tracking, and reporting.
       </p>
       <b-btn 
@@ -15,7 +14,7 @@
 <script>
 	export default {
 		name: 'CallToAction',
-		props:[],
+		props:['className'],
 		fetch(){
 
 		},

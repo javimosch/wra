@@ -11,6 +11,34 @@
               <ul class="list-group mt-4">
                 
 
+                
+
+                <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-check"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">2 Projects</p>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-check"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">2 Service Accounts</p>
+                    </div>
+                  </div>
+                </li>
+
                 <li class="list-group-item border-0">
                   <div class="row">
                     <div class="col-4">
@@ -24,49 +52,7 @@
                   </div>
                 </li>
 
-                <li class="list-group-item border-0">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="float-right d-block">
-                        <i class="fas fa-check"></i>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <p class="m-0">1 Projects</p>
-                    </div>
-                  </div>
-                </li>
 
-                <li class="list-group-item border-0">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="float-right d-block">
-                        <i class="fas fa-check"></i>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <p class="m-0">1 Service Account</p>
-                    </div>
-                  </div>
-                </li>
-
-               
-
-
-               <li class="list-group-item border-0">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="float-right d-block">
-                        <i class="fas fa-times"></i>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <p class="m-0">Analytics and Reports</p>
-                    </div>
-                  </div>
-                </li>
-
-               
                 <li class="list-group-item border-0">
                   <div class="row">
                     <div class="col-4">
@@ -75,7 +61,20 @@
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">Plugins</p>
+                      <p class="m-0">Unlimited Plugins</p>
+                    </div>
+                  </div>
+                </li>
+
+                 <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-times"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">24x7 Support</p>
                     </div>
                   </div>
                 </li>
