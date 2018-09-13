@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Logo from '@/assets/logo.png';
+import Logo from '@/assets/wrapkend_logo.svg';
 
 export default {
   props: [

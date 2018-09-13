@@ -1,9 +1,15 @@
 <template>
 <div class="Partners">
   <div class="row PartnersLine no-gutters justify-content-center">
-    <div class="col-12 col-md-6 col-lg-3 mt-3">
+    <div class="col-12 col-md-6 col-lg-3 mt-3"
+    style="display: flex;
+    justify-content: center;    align-items: center;">
       <img class="mx-auto d-block PartnerLogo"
            src="https://s3.amazonaws.com/awsmp-logos/00-Backendless-9-24.png" />
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 mt-3" style="    display: flex;">
+      <img class="mx-auto d-block PartnerLogo"
+           :src="Logo" />
     </div>
   </div>
 </div>
@@ -11,12 +17,15 @@
 </template>
 
 <script>
+import Logo from '@/assets/partners/heroku.svg';
 export default {
   name: 'Partners',
   props: [],
   fetch() {},
   data() {
-    return {}
+    return {
+      Logo
+    }
   },
   async asyncData() {
     return {}
@@ -56,8 +65,8 @@ h2 {
 }
 
 .PartnerLogo {
-  max-width: 250px;
-  max-height: 85px;
+      max-width: 266px;
+    max-height: 94px;
 }
 a{
   max-width: 250px;

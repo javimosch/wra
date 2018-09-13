@@ -4,7 +4,7 @@
     <a href="/" class="m-0 p-0  align-self-center w-100 LogoLink" 
       v-show="!projectBrandLogo">
           <h2 class="text-center m-0 p-0" v-show="!projectBrandLogo">
-            <img class="Logo" :src="Logo" v-show="!projectBrandLogo"/>
+            <!--<img class="Logo" :src="Logo" v-show="!projectBrandLogo"/> -->
             <span class="LogoSpan" v-show="!projectBrandLogo">wrapkend</span>
           </h2>
       </a>
@@ -17,7 +17,7 @@
 </template>
 <script>
 
-import Logo from '@/assets/wra_logo.svg';
+//import Logo from '@/assets/wra_logo.svg';
   export default {
     name: 'AppLogo',
     props:[],
@@ -26,7 +26,7 @@ import Logo from '@/assets/wra_logo.svg';
     },
     data(){
       return{
-        Logo
+  //      Logo
       }
     },
     async asyncData(){

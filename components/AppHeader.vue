@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import Logo from '@/assets/logo.png';
+//import Logo from '@/assets/logo.png';
 
 export default {
   name: 'AppHeader',
@@ -44,7 +44,7 @@ export default {
   ],
   data() {
     return {
-      logo: Logo
+      //logo: Logo
     }
   },
   methods: {

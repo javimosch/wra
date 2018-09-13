@@ -4,7 +4,7 @@
     
 
     <div class="col-12 mt-5">
-      <h2 class="text-center">Backend as a service (BaaS) for Startups</h2>
+      <h2 class="text-center Title">Backend as a service (BaaS) for Startups</h2>
     </div>
   </div>
   <CallToAction class="mb-5"></CallToAction>
@@ -28,10 +28,10 @@
   </div>
 
   <LandingSection className="pb-0" title=""
-                  :css="'background-color:#033048;position:relative;z-index:20;'">
-    <WraLandingStats :one="1200"
-                  :two="500"
-                  :three="250"></WraLandingStats>
+                  :css="'background-color:slateblue;position:relative;z-index:20;'">
+    <WraLandingStats :one="48"
+                  :two="62"
+                  :three="728"></WraLandingStats>
   </LandingSection>
 
   <div class="parallax"
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import Brands from '@/assets/brands.svg'
+//import Brands from '@/assets/brands.svg'
 import LandingSection from '@/components/LandingSection';
 import WraLandingStats from '@/components/WraLandingStats';
 import CallToAction from '@/components/CallToAction';
@@ -65,7 +65,7 @@ export default {
   fetch() {},
   data(){
     return {
-      Brands
+      //Brands
     }
   },
   async asyncData() {
@@ -105,15 +105,16 @@ export default {
 .WraLanding {
   background-color: $color3;
 }
+.Title{
+      font-size: 30px;
+    color: limegreen;
+    padding-bottom: 0px;
+    font-family: 'GT Eesti Display';
+}
 .Brands{
   max-width: 600px;
   margin: 0 auto;
   display: block;
 }
-h2 {
-  font-family: $font2;
-  font-size:25px;
-  color:$color2;
-  padding-bottom:0px;
-}
+
 </style>

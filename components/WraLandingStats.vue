@@ -6,17 +6,17 @@
         <div class="col-12 col-md-4">
           <h2 class="text-center"
               v-html="number1"></h2>
-          <p class="text-center">records per second (read)</p>
+          <p class="text-center">Registered users</p>
         </div>
         <div class="col-12 col-md-4">
           <h2 class="text-center"
               v-html="number2"></h2>
-          <p class="text-center">records per second (write)</p>
+          <p class="text-center">Created projects</p>
         </div>
         <div class="col-12 col-md-4">
           <h2 class="text-center"
               v-html="number3"></h2>
-          <p class="text-center">records per second (search)</p>
+          <p class="text-center">Number of deploys</p>
         </div>
       </div>
     </ScrollItem>
@@ -38,9 +38,9 @@ export default {
   fetch() {},
   data() {
     return {
-      number1: 0,
-      number2: 300,
-      number3: 400
+      number1: 48,
+      number2: 62,
+      number3: 728
     }
   },
   async asyncData() {

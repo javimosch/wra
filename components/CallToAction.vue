@@ -2,8 +2,8 @@
 	<div class="CallToAction container">
 		<div class="row no-gutters mt-4">
     <div :class="'col-12 '+className||''">
-      <p class="text-center">
-      	<strong>Wrapkend</strong> is an CloudIDE/Backend As Service solution that provides instant nodejs app deployment with custom domain, and a set of ease to use development tools that provide advanced functionalities like real-time pub/sub, blazing fast search, error tracking, and reporting.
+      <p class="text-center Text">
+      	<strong style="color:limegreen;">Wrapkend</strong> is an CloudIDE, Backend As Service, Software as Service solution that provides instant NodeJS App development Workstations, which allow you to create projects in minutes. A set of ease to use development tools is available to provide functionalities such as real time code editing with live reload, code search, error logging, plugins and reporting.
       </p>
       <b-btn 
       class="mx-auto d-block mt-5" @click.stop="track" href="https://editor.wrapkend.com/register" target="_self" variant="warning" size="lg">Discover</b-btn>
@@ -47,21 +47,22 @@
 .CallToAction{
 	
 }
-p{
-	font-family: $font2;
-	font-size: 14px;
-	font-weight: 300;
-	color:$color4;
+.Text{
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    font-family: 'GT Eesti Display';
+    margin-top: 20px;
 }
 a{
 	max-width: 200px;
-    background-color:$color2;
-    border-color:$color2;
-    color:$color6;
+    background-color:$color6;
+    border-color:$color6;
+    color:$color3;
   }
   a:hover{
-   background-color:$color1; 
-   border-color:$color1;
+   background-color:$color2; 
+   border-color:$color2;
    color:$color6;
   }
 </style>

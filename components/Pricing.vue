@@ -13,6 +13,21 @@
 
                 
 
+                
+
+                 <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-check"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">Cloud hosting</p>
+                    </div>
+                  </div>
+                </li>
+
                 <li class="list-group-item border-0">
                   <div class="row">
                     <div class="col-4">
@@ -47,11 +62,23 @@
                       </div>
                     </div>
                     <div class="col-8">
-                      <p class="m-0">Unlimited Project Files</p>
+                      <p class="m-0">2.000 Files</p>
                     </div>
                   </div>
                 </li>
 
+                <li class="list-group-item border-0">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="float-right d-block">
+                        <i class="fas fa-times"></i>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <p class="m-0">Multi Organization</p>
+                    </div>
+                  </div>
+                </li>
 
                 <li class="list-group-item border-0">
                   <div class="row">
@@ -89,7 +116,7 @@
         <div class="col-md-6 mt-3" v-if="false">
           <div class="card" >
             <div class="card-header">
-              <h3 class="text-center">TIER 1</h3></div>
+              <h3 class="text-center">Startup</h3></div>
             <div class="card-body">
               <ul class="list-group mt-4">
                 
@@ -249,6 +276,7 @@ import {startParallax} from '@/plugins/parallax';
 .Pricing{
 	
 }
+
 h3,h4{
   margin:0px;
   padding:0px;
