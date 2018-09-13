@@ -4,7 +4,6 @@ node_js:
 script:
 - nvm use 9.5
 - yarn
-- yarn prod:generator
 - yarn generate
 before_deploy:
 - ls -lrt
