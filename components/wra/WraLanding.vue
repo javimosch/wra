@@ -28,7 +28,7 @@
   </div>
 
   <LandingSection className="pb-0" title=""
-                  :css="'background-color:slateblue;position:relative;z-index:20;'">
+                  :css="'background-color:slategrey;position:relative;z-index:20;'">
     <WraLandingStats :one="48"
                   :two="62"
                   :three="728"></WraLandingStats>
@@ -36,7 +36,7 @@
 
   <div class="parallax"
        data-rellax-speed="-1">
-    <LandingSection title="Inspirations" class="p-5"
+    <LandingSection title="Inspirations" class="p-md-5"
                     :css="'background-color:white;'">
       <Partners v-if="true" class="mb-5"></Partners>
     </LandingSection>

@@ -65,7 +65,7 @@ h2 {
 }
 
 .PartnerLogo {
-      max-width: 266px;
+    max-width: 200px;
     max-height: 94px;
 }
 a{

@@ -1,41 +1,23 @@
 <template>
 <div class="WraFooter">
-  <div class="row h-100 no-gutters">
-    <div class="col-12 col-sm-7 pl-4 pr-4">
-      <div class="outer">
-        <div class="middle">
-          <div class="inner">
-            <a href="https://www.facebook.com/Wrapkend-895490107279528/"
-               target="_blank">
+  <div class="row no-gutters h-100 no-gutters">
+    <div class="col-12 col-md-6 d-flex justify-content-center">
+      <a class="Link" href="https://www.facebook.com/Wrapkend-895490107279528/"
+         target="_blank">
               <i class="d-inline mr-2 fab fa-facebook-square "></i> <span class="Text">Community</span>
             </a>
-            /
-            <a href="https://m.me/895490107279528" target="_blank" >
+    </div>
+    <div class="col-12 col-md-6 d-flex justify-content-center">
+      <a class="Link" href="https://m.me/895490107279528"
+         target="_blank">
               <i class="d-inline ml-1 mr-1 fab fa-facebook-messenger "></i>
               <span class="Text">
-               Messenger
+               Contact Us
               </span>
             </a>
-            
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="col-12 col-sm-5  pl-4 pr-4 d-flex justify-content-center align-items-center">
-      <div class="row no-gutters">
-        <div class="col-6 text-center">
-          <a class="Text"
-             target="_blank"
-             href="mailto:arancibiajav@gmail.com">Questions?</a>
-        </div>
-        <div class="col-6 text-center">
-          <a class="Text"
-             href="tel:+33782809054">
-               <strong>+33&nbsp;7&nbsp;82&nbsp;80&nbsp;90&nbsp;54</strong>
-             </a>
-        </div>
-      </div>
-    </div>
+    
+    
   </div>
 </div>
 
@@ -49,30 +31,18 @@ export default {
 </script>
 
 <style lang="scss" scoped="">
+.Link{
+  min-width:200px;
+  display:block;
+  margin:0 auto;
+  text-align: center;
+}
 .WraFooter {
   margin-top: 200px;
-  height: 80px;
+  height: fit-content;
   background-color: $lightGrey;
-}
-
-.outer {
-  display: table;
-  height: 100%;
-  width: 100%;
-  @media only screen and (min-width: 480px) {
-    width: unset;
-  }
-}
-
-.middle {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.inner {
-  margin-left: auto;
-  margin-right: auto;
-  /*whatever width you want*/
+  padding-top:20px;
+  padding-bottom:20px;
 }
 
 .TextIcon {

@@ -2,7 +2,7 @@
 	<div :class="sectionClass" :style="sectionStyle">
 		<div class="row no-gutters">
 			<div class="col-12" v-show="title">
-				<h1 class="text-center title p-4 mt-4" v-html="title"></h1>
+				<h1 class="text-center title mt-4" v-html="title"></h1>
 			</div>
 			<div class="col-12" v-show="text">
 				<p v-html="text"></p>
@@ -55,7 +55,7 @@
 	background-color:$color3;
 }
 .title{
-	font-size:40px;
+	font-size:30px;
 	color:$color3;
 }
 .inverted .title{
